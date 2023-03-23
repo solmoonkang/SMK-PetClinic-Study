@@ -1,6 +1,7 @@
 package kr.co.smkpetclinicstudy.persistence.entity;
 
 import jakarta.persistence.*;
+import kr.co.smkpetclinicstudy.persistence.BaseEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -10,11 +11,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "tbl_owners")
-public class Owners {
-
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "owners_id", length = 4)
-    private Long ownersId;
+@AttributeOverride(     // 하나의 Entity에서 같은 값 타입을 사용하면 Column 명이 중복되므로 Column 명 속성을 재정의
+        name = "id",
+        column = @Column(name = "owners_id", length = 4))
+public class Owners extends BaseEntity {
 
     @Column(name = "first_name", length = 30)
     private String firstName;
@@ -22,12 +22,13 @@ public class Owners {
     @Column(name = "last_name", length = 30)
     private String lastName;
 
+    @Column(name = "address")
     private String address;
 
-    @Column(length = 80)
+    @Column(name = "city", length = 80)
     private String city;
 
-    @Column(length = 20)
+    @Column(name = "telephone", length = 20)
     private String telephone;
 
 

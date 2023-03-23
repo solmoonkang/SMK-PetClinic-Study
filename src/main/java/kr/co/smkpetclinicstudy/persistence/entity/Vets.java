@@ -1,6 +1,7 @@
 package kr.co.smkpetclinicstudy.persistence.entity;
 
 import jakarta.persistence.*;
+import kr.co.smkpetclinicstudy.persistence.BaseEntity;
 import kr.co.smkpetclinicstudy.persistence.enums.VetsSpecialties;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -11,11 +12,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "tbl_vets")
-public class Vets {
-
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "vets_id", length = 4)
-    private Long vetsId;
+@AttributeOverride(
+        name = "id",
+        column = @Column(name = "vets_id", length = 4))
+public class Vets extends BaseEntity {
 
     @Column(name = "first_name", length = 30)
     private String firstName;
@@ -24,6 +24,7 @@ public class Vets {
     private String lastName;
 
     @Column(name = "vets")
+    @Enumerated(value = EnumType.STRING)
     private VetsSpecialties vetsSpecialties;
 
 

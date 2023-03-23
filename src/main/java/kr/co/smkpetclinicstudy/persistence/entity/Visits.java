@@ -1,6 +1,7 @@
 package kr.co.smkpetclinicstudy.persistence.entity;
 
 import jakarta.persistence.*;
+import kr.co.smkpetclinicstudy.persistence.BaseEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,15 +13,15 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "tbl_visits")
-public class Visits {
-
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "visits_id", length = 4)
-    private Long visitsId;
+@AttributeOverride(
+        name = "id",
+        column = @Column(name = "visits_id", length = 4))
+public class Visits extends BaseEntity {
 
     @Column(name = "visits_date")
     private LocalDateTime visitDate;
 
+    @Column(name = "description")
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)

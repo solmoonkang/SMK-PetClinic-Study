@@ -1,6 +1,7 @@
 package kr.co.smkpetclinicstudy.persistence.entity;
 
 import jakarta.persistence.*;
+import kr.co.smkpetclinicstudy.persistence.BaseEntity;
 import kr.co.smkpetclinicstudy.persistence.enums.PetsTypes;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -13,22 +14,22 @@ import java.time.LocalDate;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "tbl_pets")
-public class Pets {
+@AttributeOverride(
+        name = "id",
+        column = @Column(name = "pets_id", length = 4))
+public class Pets extends BaseEntity {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "pets_id", length = 4)
-    private Long petsId;
-
-    @Column(length = 30)
+    @Column(name = "name", length = 30)
     private String name;
 
     @Column(name = "birth_date")
     private LocalDate birthDate;
 
     @Column(name = "pets_types")
+    @Enumerated(value = EnumType.STRING)    // enum 값을 index 값이 아닌 text 값 그대로 저장(즉, DB에 enum 값이 그대로 저장)
     private PetsTypes petsTypes;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)  // 지연 로딩
     @JoinColumn(name = "owners_id")
     private Owners owners;
 
