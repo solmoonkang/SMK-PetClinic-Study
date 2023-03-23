@@ -23,7 +23,7 @@ public class Visits {
 
     private String description;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pets_id")
     private Pets pets;
 

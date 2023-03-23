@@ -7,7 +7,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -23,19 +23,19 @@ public class Pets {
     private String name;
 
     @Column(name = "birth_date")
-    private LocalDateTime birthDate;
+    private LocalDate birthDate;
 
     @Column(name = "pets_types")
     private PetsTypes petsTypes;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owners_id")
     private Owners owners;
 
 
     @Builder
     public Pets(String name,
-                LocalDateTime birthDate,
+                LocalDate birthDate,
                 PetsTypes petsTypes,
                 Owners owners) {
         this.name = name;
