@@ -2,7 +2,7 @@ package kr.co.smkpetclinicstudy.persistence.entity;
 
 import jakarta.persistence.*;
 import kr.co.smkpetclinicstudy.persistence.BaseEntity;
-import kr.co.smkpetclinicstudy.service.model.request.SignUpRequestDto;
+import kr.co.smkpetclinicstudy.service.model.request.SignUpRequest;
 import lombok.*;
 
 @Getter
@@ -43,13 +43,13 @@ public class Owners extends BaseEntity {
         this.telephone = telephone;
     }
 
-    public static Owners of(SignUpRequestDto signUpRequestDto) {
+    public static Owners of(SignUpRequest signUpRequest) {
         return Owners.builder()
-                .firstName(signUpRequestDto.getFirstName())
-                .lastName(signUpRequestDto.getLastName())
-                .address(signUpRequestDto.getAddress())
-                .city(signUpRequestDto.getCity())
-                .telephone(signUpRequestDto.getTelephone())
+                .firstName(signUpRequest.getFirstName())
+                .lastName(signUpRequest.getLastName())
+                .address(signUpRequest.getAddress())
+                .city(signUpRequest.getCity())
+                .telephone(signUpRequest.getTelephone())
                 .build();
     }
 }

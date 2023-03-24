@@ -8,7 +8,7 @@ import lombok.Getter;
 @Getter
 @Builder
 @AllArgsConstructor
-public class SignUpRequestDto {
+public class SignUpRequest {
 
     @NotBlank(message = "Please enter your first name")
     private String firstName;
