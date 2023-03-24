@@ -15,17 +15,17 @@ import java.time.LocalDateTime;
 @Table(name = "tbl_visits")
 @AttributeOverride(
         name = "id",
-        column = @Column(name = "visits_id", length = 4))
+        column = @Column(name = "visit_id", length = 4))
 public class Visits extends BaseEntity {
 
-    @Column(name = "visits_date")
+    @Column(name = "visit_date")
     private LocalDateTime visitDate;
 
     @Column(name = "description")
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "pets_id")
+    @JoinColumn(name = "pet_id")
     private Pets pets;
 
 

@@ -16,7 +16,7 @@ import java.time.LocalDate;
 @Table(name = "tbl_pets")
 @AttributeOverride(
         name = "id",
-        column = @Column(name = "pets_id", length = 4))
+        column = @Column(name = "pet_id", length = 4))
 public class Pets extends BaseEntity {
 
     @Column(name = "name", length = 30)
@@ -25,12 +25,12 @@ public class Pets extends BaseEntity {
     @Column(name = "birth_date")
     private LocalDate birthDate;
 
-    @Column(name = "pets_types")
+    @Column(name = "pet_types")
     @Enumerated(value = EnumType.STRING)    // enum 값을 index 값이 아닌 text 값 그대로 저장(즉, DB에 enum 값이 그대로 저장)
     private PetsTypes petsTypes;
 
     @ManyToOne(fetch = FetchType.LAZY)  // 지연 로딩
-    @JoinColumn(name = "owners_id")
+    @JoinColumn(name = "owner_id")
     private Owners owners;
 
 

@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "tbl_vets")
 @AttributeOverride(
         name = "id",
-        column = @Column(name = "vets_id", length = 4))
+        column = @Column(name = "vet_id", length = 4))
 public class Vets extends BaseEntity {
 
     @Column(name = "first_name", length = 30)
