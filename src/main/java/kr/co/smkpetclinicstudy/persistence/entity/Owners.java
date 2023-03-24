@@ -2,10 +2,8 @@ package kr.co.smkpetclinicstudy.persistence.entity;
 
 import jakarta.persistence.*;
 import kr.co.smkpetclinicstudy.persistence.BaseEntity;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import kr.co.smkpetclinicstudy.service.model.request.SignUpRequestDto;
+import lombok.*;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -43,5 +41,15 @@ public class Owners extends BaseEntity {
         this.address = address;
         this.city = city;
         this.telephone = telephone;
+    }
+
+    public static Owners of(SignUpRequestDto signUpRequestDto) {
+        return Owners.builder()
+                .firstName(signUpRequestDto.getFirstName())
+                .lastName(signUpRequestDto.getLastName())
+                .address(signUpRequestDto.getAddress())
+                .city(signUpRequestDto.getCity())
+                .telephone(signUpRequestDto.getTelephone())
+                .build();
     }
 }
