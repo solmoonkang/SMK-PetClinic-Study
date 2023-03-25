@@ -28,4 +28,9 @@ public class OwnersController {
     public void editInfo(@Valid @RequestBody OwnerRequest ownerRequest) {
         ownersService.editInfo(ownerRequest);
     }
+
+    @DeleteMapping
+    public void deleteInfo(@Valid @RequestBody Long ownerId) {
+        ownersService.deleteInfo(ownerId);
+    }
 }

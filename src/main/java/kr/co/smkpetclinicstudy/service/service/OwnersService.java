@@ -40,4 +40,9 @@ public class OwnersService {
 
         ownersRepository.save(owners.get());
     }
+
+    @Transactional
+    public void deleteInfo(Long ownerId) {
+        ownersRepository.deleteById(ownerId);
+    }
 }
