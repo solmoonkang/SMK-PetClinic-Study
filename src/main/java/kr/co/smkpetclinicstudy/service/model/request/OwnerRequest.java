@@ -8,7 +8,9 @@ import lombok.Getter;
 @Getter
 @Builder
 @AllArgsConstructor
-public class SignUpRequest {
+public class OwnerRequest {
+
+    private Long ownerId;
 
     @NotBlank(message = "Please enter your first name")
     private String firstName;

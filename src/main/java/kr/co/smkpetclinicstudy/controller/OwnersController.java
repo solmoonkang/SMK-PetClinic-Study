@@ -1,7 +1,7 @@
 package kr.co.smkpetclinicstudy.controller;
 
 import jakarta.validation.Valid;
-import kr.co.smkpetclinicstudy.service.model.request.SignUpRequest;
+import kr.co.smkpetclinicstudy.service.model.request.OwnerRequest;
 import kr.co.smkpetclinicstudy.service.model.response.OwnerResponse;
 import kr.co.smkpetclinicstudy.service.service.OwnersService;
 import lombok.RequiredArgsConstructor;
@@ -15,12 +15,17 @@ public class OwnersController {
     private final OwnersService ownersService;
 
     @PostMapping
-    public void signUp(@Valid @RequestBody SignUpRequest signUpRequest) {
-        ownersService.signUp(signUpRequest);
+    public void signUp(@Valid @RequestBody OwnerRequest ownerRequest) {
+        ownersService.signUp(ownerRequest);
     }
 
     @GetMapping
-    public OwnerResponse getInfo(String ownerId) {
+    public OwnerResponse getInfo(@RequestParam("ownerId") String ownerId) {
         return ownersService.getInfo(ownerId);
+    }
+
+    @PutMapping
+    public void editInfo(@Valid @RequestBody OwnerRequest ownerRequest) {
+        ownersService.editInfo(ownerRequest);
     }
 }

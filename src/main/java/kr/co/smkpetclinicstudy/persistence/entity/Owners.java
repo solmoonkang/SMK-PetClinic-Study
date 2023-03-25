@@ -2,7 +2,7 @@ package kr.co.smkpetclinicstudy.persistence.entity;
 
 import jakarta.persistence.*;
 import kr.co.smkpetclinicstudy.persistence.BaseEntity;
-import kr.co.smkpetclinicstudy.service.model.request.SignUpRequest;
+import kr.co.smkpetclinicstudy.service.model.request.OwnerRequest;
 import lombok.*;
 
 @Getter
@@ -43,13 +43,25 @@ public class Owners extends BaseEntity {
         this.telephone = telephone;
     }
 
-    public static Owners of(SignUpRequest signUpRequest) {
+    public static Owners of(OwnerRequest ownerRequest) {
         return Owners.builder()
-                .firstName(signUpRequest.getFirstName())
-                .lastName(signUpRequest.getLastName())
-                .address(signUpRequest.getAddress())
-                .city(signUpRequest.getCity())
-                .telephone(signUpRequest.getTelephone())
+                .firstName(ownerRequest.getFirstName())
+                .lastName(ownerRequest.getLastName())
+                .address(ownerRequest.getAddress())
+                .city(ownerRequest.getCity())
+                .telephone(ownerRequest.getTelephone())
                 .build();
+    }
+
+    public void edit(String firstName,
+                     String lastName,
+                     String address,
+                     String city,
+                     String telephone) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.city = city;
+        this.telephone = telephone;
     }
 }
