@@ -7,6 +7,8 @@ import kr.co.smkpetclinicstudy.service.service.OwnersService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/owners")
 @RequiredArgsConstructor
@@ -22,6 +24,11 @@ public class OwnersController {
     @GetMapping
     public OwnerResponse getInfo(@RequestParam("ownerId") String ownerId) {
         return ownersService.getInfo(ownerId);
+    }
+
+    @GetMapping("/all")
+    public List<OwnerResponse> getAllInfo() {
+         return ownersService.getAllInfo();
     }
 
     @PutMapping
