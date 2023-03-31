@@ -22,8 +22,8 @@ public class OwnersController {
     }
 
     @GetMapping
-    public OwnerResponse getInfo(@RequestParam("telephone") String telephone) {
-        return ownersService.getInfo(telephone);
+    public OwnerResponse getInfo(@RequestParam("id") Long id) {
+        return ownersService.getInfo(id);
     }
 
     @GetMapping("/all")

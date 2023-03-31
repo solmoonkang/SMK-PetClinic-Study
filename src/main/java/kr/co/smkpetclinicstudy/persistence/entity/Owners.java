@@ -12,7 +12,7 @@ import lombok.*;
 @Table(name = "tbl_owners")
 @AttributeOverride(     // 하나의 Entity에서 같은 값 타입을 사용하면 Column 명이 중복되므로 Column 명 속성을 재정의
         name = "id",
-        column = @Column(name = "owner_id", length = 4))
+        column = @Column(name = "owners_id", length = 4))
 public class Owners extends BaseEntity {
 
     @Column(name = "first_name", length = 30)
@@ -56,6 +56,7 @@ public class Owners extends BaseEntity {
 
     public static OwnerResponse of(Owners owners) {
         return OwnerResponse.builder()
+                .id(owners.getId())
                 .firstName(owners.getFirstName())
                 .lastName(owners.getLastName())
                 .city(owners.getCity())

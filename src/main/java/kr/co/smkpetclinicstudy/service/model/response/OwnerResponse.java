@@ -9,9 +9,11 @@ import lombok.Getter;
 @AllArgsConstructor
 public class OwnerResponse {
 
-    private final String firstName;
+    private Long id;
 
-    private final String lastName;
+    private String firstName;
 
-    private final String city;
+    private String lastName;
+
+    private String city;
 }

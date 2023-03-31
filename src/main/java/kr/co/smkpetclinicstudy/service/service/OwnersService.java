@@ -24,8 +24,8 @@ public class OwnersService {
     }
 
     @Transactional(readOnly = true)
-    public OwnerResponse getInfo(String telephone) {
-       Optional<Owners> owners = ownersRepository.findByTelephone(telephone);
+    public OwnerResponse getInfo(Long id) {
+       Optional<Owners> owners = ownersRepository.findById(id);
        return Owners.of(owners.get());
     }
 
