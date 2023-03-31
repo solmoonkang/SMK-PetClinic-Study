@@ -3,6 +3,7 @@ package kr.co.smkpetclinicstudy.persistence.entity;
 import jakarta.persistence.*;
 import kr.co.smkpetclinicstudy.persistence.BaseEntity;
 import kr.co.smkpetclinicstudy.persistence.enums.PetsTypes;
+import kr.co.smkpetclinicstudy.service.model.request.PetRequest;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,7 +17,7 @@ import java.time.LocalDate;
 @Table(name = "tbl_pets")
 @AttributeOverride(
         name = "id",
-        column = @Column(name = "pet_id", length = 4))
+        column = @Column(name = "pets_id", length = 4))
 public class Pets extends BaseEntity {
 
     @Column(name = "name", length = 30)
@@ -25,12 +26,12 @@ public class Pets extends BaseEntity {
     @Column(name = "birth_date")
     private LocalDate birthDate;
 
-    @Column(name = "pet_types")
+    @Column(name = "pets_types")
     @Enumerated(value = EnumType.STRING)    // enum 값을 index 값이 아닌 text 값 그대로 저장(즉, DB에 enum 값이 그대로 저장)
     private PetsTypes petsTypes;
 
     @ManyToOne(fetch = FetchType.LAZY)  // 지연 로딩
-    @JoinColumn(name = "owner_id")
+    @JoinColumn(name = "owners_id")
     private Owners owners;
 
 
@@ -43,5 +44,15 @@ public class Pets extends BaseEntity {
         this.birthDate = birthDate;
         this.petsTypes = petsTypes;
         this.owners = owners;
+    }
+
+
+    public static Pets of(PetRequest petRequest) {
+        return Pets.builder()
+                .name(petRequest.getName())
+                .birthDate(LocalDate.now())
+                .petsTypes(petRequest.getPetsTypes())
+                .owners(petRequest.getOwnersId())
+                .build();
     }
 }
