@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import kr.co.smkpetclinicstudy.persistence.BaseEntity;
 import kr.co.smkpetclinicstudy.persistence.enums.PetsTypes;
 import kr.co.smkpetclinicstudy.service.model.request.PetRequest;
+import kr.co.smkpetclinicstudy.service.model.response.PetResponse;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -50,9 +51,19 @@ public class Pets extends BaseEntity {
     public static Pets of(PetRequest petRequest) {
         return Pets.builder()
                 .name(petRequest.getName())
-                .birthDate(LocalDate.now())
+                .birthDate(LocalDate.now()) // fix
                 .petsTypes(petRequest.getPetsTypes())
                 .owners(petRequest.getOwnersId())
+                .build();
+    }
+
+    public static PetResponse of(Pets pets) {
+        return PetResponse.builder()
+                .petsId(pets.getId())
+                .name(pets.getName())
+                .birthDate(pets.getBirthDate())
+                .petsTypes(pets.getPetsTypes())
+                .owners(pets.getOwners())
                 .build();
     }
 }
