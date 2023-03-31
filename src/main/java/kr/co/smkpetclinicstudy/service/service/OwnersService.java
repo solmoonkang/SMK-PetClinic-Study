@@ -24,14 +24,14 @@ public class OwnersService {
     }
 
     @Transactional(readOnly = true)
-    public OwnerResponse getInfo(String ownerId) {
-       Optional<Owners> owners = ownersRepository.findById(ownerId);
-       return new OwnerResponse(owners.get());
+    public OwnerResponse getInfo(String telephone) {
+       Optional<Owners> owners = ownersRepository.findByTelephone(telephone);
+       return Owners.of(owners.get());
     }
 
     @Transactional(readOnly = true)
     public List<OwnerResponse> getAllInfo() {
-        return ownersRepository.findOwnerListBy();
+        return ownersRepository.findOwnersListBy();
     }
 
     @Transactional

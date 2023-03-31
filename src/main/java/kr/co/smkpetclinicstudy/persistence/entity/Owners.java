@@ -3,6 +3,7 @@ package kr.co.smkpetclinicstudy.persistence.entity;
 import jakarta.persistence.*;
 import kr.co.smkpetclinicstudy.persistence.BaseEntity;
 import kr.co.smkpetclinicstudy.service.model.request.OwnerRequest;
+import kr.co.smkpetclinicstudy.service.model.response.OwnerResponse;
 import lombok.*;
 
 @Getter
@@ -52,6 +53,16 @@ public class Owners extends BaseEntity {
                 .telephone(ownerRequest.getTelephone())
                 .build();
     }
+
+    public static OwnerResponse of(Owners owners) {
+        return OwnerResponse.builder()
+                .firstName(owners.getFirstName())
+                .lastName(owners.getLastName())
+                .city(owners.getCity())
+                .build();
+    }
+
+
 
     public void edit(String firstName,
                      String lastName,
