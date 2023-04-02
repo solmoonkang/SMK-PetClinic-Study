@@ -2,8 +2,8 @@ package kr.co.smkpetclinicstudy.service.service;
 
 import kr.co.smkpetclinicstudy.persistence.entity.Owners;
 import kr.co.smkpetclinicstudy.persistence.repository.OwnersRepository;
-import kr.co.smkpetclinicstudy.service.model.request.OwnerRequest;
-import kr.co.smkpetclinicstudy.service.model.response.OwnerResponse;
+import kr.co.smkpetclinicstudy.service.model.request.OwnersRequest;
+import kr.co.smkpetclinicstudy.service.model.response.OwnersResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,31 +18,31 @@ public class OwnersService {
     private final OwnersRepository ownersRepository;
 
     @Transactional
-    public void signUp(OwnerRequest ownerRequest) {
-        final Owners owners = Owners.of(ownerRequest);
+    public void signUp(OwnersRequest ownersRequest) {
+        final Owners owners = Owners.of(ownersRequest);
         ownersRepository.save(owners);
     }
 
     @Transactional(readOnly = true)
-    public OwnerResponse getInfo(Long id) {
+    public OwnersResponse getInfo(Long id) {
        Optional<Owners> owners = ownersRepository.findById(id);
        return Owners.of(owners.get());
     }
 
     @Transactional(readOnly = true)
-    public List<OwnerResponse> getAllInfo() {
+    public List<OwnersResponse> getAllInfo() {
         return ownersRepository.findOwnersListBy();
     }
 
     @Transactional
-    public void editInfo(OwnerRequest ownerRequest) {
-        Optional<Owners> owners = ownersRepository.findById(ownerRequest.getOwnerId());
+    public void editInfo(OwnersRequest ownersRequest) {
+        Optional<Owners> owners = ownersRepository.findById(ownersRequest.getOwnerId());
         owners.get().edit(
-                ownerRequest.getFirstName(),
-                ownerRequest.getLastName(),
-                ownerRequest.getAddress(),
-                ownerRequest.getCity(),
-                ownerRequest.getTelephone());
+                ownersRequest.getFirstName(),
+                ownersRequest.getLastName(),
+                ownersRequest.getAddress(),
+                ownersRequest.getCity(),
+                ownersRequest.getTelephone());
 
         ownersRepository.save(owners.get());
     }

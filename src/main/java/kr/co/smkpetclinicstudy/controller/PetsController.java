@@ -1,8 +1,8 @@
 package kr.co.smkpetclinicstudy.controller;
 
 import jakarta.validation.Valid;
-import kr.co.smkpetclinicstudy.service.model.request.PetRequest;
-import kr.co.smkpetclinicstudy.service.model.response.PetResponse;
+import kr.co.smkpetclinicstudy.service.model.request.PetsRequest;
+import kr.co.smkpetclinicstudy.service.model.response.PetsResponse;
 import kr.co.smkpetclinicstudy.service.service.PetsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -17,23 +17,23 @@ public class PetsController {
     private final PetsService petsService;
 
     @PostMapping
-    public void register(@RequestBody @Valid PetRequest petRequest) {
-        petsService.register(petRequest);
+    public void register(@RequestBody @Valid PetsRequest petsRequest) {
+        petsService.register(petsRequest);
     }
 
     @GetMapping
-    public PetResponse getPetInfo(@RequestParam("petsId") Long petsId) {
+    public PetsResponse getPetInfo(@RequestParam("petsId") Long petsId) {
         return petsService.getPetInfo(petsId);
     }
 
     @GetMapping("/all")
-    public List<PetResponse> getAllPetInfo() {
+    public List<PetsResponse> getAllPetInfo() {
         return petsService.getAllPetInfo();
     }
 
     @PutMapping
-    public void updatePetInfo(@RequestBody @Valid PetRequest petRequest) {
-        petsService.updatePetInfo(petRequest);
+    public void updatePetInfo(@RequestBody @Valid PetsRequest petsRequest) {
+        petsService.updatePetInfo(petsRequest);
     }
 
     @DeleteMapping

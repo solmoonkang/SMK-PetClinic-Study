@@ -2,8 +2,8 @@ package kr.co.smkpetclinicstudy.persistence.entity;
 
 import jakarta.persistence.*;
 import kr.co.smkpetclinicstudy.persistence.BaseEntity;
-import kr.co.smkpetclinicstudy.service.model.request.OwnerRequest;
-import kr.co.smkpetclinicstudy.service.model.response.OwnerResponse;
+import kr.co.smkpetclinicstudy.service.model.request.OwnersRequest;
+import kr.co.smkpetclinicstudy.service.model.response.OwnersResponse;
 import lombok.*;
 
 @Getter
@@ -44,18 +44,18 @@ public class Owners extends BaseEntity {
         this.telephone = telephone;
     }
 
-    public static Owners of(OwnerRequest ownerRequest) {
+    public static Owners of(OwnersRequest ownersRequest) {
         return Owners.builder()
-                .firstName(ownerRequest.getFirstName())
-                .lastName(ownerRequest.getLastName())
-                .address(ownerRequest.getAddress())
-                .city(ownerRequest.getCity())
-                .telephone(ownerRequest.getTelephone())
+                .firstName(ownersRequest.getFirstName())
+                .lastName(ownersRequest.getLastName())
+                .address(ownersRequest.getAddress())
+                .city(ownersRequest.getCity())
+                .telephone(ownersRequest.getTelephone())
                 .build();
     }
 
-    public static OwnerResponse of(Owners owners) {
-        return OwnerResponse.builder()
+    public static OwnersResponse of(Owners owners) {
+        return OwnersResponse.builder()
                 .id(owners.getId())
                 .firstName(owners.getFirstName())
                 .lastName(owners.getLastName())

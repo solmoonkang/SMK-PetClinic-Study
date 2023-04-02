@@ -3,7 +3,7 @@ package kr.co.smkpetclinicstudy.persistence.entity;
 import jakarta.persistence.*;
 import kr.co.smkpetclinicstudy.persistence.BaseEntity;
 import kr.co.smkpetclinicstudy.persistence.enums.VetsSpecialties;
-import kr.co.smkpetclinicstudy.service.model.request.VetRequest;
+import kr.co.smkpetclinicstudy.service.model.request.VetsRequest;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -38,11 +38,11 @@ public class Vets extends BaseEntity {
         this.vetsSpecialties = vetsSpecialties;
     }
 
-    public static Vets of(VetRequest vetRequest) {
+    public static Vets of(VetsRequest vetsRequest) {
         return Vets.builder()
-                .firstName(vetRequest.getFirstName())
-                .lastName(vetRequest.getLastName())
-                .vetsSpecialties(vetRequest.getVetsSpecialties())
+                .firstName(vetsRequest.getFirstName())
+                .lastName(vetsRequest.getLastName())
+                .vetsSpecialties(vetsRequest.getVetsSpecialties())
                 .build();
     }
 

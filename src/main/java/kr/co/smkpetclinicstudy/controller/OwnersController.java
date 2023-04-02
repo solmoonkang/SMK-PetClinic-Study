@@ -1,8 +1,8 @@
 package kr.co.smkpetclinicstudy.controller;
 
 import jakarta.validation.Valid;
-import kr.co.smkpetclinicstudy.service.model.request.OwnerRequest;
-import kr.co.smkpetclinicstudy.service.model.response.OwnerResponse;
+import kr.co.smkpetclinicstudy.service.model.request.OwnersRequest;
+import kr.co.smkpetclinicstudy.service.model.response.OwnersResponse;
 import kr.co.smkpetclinicstudy.service.service.OwnersService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -17,23 +17,23 @@ public class OwnersController {
     private final OwnersService ownersService;
 
     @PostMapping
-    public void signUp(@Valid @RequestBody OwnerRequest ownerRequest) {
-        ownersService.signUp(ownerRequest);
+    public void signUp(@Valid @RequestBody OwnersRequest ownersRequest) {
+        ownersService.signUp(ownersRequest);
     }
 
     @GetMapping
-    public OwnerResponse getInfo(@RequestParam("id") Long id) {
+    public OwnersResponse getInfo(@RequestParam("id") Long id) {
         return ownersService.getInfo(id);
     }
 
     @GetMapping("/all")
-    public List<OwnerResponse> getAllInfo() {
+    public List<OwnersResponse> getAllInfo() {
          return ownersService.getAllInfo();
     }
 
     @PutMapping
-    public void editInfo(@Valid @RequestBody OwnerRequest ownerRequest) {
-        ownersService.editInfo(ownerRequest);
+    public void editInfo(@Valid @RequestBody OwnersRequest ownersRequest) {
+        ownersService.editInfo(ownersRequest);
     }
 
     @DeleteMapping

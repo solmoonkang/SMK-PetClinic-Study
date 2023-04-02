@@ -1,7 +1,6 @@
 package kr.co.smkpetclinicstudy.service.model.request;
 
 import jakarta.validation.constraints.NotBlank;
-import kr.co.smkpetclinicstudy.persistence.enums.VetsSpecialties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -9,7 +8,9 @@ import lombok.Getter;
 @Getter
 @Builder
 @AllArgsConstructor
-public class VetRequest {
+public class OwnersRequest {
+
+    private Long ownerId;
 
     @NotBlank(message = "Please enter your first name")
     private String firstName;
@@ -17,6 +18,12 @@ public class VetRequest {
     @NotBlank(message = "Please enter your last name")
     private String lastName;
 
-    @NotBlank(message = "Please enter your specialties")
-    private VetsSpecialties vetsSpecialties;
+    @NotBlank(message = "Please enter your detail address")
+    private String address;
+
+    @NotBlank(message = "Please enter your city name")
+    private String city;
+
+    @NotBlank(message = "Please enter your telephone, 010-xxxx-xxxx")
+    private String telephone;
 }

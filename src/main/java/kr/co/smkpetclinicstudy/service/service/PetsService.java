@@ -1,11 +1,9 @@
 package kr.co.smkpetclinicstudy.service.service;
 
-import kr.co.smkpetclinicstudy.persistence.entity.Owners;
 import kr.co.smkpetclinicstudy.persistence.entity.Pets;
-import kr.co.smkpetclinicstudy.persistence.repository.OwnersRepository;
 import kr.co.smkpetclinicstudy.persistence.repository.PetsRepository;
-import kr.co.smkpetclinicstudy.service.model.request.PetRequest;
-import kr.co.smkpetclinicstudy.service.model.response.PetResponse;
+import kr.co.smkpetclinicstudy.service.model.request.PetsRequest;
+import kr.co.smkpetclinicstudy.service.model.response.PetsResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,28 +18,28 @@ public class PetsService {
     private final PetsRepository petsRepository;
 
     @Transactional
-    public void register(PetRequest petRequest) {
-        final Pets pets = Pets.of(petRequest);
+    public void register(PetsRequest petsRequest) {
+        final Pets pets = Pets.of(petsRequest);
         petsRepository.save(pets);
     }
 
     @Transactional(readOnly = true)
-    public PetResponse getPetInfo(Long petsId) {
+    public PetsResponse getPetInfo(Long petsId) {
         Optional<Pets> pets = petsRepository.findByPetsId(petsId);
         return Pets.of(pets.get());
     }
 
     @Transactional(readOnly = true)
-    public List<PetResponse> getAllPetInfo() {
+    public List<PetsResponse> getAllPetInfo() {
         return petsRepository.findPetsListBy();
     }
 
     @Transactional
-    public void updatePetInfo(PetRequest petRequest) {
-        Optional<Pets> pets = petsRepository.findById(petRequest.getOwnersId().getId());
+    public void updatePetInfo(PetsRequest petsRequest) {
+        Optional<Pets> pets = petsRepository.findById(petsRequest.getOwnersId().getId());
         pets.get().update(
-                petRequest.getName(),
-                petRequest.getOwnersId());
+                petsRequest.getName(),
+                petsRequest.getOwnersId());
     }
 
     @Transactional

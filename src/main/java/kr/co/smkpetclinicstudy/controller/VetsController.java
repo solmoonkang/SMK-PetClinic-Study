@@ -1,7 +1,7 @@
 package kr.co.smkpetclinicstudy.controller;
 
 import jakarta.validation.Valid;
-import kr.co.smkpetclinicstudy.service.model.request.VetRequest;
+import kr.co.smkpetclinicstudy.service.model.request.VetsRequest;
 import kr.co.smkpetclinicstudy.service.service.VetsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +17,7 @@ public class VetsController {
     private final VetsService vetsService;
 
     @PostMapping()
-    public void signUp(@RequestBody @Valid VetRequest vetRequest) {
-        vetsService.signUp(vetRequest);
+    public void signUp(@RequestBody @Valid VetsRequest vetsRequest) {
+        vetsService.signUp(vetsRequest);
     }
 }

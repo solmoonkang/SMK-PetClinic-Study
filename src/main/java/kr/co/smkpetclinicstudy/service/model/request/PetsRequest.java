@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Getter
 @AllArgsConstructor
 @Builder
-public class PetRequest {
+public class PetsRequest {
 
     @NotBlank(message = "Please enter your pet name")
     private String name;

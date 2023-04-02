@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @Getter
 @AllArgsConstructor
 @Builder
-public class PetResponse {
+public class PetsResponse {
 
     private Long petsId;
 
