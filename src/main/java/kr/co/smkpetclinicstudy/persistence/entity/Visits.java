@@ -3,6 +3,7 @@ package kr.co.smkpetclinicstudy.persistence.entity;
 import jakarta.persistence.*;
 import kr.co.smkpetclinicstudy.persistence.BaseEntity;
 import kr.co.smkpetclinicstudy.service.model.request.VisitsRequest;
+import kr.co.smkpetclinicstudy.service.model.response.VisitsResponse;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -44,6 +45,14 @@ public class Visits extends BaseEntity {
                 .visitDate(LocalDate.now())
                 .description(visitsRequest.getDescription())
                 .pets(visitsRequest.getPets())
+                .build();
+    }
+
+    public static VisitsResponse of(Visits visits) {
+        return VisitsResponse.builder()
+                .visitDate(LocalDate.now())
+                .description(visits.getDescription())
+                .pets(visits.getPets())
                 .build();
     }
 }
