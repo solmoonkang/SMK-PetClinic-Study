@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import kr.co.smkpetclinicstudy.persistence.BaseEntity;
 import kr.co.smkpetclinicstudy.persistence.enums.VetsSpecialties;
 import kr.co.smkpetclinicstudy.service.model.request.VetsRequest;
+import kr.co.smkpetclinicstudy.service.model.response.VetsResponse;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -45,5 +46,4 @@ public class Vets extends BaseEntity {
                 .vetsSpecialties(vetsRequest.getVetsSpecialties())
                 .build();
     }
-
 }
