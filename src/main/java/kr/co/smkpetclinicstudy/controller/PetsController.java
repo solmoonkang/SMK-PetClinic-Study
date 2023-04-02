@@ -22,12 +22,17 @@ public class PetsController {
     }
 
     @GetMapping
-    public PetResponse getPetInfo(Long petsId) {
+    public PetResponse getPetInfo(@RequestParam("petsId") Long petsId) {
         return petsService.getPetInfo(petsId);
     }
 
     @GetMapping("/all")
     public List<PetResponse> getAllPetInfo() {
         return petsService.getAllPetInfo();
+    }
+
+    @PutMapping
+    public void updatePetInfo(@RequestBody @Valid PetRequest petRequest) {
+        petsService.updatePetInfo(petRequest);
     }
 }

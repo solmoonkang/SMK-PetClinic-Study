@@ -66,4 +66,10 @@ public class Pets extends BaseEntity {
                 .owners(pets.getOwners())
                 .build();
     }
+
+    public void update(String name,
+                       Owners owners) {
+        this.name = name;
+        this.owners = owners;
+    }
 }

@@ -35,4 +35,12 @@ public class PetsService {
     public List<PetResponse> getAllPetInfo() {
         return petsRepository.findPetsListBy();
     }
+
+    @Transactional
+    public void updatePetInfo(PetRequest petRequest) {
+        Optional<Pets> pets = petsRepository.findById(petRequest.getOwnersId().getId());
+        pets.get().update(
+                petRequest.getName(),
+                petRequest.getOwnersId());
+    }
 }
