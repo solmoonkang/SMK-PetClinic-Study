@@ -43,4 +43,9 @@ public class PetsService {
                 petRequest.getName(),
                 petRequest.getOwnersId());
     }
+
+    @Transactional
+    public void deletePetInfo(Long petsId) {
+        petsRepository.deleteById(petsId);
+    }
 }

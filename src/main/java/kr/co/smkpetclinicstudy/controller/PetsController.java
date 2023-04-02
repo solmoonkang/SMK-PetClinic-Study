@@ -35,4 +35,9 @@ public class PetsController {
     public void updatePetInfo(@RequestBody @Valid PetRequest petRequest) {
         petsService.updatePetInfo(petRequest);
     }
+
+    @DeleteMapping
+    public void deletePetInfo(@RequestParam("petsId") Long petsId) {
+        petsService.deletePetInfo(petsId);
+    }
 }
