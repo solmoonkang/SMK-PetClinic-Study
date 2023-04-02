@@ -2,12 +2,13 @@ package kr.co.smkpetclinicstudy.persistence.entity;
 
 import jakarta.persistence.*;
 import kr.co.smkpetclinicstudy.persistence.BaseEntity;
+import kr.co.smkpetclinicstudy.service.model.request.VisitsRequest;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -15,26 +16,34 @@ import java.time.LocalDateTime;
 @Table(name = "tbl_visits")
 @AttributeOverride(
         name = "id",
-        column = @Column(name = "visit_id", length = 4))
+        column = @Column(name = "visits_id", length = 4))
 public class Visits extends BaseEntity {
 
     @Column(name = "visit_date")
-    private LocalDateTime visitDate;
+    private LocalDate visitDate;
 
     @Column(name = "description")
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "pet_id")
+    @JoinColumn(name = "pets_id")
     private Pets pets;
 
 
     @Builder
-    public Visits(LocalDateTime visitDate,
+    public Visits(LocalDate visitDate,
                   String description,
                   Pets pets) {
         this.visitDate = visitDate;
         this.description = description;
         this.pets = pets;
+    }
+
+    public static Visits of(VisitsRequest visitsRequest) {
+        return Visits.builder()
+                .visitDate(LocalDate.now())
+                .description(visitsRequest.getDescription())
+                .pets(visitsRequest.getPets())
+                .build();
     }
 }
