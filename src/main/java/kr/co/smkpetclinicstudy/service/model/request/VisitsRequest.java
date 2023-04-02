@@ -13,6 +13,8 @@ import java.time.LocalDate;
 @Builder
 public class VisitsRequest {
 
+    private Long visitsId;
+
     private LocalDate visitDate;
 
     private String description;

@@ -55,4 +55,8 @@ public class Visits extends BaseEntity {
                 .pets(visits.getPets())
                 .build();
     }
+
+    public void update(String description) {
+        this.description = description;
+    }
 }

@@ -27,4 +27,11 @@ public class VisitsService {
         Optional<Visits> visits = visitsRepository.findByVisitsId(visitsId);
         return Visits.of(visits.get());
     }
+
+    @Transactional
+    public void updateVisitedInfo(VisitsRequest visitsRequest) {
+        Optional<Visits> visits = visitsRepository.findByVisitsId(visitsRequest.getVisitsId());
+        visits.get().update(visitsRequest.getDescription());
+        visitsRepository.save(visits.get());
+    }
 }

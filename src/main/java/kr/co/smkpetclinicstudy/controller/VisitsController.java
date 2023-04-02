@@ -20,7 +20,12 @@ public class VisitsController {
     }
 
     @GetMapping
-    public VisitsResponse visitedInfo(@RequestParam("visits_id") Long visitsId) {
+    public VisitsResponse visitedInfo(@RequestParam("visitsId") Long visitsId) {
         return visitsService.visitedInfo(visitsId);
+    }
+
+    @PutMapping
+    public void updateVisitedInfo(@RequestBody @Valid VisitsRequest visitsRequest) {
+        visitsService.updateVisitedInfo(visitsRequest);
     }
 }
