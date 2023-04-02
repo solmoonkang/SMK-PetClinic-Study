@@ -35,4 +35,9 @@ public class VisitsController {
     public void updateVisitedInfo(@RequestBody @Valid VisitsRequest visitsRequest) {
         visitsService.updateVisitedInfo(visitsRequest);
     }
+
+    @DeleteMapping
+    public void deleteVisitedInfo(@RequestParam("visitsId") Long visitsId) {
+        visitsService.deleteVisitedInfo(visitsId);
+    }
 }

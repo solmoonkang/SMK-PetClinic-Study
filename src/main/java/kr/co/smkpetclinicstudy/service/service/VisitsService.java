@@ -40,4 +40,9 @@ public class VisitsService {
         visits.get().update(visitsRequest.getDescription());
         visitsRepository.save(visits.get());
     }
+
+    @Transactional
+    public void deleteVisitedInfo(Long visitsId) {
+        visitsRepository.deleteById(visitsId);
+    }
 }
