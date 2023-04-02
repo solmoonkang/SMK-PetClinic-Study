@@ -21,6 +21,11 @@ public class VetsController {
         vetsService.signUp(vetsRequest);
     }
 
+    @GetMapping
+    public VetsResponse getInfo(@RequestParam("vetsId") Long vetsId) {
+        return vetsService.getInfo(vetsId);
+    }
+
     @GetMapping("all")
     public List<VetsResponse> getAllInfo() {
         return vetsService.getAllInfo();

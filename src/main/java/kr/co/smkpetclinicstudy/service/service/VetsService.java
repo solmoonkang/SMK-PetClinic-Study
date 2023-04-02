@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -20,6 +21,12 @@ public class VetsService {
     public void signUp(VetsRequest vetsRequest) {
         final Vets vets = Vets.of(vetsRequest);
         vetsRepository.save(vets);
+    }
+
+    @Transactional(readOnly = true)
+    public VetsResponse getInfo(Long vetsId) {
+        Optional<Vets> vets = vetsRepository.findByVetsId(vetsId);
+        return Vets.of(vets.get());
     }
 
     @Transactional(readOnly = true)

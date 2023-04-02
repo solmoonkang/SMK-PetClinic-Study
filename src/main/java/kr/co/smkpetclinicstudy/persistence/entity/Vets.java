@@ -46,4 +46,12 @@ public class Vets extends BaseEntity {
                 .vetsSpecialties(vetsRequest.getVetsSpecialties())
                 .build();
     }
+
+    public static VetsResponse of(Vets vets) {
+        return VetsResponse.builder()
+                .firstName(vets.getFirstName())
+                .lastName(vets.getLastName())
+                .vetsSpecialties(vets.getVetsSpecialties())
+                .build();
+    }
 }
