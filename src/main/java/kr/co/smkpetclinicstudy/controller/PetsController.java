@@ -7,6 +7,8 @@ import kr.co.smkpetclinicstudy.service.service.PetsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/pets")
 @RequiredArgsConstructor
@@ -22,5 +24,10 @@ public class PetsController {
     @GetMapping
     public PetResponse getPetInfo(Long petsId) {
         return petsService.getPetInfo(petsId);
+    }
+
+    @GetMapping("/all")
+    public List<PetResponse> getAllPetInfo() {
+        return petsService.getAllPetInfo();
     }
 }
