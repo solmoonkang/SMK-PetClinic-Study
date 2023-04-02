@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -26,6 +27,11 @@ public class VisitsService {
     public VisitsResponse visitedInfo(Long visitsId) {
         Optional<Visits> visits = visitsRepository.findByVisitsId(visitsId);
         return Visits.of(visits.get());
+    }
+
+    @Transactional(readOnly = true)
+    public List<VisitsResponse> visitedAllInfo() {
+        return visitsRepository.findVisitsListBy();
     }
 
     @Transactional
