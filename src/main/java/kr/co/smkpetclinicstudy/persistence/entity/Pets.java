@@ -51,7 +51,7 @@ public class Pets extends BaseEntity {
     public static Pets of(PetRequest petRequest) {
         return Pets.builder()
                 .name(petRequest.getName())
-                .birthDate(LocalDate.now()) // fix
+                .birthDate(petRequest.getBirthDate())
                 .petsTypes(petRequest.getPetsTypes())
                 .owners(petRequest.getOwnersId())
                 .build();

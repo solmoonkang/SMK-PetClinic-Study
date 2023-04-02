@@ -1,5 +1,6 @@
 package kr.co.smkpetclinicstudy.service.model.request;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotBlank;
 import kr.co.smkpetclinicstudy.persistence.entity.Owners;
 import kr.co.smkpetclinicstudy.persistence.enums.PetsTypes;
@@ -18,6 +19,7 @@ public class PetRequest {
     private String name;
 
     @NotBlank(message = "Please enter your pet birth date")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
     private LocalDate birthDate;
 
     @NotBlank(message = "Please enter your pets types")
