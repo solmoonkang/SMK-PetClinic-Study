@@ -33,4 +33,15 @@ public class VetsService {
     public List<VetsResponse> getAllInfo() {
         return vetsRepository.findVetsListBy();
     }
+
+    @Transactional
+    public void updateVetInfo(VetsRequest vetsRequest) {
+        Optional<Vets> vets = vetsRepository.findByVetsId(vetsRequest.getVetsId());
+        vets.get().update(
+                vetsRequest.getFirstName(),
+                vetsRequest.getLastName(),
+                vetsRequest.getVetsSpecialties());
+
+        vetsRepository.save(vets.get());
+    }
 }

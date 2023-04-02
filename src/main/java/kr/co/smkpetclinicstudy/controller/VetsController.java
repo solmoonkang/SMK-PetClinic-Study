@@ -30,4 +30,9 @@ public class VetsController {
     public List<VetsResponse> getAllInfo() {
         return vetsService.getAllInfo();
     }
+
+    @PutMapping
+    public void updateVetInfo(@RequestBody VetsRequest vetsRequest) {
+        vetsService.updateVetInfo(vetsRequest);
+    }
 }

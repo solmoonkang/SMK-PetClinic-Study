@@ -11,6 +11,8 @@ import lombok.Getter;
 @AllArgsConstructor
 public class VetsRequest {
 
+    private Long vetsId;
+
     @NotBlank(message = "Please enter your first name")
     private String firstName;
 
