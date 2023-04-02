@@ -44,4 +44,9 @@ public class VetsService {
 
         vetsRepository.save(vets.get());
     }
+
+    @Transactional
+    public void deleteVetInfo(Long vetsId) {
+        vetsRepository.deleteById(vetsId);
+    }
 }

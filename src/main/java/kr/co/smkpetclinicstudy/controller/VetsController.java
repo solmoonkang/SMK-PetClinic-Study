@@ -32,7 +32,12 @@ public class VetsController {
     }
 
     @PutMapping
-    public void updateVetInfo(@RequestBody VetsRequest vetsRequest) {
+    public void updateVetInfo(@RequestBody @Valid VetsRequest vetsRequest) {
         vetsService.updateVetInfo(vetsRequest);
+    }
+
+    @DeleteMapping
+    public void deleteVetInfo(@RequestParam("vetsId") Long vetsId) {
+        vetsService.deleteVetInfo(vetsId);
     }
 }
