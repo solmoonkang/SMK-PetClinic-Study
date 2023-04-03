@@ -39,8 +39,7 @@ public class VetsService {
         Optional<Vets> vets = vetsRepository.findByVetsId(vetsRequest.getVetsId());
         vets.get().update(
                 vetsRequest.getFirstName(),
-                vetsRequest.getLastName(),
-                vetsRequest.getVetsSpecialties());
+                vetsRequest.getLastName());
 
         vetsRepository.save(vets.get());
     }
