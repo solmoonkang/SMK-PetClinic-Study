@@ -8,22 +8,13 @@ import lombok.Getter;
 @Getter
 @Builder
 @AllArgsConstructor
-public class OwnersRequest {
+public class VetReqDTO {
 
-    private Long ownerId;
+    private Long vetsId;
 
     @NotBlank(message = "Please enter your first name")
     private String firstName;
 
     @NotBlank(message = "Please enter your last name")
     private String lastName;
-
-    @NotBlank(message = "Please enter your detail address")
-    private String address;
-
-    @NotBlank(message = "Please enter your city name")
-    private String city;
-
-    @NotBlank(message = "Please enter your telephone, 010-xxxx-xxxx")
-    private String telephone;
 }

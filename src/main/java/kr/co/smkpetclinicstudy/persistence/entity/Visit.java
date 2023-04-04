@@ -2,8 +2,8 @@ package kr.co.smkpetclinicstudy.persistence.entity;
 
 import jakarta.persistence.*;
 import kr.co.smkpetclinicstudy.persistence.BaseEntity;
-import kr.co.smkpetclinicstudy.service.model.request.VisitsRequest;
-import kr.co.smkpetclinicstudy.service.model.response.VisitsResponse;
+import kr.co.smkpetclinicstudy.service.model.request.VisitReqDTO;
+import kr.co.smkpetclinicstudy.service.model.response.VisitResDTO;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -18,7 +18,7 @@ import java.time.LocalDate;
 @AttributeOverride(
         name = "id",
         column = @Column(name = "visits_id", length = 4))
-public class Visits extends BaseEntity {
+public class Visit extends BaseEntity {
 
     @Column(name = "visit_date")
     private LocalDate visitDate;
@@ -28,31 +28,31 @@ public class Visits extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pets_id")
-    private Pets pets;
+    private Pet pet;
 
 
     @Builder
-    public Visits(LocalDate visitDate,
-                  String description,
-                  Pets pets) {
+    public Visit(LocalDate visitDate,
+                 String description,
+                 Pet pet) {
         this.visitDate = visitDate;
         this.description = description;
-        this.pets = pets;
+        this.pet = pet;
     }
 
-    public static Visits of(VisitsRequest visitsRequest) {
-        return Visits.builder()
+    public static Visit of(VisitReqDTO visitReqDTO) {
+        return Visit.builder()
                 .visitDate(LocalDate.now())
-                .description(visitsRequest.getDescription())
-                .pets(visitsRequest.getPets())
+                .description(visitReqDTO.getDescription())
+                .pets(visitReqDTO.getPet())
                 .build();
     }
 
-    public static VisitsResponse of(Visits visits) {
-        return VisitsResponse.builder()
+    public static VisitResDTO of(Visit visit) {
+        return VisitResDTO.builder()
                 .visitDate(LocalDate.now())
-                .description(visits.getDescription())
-                .pets(visits.getPets())
+                .description(visit.getDescription())
+                .pet(visit.getPet())
                 .build();
     }
 

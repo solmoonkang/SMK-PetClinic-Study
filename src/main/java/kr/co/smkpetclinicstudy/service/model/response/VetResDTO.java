@@ -7,7 +7,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 @Builder
-public class VetsResponse {
+public class VetResDTO {
 
     private String firstName;
 

@@ -2,8 +2,8 @@ package kr.co.smkpetclinicstudy.persistence.entity;
 
 import jakarta.persistence.*;
 import kr.co.smkpetclinicstudy.persistence.BaseEntity;
-import kr.co.smkpetclinicstudy.service.model.request.OwnersRequest;
-import kr.co.smkpetclinicstudy.service.model.response.OwnersResponse;
+import kr.co.smkpetclinicstudy.service.model.request.OwnerReqDTO;
+import kr.co.smkpetclinicstudy.service.model.response.OwnerResDTO;
 import lombok.*;
 
 @Getter
@@ -12,8 +12,8 @@ import lombok.*;
 @Table(name = "tbl_owners")
 @AttributeOverride(     // 하나의 Entity에서 같은 값 타입을 사용하면 Column 명이 중복되므로 Column 명 속성을 재정의
         name = "id",
-        column = @Column(name = "owners_id", length = 4))
-public class Owners extends BaseEntity {
+        column = @Column(name = "owner_id", length = 4))
+public class Owner extends BaseEntity {
 
     @Column(name = "first_name", length = 30)
     private String firstName;
@@ -32,11 +32,11 @@ public class Owners extends BaseEntity {
 
 
     @Builder
-    public Owners(String firstName,
-                  String lastName,
-                  String address,
-                  String city,
-                  String telephone) {
+    public Owner(String firstName,
+                 String lastName,
+                 String address,
+                 String city,
+                 String telephone) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
@@ -44,22 +44,22 @@ public class Owners extends BaseEntity {
         this.telephone = telephone;
     }
 
-    public static Owners of(OwnersRequest ownersRequest) {
-        return Owners.builder()
-                .firstName(ownersRequest.getFirstName())
-                .lastName(ownersRequest.getLastName())
-                .address(ownersRequest.getAddress())
-                .city(ownersRequest.getCity())
-                .telephone(ownersRequest.getTelephone())
+    public static Owner of(OwnerReqDTO ownerReqDto) {
+        return Owner.builder()
+                .firstName(ownerReqDto.getFirstName())
+                .lastName(ownerReqDto.getLastName())
+                .address(ownerReqDto.getAddress())
+                .city(ownerReqDto.getCity())
+                .telephone(ownerReqDto.getTelephone())
                 .build();
     }
 
-    public static OwnersResponse of(Owners owners) {
-        return OwnersResponse.builder()
-                .id(owners.getId())
-                .firstName(owners.getFirstName())
-                .lastName(owners.getLastName())
-                .city(owners.getCity())
+    public static OwnerResDTO of(Owner owner) {
+        return OwnerResDTO.builder()
+                .id(owner.getId())
+                .firstName(owner.getFirstName())
+                .lastName(owner.getLastName())
+                .city(owner.getCity())
                 .build();
     }
 

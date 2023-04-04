@@ -1,7 +1,7 @@
 package kr.co.smkpetclinicstudy.service.model.response;
 
-import kr.co.smkpetclinicstudy.persistence.entity.Owners;
-import kr.co.smkpetclinicstudy.persistence.enums.PetsTypes;
+import kr.co.smkpetclinicstudy.persistence.entity.Owner;
+import kr.co.smkpetclinicstudy.persistence.enums.PetType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @Getter
 @AllArgsConstructor
 @Builder
-public class PetsResponse {
+public class PetResDTO {
 
     private Long petsId;
 
@@ -19,7 +19,7 @@ public class PetsResponse {
 
     private LocalDate birthDate;
 
-    private PetsTypes petsTypes;
+    private PetType petType;
 
-    private Owners owners;
+    private Owner owner;
 }

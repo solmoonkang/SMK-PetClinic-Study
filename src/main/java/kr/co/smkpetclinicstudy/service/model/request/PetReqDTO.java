@@ -2,8 +2,8 @@ package kr.co.smkpetclinicstudy.service.model.request;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotBlank;
-import kr.co.smkpetclinicstudy.persistence.entity.Owners;
-import kr.co.smkpetclinicstudy.persistence.enums.PetsTypes;
+import kr.co.smkpetclinicstudy.persistence.entity.Owner;
+import kr.co.smkpetclinicstudy.persistence.enums.PetType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Getter
 @AllArgsConstructor
 @Builder
-public class PetsRequest {
+public class PetReqDTO {
 
     @NotBlank(message = "Please enter your pet name")
     private String name;
@@ -23,8 +23,8 @@ public class PetsRequest {
     private LocalDate birthDate;
 
     @NotBlank(message = "Please enter your pets types")
-    private PetsTypes petsTypes;
+    private PetType petType;
 
     @NotBlank(message = "Please enter your pet owner id")
-    private Owners ownersId;
+    private Owner ownerId;
 }

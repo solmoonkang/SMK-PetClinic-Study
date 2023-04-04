@@ -1,6 +1,5 @@
 package kr.co.smkpetclinicstudy.persistence.enums;
 
-import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -8,7 +7,7 @@ import java.util.Arrays;
 
 @Getter
 @AllArgsConstructor
-public enum PetsTypes {
+public enum PetType {
 
     DOG("강아지"),
 
@@ -22,9 +21,9 @@ public enum PetsTypes {
 
     String petType;
 
-    public static PetsTypes of(String petType){
+    public static PetType of(String petType){
 
-        return Arrays.stream(PetsTypes.values())
+        return Arrays.stream(PetType.values())
                 .filter(type -> type.toString().equalsIgnoreCase(petType))
                 .findAny().orElseThrow(() -> new RuntimeException("Not Fount Pet Type"));
     }
