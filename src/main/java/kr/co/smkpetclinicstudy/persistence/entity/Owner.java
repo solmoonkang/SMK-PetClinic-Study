@@ -44,36 +44,29 @@ public class Owner extends BaseEntity {
         this.telephone = telephone;
     }
 
-    public static Owner of(OwnerReqDTO ownerReqDto) {
+    public static Owner dtoToEntity(OwnerReqDTO.CREATE create) {
         return Owner.builder()
-                .firstName(ownerReqDto.getFirstName())
-                .lastName(ownerReqDto.getLastName())
-                .address(ownerReqDto.getAddress())
-                .city(ownerReqDto.getCity())
-                .telephone(ownerReqDto.getTelephone())
+                .firstName(create.getFirstName())
+                .lastName(create.getLastName())
+                .address(create.getAddress())
+                .city(create.getCity())
+                .telephone(create.getTelephone())
                 .build();
     }
 
-    public static OwnerResDTO of(Owner owner) {
-        return OwnerResDTO.builder()
-                .id(owner.getId())
+    public static OwnerResDTO.READ entityToDto(Owner owner) {
+        return OwnerResDTO.READ.builder()
                 .firstName(owner.getFirstName())
                 .lastName(owner.getLastName())
                 .city(owner.getCity())
                 .build();
     }
 
-
-
-    public void edit(String firstName,
-                     String lastName,
-                     String address,
-                     String city,
-                     String telephone) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-        this.city = city;
-        this.telephone = telephone;
+    public void updateOwner(OwnerReqDTO.UPDATE update) {
+        this.firstName = update.getFirstName();
+        this.lastName = update.getLastName();
+        this.city = update.getCity();
+        this.address = update.getAddress();
+        this.telephone = update.getTelephone();
     }
 }

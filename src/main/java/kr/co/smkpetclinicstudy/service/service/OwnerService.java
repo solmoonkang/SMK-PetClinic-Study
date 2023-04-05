@@ -8,9 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Optional;
-
 @Transactional(readOnly = true)
 @Service
 @RequiredArgsConstructor
@@ -19,36 +16,32 @@ public class OwnerService {
     private final OwnerRepository ownerRepository;
 
     @Transactional
-    public void signUp(OwnerReqDTO ownerReqDto) {
-        final Owner owner = Owner.of(ownerReqDto);
+    public void createOwner(OwnerReqDTO.CREATE create) {
+        final Owner owner = Owner.dtoToEntity(create);
+
         ownerRepository.save(owner);
     }
 
-    public OwnerResDTO getInfo(Long ownerId) {
-       Optional<Owner> owners = ownerRepository.findByOwnerId(ownerId);
-       return Owner.of(owners.get());
-    }
+    public OwnerResDTO.READ getOwnerById(Long ownerId) {
+       Owner owner = ownerRepository.findById(ownerId)
+               .orElseThrow(() -> new RuntimeException("Not Found Owner"));
 
-
-    public List<OwnerResDTO> getAllInfo() {
-        return ownerRepository.findOwnersListBy();
+       return Owner.entityToDto(owner);
     }
 
     @Transactional
-    public void editInfo(OwnerReqDTO ownerReqDto) {
-        Optional<Owner> owners = ownerRepository.findByOwnerId(ownerReqDto.getOwnerId());
-        owners.get().edit(
-                ownerReqDto.getFirstName(),
-                ownerReqDto.getLastName(),
-                ownerReqDto.getAddress(),
-                ownerReqDto.getCity(),
-                ownerReqDto.getTelephone());
+    public void updateOwner(OwnerReqDTO.UPDATE update) {
+        Owner owner = ownerRepository.findById(update.getOwnerId())
+                .orElseThrow(() -> new RuntimeException("Not Found Owner"));
 
-        ownerRepository.save(owners.get());
+        owner.updateOwner(update);
     }
 
     @Transactional
-    public void deleteInfo(Long ownerId) {
-        ownerRepository.deleteById(ownerId);
+    public void deleteOwnerById(Long ownerId) {
+        Owner owner = ownerRepository.findById(ownerId)
+                .orElseThrow(() -> new RuntimeException("Not Found Owner"));
+
+        ownerRepository.delete(owner);
     }
 }

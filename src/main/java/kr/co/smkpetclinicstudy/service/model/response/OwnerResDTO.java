@@ -3,17 +3,20 @@ package kr.co.smkpetclinicstudy.service.model.response;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Builder
-@AllArgsConstructor
 public class OwnerResDTO {
 
-    private Long id;
+    @Getter
+    @AllArgsConstructor
+    @Builder
+    @NoArgsConstructor
+    public static class READ {
 
-    private String firstName;
+        private String firstName;
 
-    private String lastName;
+        private String lastName;
 
-    private String city;
+        private String city;
+    }
 }
