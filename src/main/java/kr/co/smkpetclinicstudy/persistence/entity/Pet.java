@@ -2,9 +2,9 @@ package kr.co.smkpetclinicstudy.persistence.entity;
 
 import jakarta.persistence.*;
 import kr.co.smkpetclinicstudy.persistence.BaseEntity;
-import kr.co.smkpetclinicstudy.persistence.enums.PetType;
-import kr.co.smkpetclinicstudy.service.model.request.PetReqDTO;
-import kr.co.smkpetclinicstudy.service.model.response.PetResDTO;
+import kr.co.smkpetclinicstudy.service.model.enums.PetType;
+import kr.co.smkpetclinicstudy.service.model.dtos.request.PetReqDTO;
+import kr.co.smkpetclinicstudy.service.model.dtos.response.PetResDTO;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;

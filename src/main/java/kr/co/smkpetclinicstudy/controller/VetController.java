@@ -1,8 +1,8 @@
 package kr.co.smkpetclinicstudy.controller;
 
 import jakarta.validation.Valid;
-import kr.co.smkpetclinicstudy.service.model.request.VetReqDTO;
-import kr.co.smkpetclinicstudy.service.model.response.VetResDTO;
+import kr.co.smkpetclinicstudy.service.model.dtos.request.VetReqDTO;
+import kr.co.smkpetclinicstudy.service.model.dtos.response.VetResDTO;
 import kr.co.smkpetclinicstudy.service.service.VetService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

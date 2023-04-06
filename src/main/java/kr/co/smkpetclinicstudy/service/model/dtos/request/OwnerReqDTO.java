@@ -1,4 +1,4 @@
-package kr.co.smkpetclinicstudy.service.model.request;
+package kr.co.smkpetclinicstudy.service.model.dtos.request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

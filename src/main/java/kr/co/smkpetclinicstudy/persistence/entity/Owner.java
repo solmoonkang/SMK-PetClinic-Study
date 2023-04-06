@@ -2,8 +2,8 @@ package kr.co.smkpetclinicstudy.persistence.entity;
 
 import jakarta.persistence.*;
 import kr.co.smkpetclinicstudy.persistence.BaseEntity;
-import kr.co.smkpetclinicstudy.service.model.request.OwnerReqDTO;
-import kr.co.smkpetclinicstudy.service.model.response.OwnerResDTO;
+import kr.co.smkpetclinicstudy.service.model.dtos.request.OwnerReqDTO;
+import kr.co.smkpetclinicstudy.service.model.dtos.response.OwnerResDTO;
 import lombok.*;
 
 @Getter

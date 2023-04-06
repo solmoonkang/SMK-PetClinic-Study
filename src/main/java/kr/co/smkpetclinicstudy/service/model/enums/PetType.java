@@ -1,4 +1,4 @@
-package kr.co.smkpetclinicstudy.persistence.enums;
+package kr.co.smkpetclinicstudy.service.model.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

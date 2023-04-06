@@ -1,13 +1,11 @@
-package kr.co.smkpetclinicstudy.service.model.response;
+package kr.co.smkpetclinicstudy.service.model.dtos.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
-public class VetResDTO {
+public class OwnerResDTO {
 
     @Getter
     @AllArgsConstructor
@@ -19,6 +17,6 @@ public class VetResDTO {
 
         private String lastName;
 
-        private List<String> vetSpecialtiesName;
+        private String city;
     }
 }

@@ -1,6 +1,6 @@
-package kr.co.smkpetclinicstudy.service.model.response;
+package kr.co.smkpetclinicstudy.service.model.dtos.response;
 
-import kr.co.smkpetclinicstudy.persistence.enums.PetType;
+import kr.co.smkpetclinicstudy.service.model.enums.PetType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

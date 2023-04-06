@@ -2,8 +2,8 @@ package kr.co.smkpetclinicstudy.service.service;
 
 import kr.co.smkpetclinicstudy.persistence.entity.Owner;
 import kr.co.smkpetclinicstudy.persistence.repository.OwnerRepository;
-import kr.co.smkpetclinicstudy.service.model.request.OwnerReqDTO;
-import kr.co.smkpetclinicstudy.service.model.response.OwnerResDTO;
+import kr.co.smkpetclinicstudy.service.model.dtos.request.OwnerReqDTO;
+import kr.co.smkpetclinicstudy.service.model.dtos.response.OwnerResDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

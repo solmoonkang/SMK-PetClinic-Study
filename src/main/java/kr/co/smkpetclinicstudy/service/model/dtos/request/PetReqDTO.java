@@ -1,8 +1,7 @@
-package kr.co.smkpetclinicstudy.service.model.request;
+package kr.co.smkpetclinicstudy.service.model.dtos.request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import kr.co.smkpetclinicstudy.persistence.enums.PetType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
