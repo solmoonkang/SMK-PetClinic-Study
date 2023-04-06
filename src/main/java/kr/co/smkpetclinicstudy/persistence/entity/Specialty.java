@@ -3,6 +3,7 @@ package kr.co.smkpetclinicstudy.persistence.entity;
 import jakarta.persistence.*;
 import kr.co.smkpetclinicstudy.persistence.BaseEntity;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -15,9 +16,21 @@ import java.util.List;
 @Table(name = "tbl_specialties")
 @AttributeOverride(
         name = "id",
-        column = @Column(name = "specialties_id", length = 4))
+        column = @Column(name = "specialty_id", length = 4))
 public class Specialty extends BaseEntity {
 
-    @OneToMany(mappedBy = "specialty")
-    private List<VetSpecialty> vetSpecialtyList = new ArrayList<>();
+    @Column(name = "name", length = 80)
+    private String name;
+
+
+    @Builder
+    public Specialty(String name) {
+        this.name = name;
+    }
+
+    public static Specialty paramToEntity(String name) {
+        return Specialty.builder()
+                .name(name)
+                .build();
+    }
 }

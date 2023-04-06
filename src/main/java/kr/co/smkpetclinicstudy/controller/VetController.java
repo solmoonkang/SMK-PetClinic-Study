@@ -5,9 +5,8 @@ import kr.co.smkpetclinicstudy.service.model.request.VetReqDTO;
 import kr.co.smkpetclinicstudy.service.model.response.VetResDTO;
 import kr.co.smkpetclinicstudy.service.service.VetService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/vets")
@@ -17,27 +16,41 @@ public class VetController {
     private final VetService vetService;
 
     @PostMapping()
-    public void signUp(@RequestBody @Valid VetReqDTO vetReqDTO) {
-        vetService.signUp(vetReqDTO);
+    public ResponseEntity<String> createVet(@RequestBody @Valid VetReqDTO.CREATE create) {
+        try {
+            vetService.createVet(create);
+            return ResponseEntity.ok("Successfully Create Vet");
+        } catch (Exception e) {
+            return ResponseEntity.ok("Error" + e);
+        }
     }
 
-    @GetMapping
-    public VetResDTO getInfo(@RequestParam("vetsId") Long vetsId) {
-        return vetService.getInfo(vetsId);
-    }
-
-    @GetMapping("all")
-    public List<VetResDTO> getAllInfo() {
-        return vetService.getAllInfo();
+    @GetMapping("{/vet_id}")
+    public ResponseEntity<VetResDTO.READ> getVetById(@PathVariable(name = "vet_id") Long vetId) throws Exception {
+        try {
+            return ResponseEntity.ok(vetService.getVetById(vetId));
+        } catch (Exception e) {
+            throw new Exception("Error : " + e);
+        }
     }
 
     @PutMapping
-    public void updateVetInfo(@RequestBody @Valid VetReqDTO vetReqDTO) {
-        vetService.updateVetInfo(vetReqDTO);
+    public ResponseEntity<String> updateVet(@RequestBody @Valid VetReqDTO.UPDATE update) {
+        try {
+            vetService.updateVet(update);
+            return ResponseEntity.ok("Successfully Update Vet");
+        } catch (Exception e) {
+            return ResponseEntity.ok("Error" + e);
+        }
     }
 
-    @DeleteMapping
-    public void deleteVetInfo(@RequestParam("vetsId") Long vetsId) {
-        vetService.deleteVetInfo(vetsId);
+    @DeleteMapping("{/vet_id}")
+    public ResponseEntity<String> deleteVetById(@PathVariable(name = "vet_id") Long vetId) {
+        try {
+            vetService.deleteVetById(vetId);
+            return ResponseEntity.ok("Successfully Delete Vet");
+        } catch (Exception e) {
+            return ResponseEntity.ok("Error" + e);
+        }
     }
 }

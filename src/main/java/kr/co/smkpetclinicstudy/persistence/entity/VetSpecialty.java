@@ -3,23 +3,31 @@ package kr.co.smkpetclinicstudy.persistence.entity;
 import jakarta.persistence.*;
 import kr.co.smkpetclinicstudy.persistence.BaseEntity;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-@Table(name = "tbl_vets_specialties")
+@Table(name = "tbl_vet_specialties")
 @AttributeOverride(
         name = "id",
-        column = @Column(name = "vets_specialties_id", length = 4))
+        column = @Column(name = "vet_specialty_id", length = 4))
 public class VetSpecialty extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "vets_id")
+    @JoinColumn(name = "vet_id")
     private Vet vet;
 
-    @JoinColumn(name = "specialties_id")
+    @JoinColumn(name = "specialty_id")
     @ManyToOne(fetch = FetchType.LAZY)
     private Specialty specialty;
+
+    @Builder
+    public VetSpecialty(Vet vet,
+                        Specialty specialty) {
+        this.vet = vet;
+        this.specialty = specialty;
+    }
 }

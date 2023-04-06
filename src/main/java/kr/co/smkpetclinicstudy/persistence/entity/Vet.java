@@ -18,7 +18,7 @@ import java.util.List;
 @Table(name = "tbl_vets")
 @AttributeOverride(
         name = "id",
-        column = @Column(name = "vets_id", length = 4))
+        column = @Column(name = "vet_id", length = 4))
 public class Vet extends BaseEntity {
 
     @Column(name = "first_name", length = 30)
@@ -27,34 +27,40 @@ public class Vet extends BaseEntity {
     @Column(name = "last_name", length = 30)
     private String lastName;
 
-    @OneToMany(mappedBy = "vet")
-    private List<VetSpecialty> vetSpecialtyList = new ArrayList<>();
-
+    @OneToMany(
+            mappedBy = "vet",
+            fetch = FetchType.LAZY,
+            cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
+    private List<VetSpecialty> vetSpecialties = new ArrayList<>();
 
     @Builder
     public Vet(String firstName,
-               String lastName) {
+               String lastName,
+               List<VetSpecialty> vetSpecialties) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.vetSpecialties = vetSpecialties;
     }
 
-    public static Vet of(VetReqDTO vetReqDTO) {
+    public static Vet dtoToEntity(VetReqDTO.CREATE create,
+                                  List<VetSpecialty> vetSpecialties) {
         return Vet.builder()
-                .firstName(vetReqDTO.getFirstName())
-                .lastName(vetReqDTO.getLastName())
+                .firstName(create.getFirstName())
+                .lastName(create.getLastName())
+                .vetSpecialties(vetSpecialties)
                 .build();
     }
 
-    public static VetResDTO of(Vet vet) {
-        return VetResDTO.builder()
+    public static VetResDTO.READ entityToDto(Vet vet,
+                                             List<String> vetSpecialtiesName) {
+        return VetResDTO.READ.builder()
                 .firstName(vet.getFirstName())
                 .lastName(vet.getLastName())
+                .vetSpecialtiesName(vetSpecialtiesName)
                 .build();
     }
 
-    public void update(String firstName,
-                       String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public void updateVetSpecialties(List<VetSpecialty> vetSpecialties) {
+        this.vetSpecialties = vetSpecialties;
     }
 }
