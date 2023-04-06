@@ -1,7 +1,6 @@
 package kr.co.smkpetclinicstudy.service.model.dtos.request;
 
-import jakarta.validation.constraints.NotBlank;
-import kr.co.smkpetclinicstudy.persistence.entity.Pet;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -21,7 +20,8 @@ public class VisitReqDTO {
 
         private String description;
 
-        private String petName;
+        @NotNull(message = "Please enter your pet name")
+        private Long petId;
     }
 
     @Getter
@@ -30,7 +30,8 @@ public class VisitReqDTO {
     @NoArgsConstructor
     public static class UPDATE {
 
-        private Long petId;
+        @NotNull(message = "Please enter your visit")
+        private Long visitId;
 
         private String description;
     }

@@ -18,5 +18,7 @@ public class VisitResDTO {
         private LocalDate visitDate;
 
         private String description;
+
+        private String petName;
     }
 }
