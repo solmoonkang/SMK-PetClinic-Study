@@ -1,6 +1,8 @@
 package kr.co.smkpetclinicstudy.service.service;
 
+import kr.co.smkpetclinicstudy.persistence.entity.Owner;
 import kr.co.smkpetclinicstudy.persistence.entity.Pet;
+import kr.co.smkpetclinicstudy.persistence.repository.OwnerRepository;
 import kr.co.smkpetclinicstudy.persistence.repository.PetRepository;
 import kr.co.smkpetclinicstudy.service.model.request.PetReqDTO;
 import kr.co.smkpetclinicstudy.service.model.response.PetResDTO;
@@ -9,41 +11,49 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
+@Transactional(readOnly = true)
 @Service
 @RequiredArgsConstructor
 public class PetService {
 
     private final PetRepository petRepository;
 
+    private final OwnerRepository ownerRepository;
+
     @Transactional
-    public void register(PetReqDTO petReqDto) {
-        final Pet pet = Pet.of(petReqDto);
+    public void createPet(PetReqDTO.CREATE create) {
+        final Owner owner = ownerRepository.findById(create.getOwnerId())
+                .orElseThrow(() -> new RuntimeException("Not Found Owner"));
+
+        final Pet pet = Pet.dtoToEntity(create, owner);
+
         petRepository.save(pet);
     }
 
-    @Transactional(readOnly = true)
-    public PetResDTO getPetInfo(Long petsId) {
-        Optional<Pet> pets = petRepository.findByPetsId(petsId);
-        return Pet.of(pets.get());
-    }
+    public List<PetResDTO.READ> getPetsByOwnerId(Long ownerId) {
+        Owner owner = ownerRepository.findById(ownerId)
+                .orElseThrow(() -> new RuntimeException("Not Found Owner"));
 
-    @Transactional(readOnly = true)
-    public List<PetResDTO> getAllPetInfo() {
-        return petRepository.findPetsListBy();
-    }
-
-    @Transactional
-    public void updatePetInfo(PetReqDTO petReqDto) {
-        Optional<Pet> pets = petRepository.findById(petReqDto.getOwnerId().getId());
-        pets.get().update(
-                petReqDto.getName(),
-                petReqDto.getOwnerId());
+        return petRepository.findByOwner(owner).stream()
+                .map(Pet::entityToDto)
+                .collect(Collectors.toList());
     }
 
     @Transactional
-    public void deletePetInfo(Long petsId) {
-        petRepository.deleteById(petsId);
+    public void updatePet(PetReqDTO.UPDATE update) {
+        Pet pet = petRepository.findById(update.getPetId())
+                .orElseThrow(() -> new RuntimeException("Not Found Pet"));
+
+        pet.updatePet(update);
+    }
+
+    @Transactional
+    public void deletePetById(Long petId) {
+        Pet pet = petRepository.findById(petId)
+                .orElseThrow(() -> new RuntimeException("Not Found Pet"));
+
+        petRepository.delete(pet);
     }
 }

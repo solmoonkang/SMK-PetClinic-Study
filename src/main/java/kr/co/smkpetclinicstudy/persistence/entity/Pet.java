@@ -18,7 +18,7 @@ import java.time.LocalDate;
 @Table(name = "tbl_pets")
 @AttributeOverride(
         name = "id",
-        column = @Column(name = "pets_id", length = 4))
+        column = @Column(name = "pet_id", length = 4))
 public class Pet extends BaseEntity {
 
     @Column(name = "name", length = 30)
@@ -28,11 +28,11 @@ public class Pet extends BaseEntity {
     private LocalDate birthDate;
 
     @Column(name = "pets_types")
-    @Enumerated(value = EnumType.STRING)    // enum 값을 index 값이 아닌 text 값 그대로 저장(즉, DB에 enum 값이 그대로 저장)
+    @Enumerated(value = EnumType.STRING)
     private PetType petType;
 
-    @ManyToOne(fetch = FetchType.LAZY)  // 지연 로딩
-    @JoinColumn(name = "owners_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "owner_id")
     private Owner owner;
 
 
@@ -48,28 +48,28 @@ public class Pet extends BaseEntity {
     }
 
 
-    public static Pet of(PetReqDTO petReqDto) {
+    public static Pet dtoToEntity(PetReqDTO.CREATE create,
+                                  Owner owner) {
         return Pet.builder()
-                .name(petReqDto.getName())
-                .birthDate(petReqDto.getBirthDate())
-                .petsTypes(petReqDto.getPetType())
-                .owners(petReqDto.getOwnerId())
+                .name(create.getName())
+                .birthDate(create.getBirthDate())
+                .petType(PetType.of(create.getPetType()))
+                .owner(owner)
                 .build();
     }
 
-    public static PetResDTO of(Pet pet) {
-        return PetResDTO.builder()
-                .petsId(pet.getId())
+    public static PetResDTO.READ entityToDto(Pet pet) {
+        return PetResDTO.READ.builder()
                 .name(pet.getName())
                 .birthDate(pet.getBirthDate())
-                .petType(pet.getPetType())
-                .owner(pet.getOwner())
+                .petType(pet.petType)
+                .ownerName(pet.getOwner().getFirstName() + pet.getOwner().getLastName())
                 .build();
     }
 
-    public void update(String name,
-                       Owner owner) {
-        this.name = name;
-        this.owner = owner;
+    public void updatePet(PetReqDTO.UPDATE update) {
+        this.name = update.getName();
+        this.birthDate = update.getBirthDate();
+        this.petType = PetType.of(update.getPetType());
     }
 }

@@ -1,10 +1,12 @@
 package kr.co.smkpetclinicstudy.controller;
 
 import jakarta.validation.Valid;
+import kr.co.smkpetclinicstudy.persistence.entity.Owner;
 import kr.co.smkpetclinicstudy.service.model.request.PetReqDTO;
 import kr.co.smkpetclinicstudy.service.model.response.PetResDTO;
 import kr.co.smkpetclinicstudy.service.service.PetService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,27 +19,41 @@ public class PetController {
     private final PetService petService;
 
     @PostMapping
-    public void register(@RequestBody @Valid PetReqDTO petReqDto) {
-        petService.register(petReqDto);
+    public ResponseEntity<String> createPet(@RequestBody @Valid PetReqDTO.CREATE create) {
+        try {
+            petService.createPet(create);
+            return ResponseEntity.ok("Successfully Create Pet");
+        } catch (Exception e) {
+            return ResponseEntity.ok("Error : " + e);
+        }
     }
 
-    @GetMapping
-    public PetResDTO getPetInfo(@RequestParam("petsId") Long petsId) {
-        return petService.getPetInfo(petsId);
-    }
-
-    @GetMapping("/all")
-    public List<PetResDTO> getAllPetInfo() {
-        return petService.getAllPetInfo();
+    @GetMapping("/{owner_id}")
+    public ResponseEntity<List<PetResDTO.READ>> getPetsByOwnerId(@PathVariable(name = "pet_id") Long ownerId) throws Exception {
+        try {
+            return ResponseEntity.ok(petService.getPetsByOwnerId(ownerId));
+        } catch (Exception e) {
+            throw new Exception("Error : " + e);
+        }
     }
 
     @PutMapping
-    public void updatePetInfo(@RequestBody @Valid PetReqDTO petReqDto) {
-        petService.updatePetInfo(petReqDto);
+    public ResponseEntity<String> updatePet(@RequestBody @Valid PetReqDTO.UPDATE update) {
+        try {
+            petService.updatePet(update);
+            return ResponseEntity.ok("Successfully Update Pet");
+        } catch (Exception e) {
+            return ResponseEntity.ok("Error : " + e);
+        }
     }
 
-    @DeleteMapping
-    public void deletePetInfo(@RequestParam("petsId") Long petsId) {
-        petService.deletePetInfo(petsId);
+    @DeleteMapping("/{pet_id}")
+    public ResponseEntity<String> deletePet(@PathVariable(name = "pet_id") Long petId) {
+        try {
+            petService.deletePetById(petId);
+            return ResponseEntity.ok("Successfully Create Pet");
+        } catch (Exception e) {
+            return ResponseEntity.ok("Error : " + e);
+        }
     }
 }

@@ -22,7 +22,6 @@ public enum PetType {
     String petType;
 
     public static PetType of(String petType){
-
         return Arrays.stream(PetType.values())
                 .filter(type -> type.toString().equalsIgnoreCase(petType))
                 .findAny().orElseThrow(() -> new RuntimeException("Not Fount Pet Type"));
