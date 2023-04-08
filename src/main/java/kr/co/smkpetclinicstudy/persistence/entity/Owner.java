@@ -27,7 +27,7 @@ public class Owner extends BaseEntity {
     @Column(name = "city", length = 80)
     private String city;
 
-    @Column(name = "telephone", length = 20)
+    @Column(name = "telephone", length = 20, unique = true)
     private String telephone;
 
 
@@ -44,23 +44,6 @@ public class Owner extends BaseEntity {
         this.telephone = telephone;
     }
 
-    public static Owner dtoToEntity(OwnerReqDTO.CREATE create) {
-        return Owner.builder()
-                .firstName(create.getFirstName())
-                .lastName(create.getLastName())
-                .address(create.getAddress())
-                .city(create.getCity())
-                .telephone(create.getTelephone())
-                .build();
-    }
-
-    public static OwnerResDTO.READ entityToDto(Owner owner) {
-        return OwnerResDTO.READ.builder()
-                .firstName(owner.getFirstName())
-                .lastName(owner.getLastName())
-                .city(owner.getCity())
-                .build();
-    }
 
     public void updateOwner(OwnerReqDTO.UPDATE update) {
         this.firstName = update.getFirstName();
