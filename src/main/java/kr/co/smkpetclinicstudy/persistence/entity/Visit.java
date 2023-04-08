@@ -3,7 +3,6 @@ package kr.co.smkpetclinicstudy.persistence.entity;
 import jakarta.persistence.*;
 import kr.co.smkpetclinicstudy.persistence.BaseEntity;
 import kr.co.smkpetclinicstudy.service.model.dtos.request.VisitReqDTO;
-import kr.co.smkpetclinicstudy.service.model.dtos.response.VisitResDTO;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -40,23 +39,6 @@ public class Visit extends BaseEntity {
         this.pet = pet;
     }
 
-
-    public static Visit dtoToEntity(VisitReqDTO.CREATE create,
-                                    Pet pet) {
-        return Visit.builder()
-                .visitDate(create.getVisitDate())
-                .description(create.getDescription())
-                .pet(pet)
-                .build();
-    }
-
-    public static VisitResDTO.READ entityToDto(Visit visit) {
-        return VisitResDTO.READ.builder()
-                .visitDate(visit.getVisitDate())
-                .description(visit.getDescription())
-                .petName(visit.getPet().getName())
-                .build();
-    }
 
     public void updatePetDescription(VisitReqDTO.UPDATE update) {
         this.description = update.getDescription();
