@@ -1,11 +1,13 @@
 package kr.co.smkpetclinicstudy.controller;
 
-import jakarta.validation.Valid;
+import kr.co.smkpetclinicstudy.infra.global.error.enums.ErrorCode;
+import kr.co.smkpetclinicstudy.infra.global.error.response.ResponseFormat;
+import kr.co.smkpetclinicstudy.infra.global.exception.NotFoundException;
 import kr.co.smkpetclinicstudy.service.model.dtos.request.VetReqDTO;
 import kr.co.smkpetclinicstudy.service.model.dtos.response.VetResDTO;
 import kr.co.smkpetclinicstudy.service.service.VetService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,41 +18,49 @@ public class VetController {
     private final VetService vetService;
 
     @PostMapping()
-    public ResponseEntity<String> createVet(@RequestBody @Valid VetReqDTO.CREATE create) {
+    public ResponseFormat<String> createVet(@RequestBody @Validated VetReqDTO.CREATE create) {
         try {
             vetService.createVet(create);
-            return ResponseEntity.ok("Successfully Create Vet");
-        } catch (Exception e) {
-            return ResponseEntity.ok("Error" + e);
+            return ResponseFormat.successMessage(
+                    ErrorCode.SUCCESS_CREATED,
+                    create.getFirstName() + "님 수의사 정보가 성공적으로 생성되었습니다");
+        } catch (NotFoundException e) {
+            return ResponseFormat.fail(ErrorCode.FAIL);
         }
     }
 
     @GetMapping("{/vet_id}")
-    public ResponseEntity<VetResDTO.READ> getVetById(@PathVariable(name = "vet_id") Long vetId) throws Exception {
+    public ResponseFormat<VetResDTO.READ> getVetById(@PathVariable(name = "vet_id") Long vetId) {
         try {
-            return ResponseEntity.ok(vetService.getVetById(vetId));
-        } catch (Exception e) {
-            throw new Exception("Error : " + e);
+            return ResponseFormat.successData(
+                    ErrorCode.SUCCESS_EXECUTE,
+                    vetService.getVetById(vetId));
+        } catch (NotFoundException e) {
+            return ResponseFormat.fail(ErrorCode.FAIL);
         }
     }
 
     @PutMapping
-    public ResponseEntity<String> updateVet(@RequestBody @Valid VetReqDTO.UPDATE update) {
+    public ResponseFormat<String> updateVet(@RequestBody @Validated VetReqDTO.UPDATE update) {
         try {
             vetService.updateVet(update);
-            return ResponseEntity.ok("Successfully Update Vet");
-        } catch (Exception e) {
-            return ResponseEntity.ok("Error" + e);
+            return ResponseFormat.successMessage(
+                    ErrorCode.SUCCESS_EXECUTE,
+                    update.getFirstName() + "님 수의사 정보가 성공적으로 수정되었습니다");
+        } catch (NotFoundException e) {
+            return ResponseFormat.fail(ErrorCode.FAIL);
         }
     }
 
     @DeleteMapping("{/vet_id}")
-    public ResponseEntity<String> deleteVetById(@PathVariable(name = "vet_id") Long vetId) {
+    public ResponseFormat<String> deleteVetById(@PathVariable(name = "vet_id") Long vetId) {
         try {
             vetService.deleteVetById(vetId);
-            return ResponseEntity.ok("Successfully Delete Vet");
-        } catch (Exception e) {
-            return ResponseEntity.ok("Error" + e);
+            return ResponseFormat.successMessage(
+                    ErrorCode.SUCCESS_EXECUTE,
+                    "수의사 정보가 성공적으로 삭제되었습니다");
+        } catch (NotFoundException e) {
+            return ResponseFormat.fail(ErrorCode.FAIL);
         }
     }
 }
