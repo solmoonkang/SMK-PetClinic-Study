@@ -27,7 +27,7 @@ public class PetController {
                     ErrorCode.SUCCESS_CREATED,
                     "펫 정보가 성공적으로 생성되었습니다");
         } catch (NotFoundException e) {
-            return ResponseFormat.fail(ErrorCode.FAIL);
+            return ResponseFormat.fail(ErrorCode.NOT_FOUND_OWNER);
         }
     }
 
@@ -38,7 +38,7 @@ public class PetController {
                     ErrorCode.SUCCESS_EXECUTE,
                     petService.getPetsByOwnerId(ownerId));
         } catch (NotFoundException e) {
-            return ResponseFormat.fail(ErrorCode.FAIL);
+            return ResponseFormat.fail(ErrorCode.NOT_FOUND_OWNER);
         }
     }
 
@@ -50,7 +50,7 @@ public class PetController {
                     ErrorCode.SUCCESS_EXECUTE,
                     "펫 정보가 성공적으로 수정되었습니다");
         } catch (NotFoundException e) {
-            return ResponseFormat.fail(ErrorCode.FAIL);
+            return ResponseFormat.fail(ErrorCode.NOT_FOUND_PET);
         }
     }
 
@@ -62,7 +62,7 @@ public class PetController {
                     ErrorCode.SUCCESS_EXECUTE,
                     "펫 정보가 성공적으로 삭제되었습니다");
         } catch (NotFoundException e) {
-            return ResponseFormat.fail(ErrorCode.FAIL);
+            return ResponseFormat.fail(ErrorCode.NOT_FOUND_PET);
         }
     }
 }

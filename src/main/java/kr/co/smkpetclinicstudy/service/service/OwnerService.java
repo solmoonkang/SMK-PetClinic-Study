@@ -59,7 +59,7 @@ public class OwnerService {
 
     // 전화번호 입력 시 중복 검사
     private void duplicateOwnerTelephone(String telephone) {
-        if (ownerRepository.existsByOwnerTelephone(telephone)) {
+        if (ownerRepository.existsByTelephone(telephone)) {
             throw new DuplicatedException(ErrorCode.DUPLICATED_OWNER_PHONE);
         }
     }

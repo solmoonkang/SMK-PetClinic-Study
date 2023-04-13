@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface OwnerRepository extends JpaRepository<Owner, Long> {
 
-    boolean existsByOwnerTelephone(String telephone);
+    boolean existsByTelephone(String telephone);
 }

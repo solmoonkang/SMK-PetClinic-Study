@@ -4,7 +4,6 @@ import kr.co.smkpetclinicstudy.persistence.entity.Owner;
 import kr.co.smkpetclinicstudy.service.model.dtos.request.OwnerReqDTO;
 import kr.co.smkpetclinicstudy.service.model.dtos.response.OwnerResDTO;
 import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring")  // Spring의 컴포넌트 모델을 사용할 수 있다(Bean을 주입하고 구현체 클래스를 만들지 않고도 사용 가능하다)
 public interface OwnerMapper {
@@ -32,8 +31,6 @@ public interface OwnerMapper {
      *  OwnerMapper 내에서 ownerMapper 객체를 static final로 선언하면 이 객체는 상수로 사용된다
      *      이렇게 상수로선언하면 객체가 여러 번 생성되지 않으므로 성능상의 이점이 있다
      */
-
-    OwnerMapper INSTANCE = Mappers.getMapper(OwnerMapper.class);
 
     // OwnerReqDTO.CREATE -> Owner Entity
     Owner ownerCreateDtoToEntity(OwnerReqDTO.CREATE create);

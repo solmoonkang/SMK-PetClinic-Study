@@ -40,7 +40,6 @@ public class OwnerReqDTO {
         @NotNull(message = "Please enter your owner")
         private Long ownerId;
 
-        @NotBlank()
         private String firstName;
 
         private String lastName;

@@ -13,6 +13,8 @@ public class OwnerResDTO {
     @NoArgsConstructor
     public static class READ {
 
+        private Long ownerId;
+
         private String firstName;
 
         private String lastName;
