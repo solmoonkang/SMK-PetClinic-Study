@@ -1,12 +1,18 @@
 package kr.co.smkpetclinicstudy.controller;
 
-import jakarta.validation.Valid;
+import kr.co.smkpetclinicstudy.infra.global.error.enums.ErrorCode;
+import kr.co.smkpetclinicstudy.infra.global.error.response.ResponseFormat;
+import kr.co.smkpetclinicstudy.infra.global.exception.DuplicatedException;
+import kr.co.smkpetclinicstudy.infra.global.exception.NotFoundException;
 import kr.co.smkpetclinicstudy.service.model.dtos.request.OwnerReqDTO;
 import kr.co.smkpetclinicstudy.service.model.dtos.response.OwnerResDTO;
 import kr.co.smkpetclinicstudy.service.service.OwnerService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import static kr.co.smkpetclinicstudy.infra.global.error.response.ResponseFormat.successData;
+import static kr.co.smkpetclinicstudy.infra.global.error.response.ResponseFormat.successMessage;
 
 @RestController
 @RequestMapping("/api/v1/owners")
@@ -16,41 +22,53 @@ public class OwnerController {
     private final OwnerService ownerService;
 
     @PostMapping
-    public ResponseEntity<String> createOwner(@Valid @RequestBody OwnerReqDTO.CREATE create) {
+    public ResponseFormat<String> createOwner(@Validated @RequestBody OwnerReqDTO.CREATE create) {
         try {
             ownerService.createOwner(create);
-            return ResponseEntity.ok("Successfully Create Owner");
-        } catch (Exception e) {
-            return ResponseEntity.ok("Error : " + e);
+            return ResponseFormat.successMessage(
+                    ErrorCode.SUCCESS_CREATED,
+                    create.getFirstName() + "님 소유자 정보가 성공적으로 생성되었습니다");
+        } catch (NotFoundException e) {
+            return ResponseFormat.fail(ErrorCode.FAIL);
+        } catch (DuplicatedException e) {
+            return ResponseFormat.fail(ErrorCode.FAIL);
         }
     }
 
-    @GetMapping
-    public ResponseEntity<OwnerResDTO.READ> getOwnerById(@PathVariable(name = "owner_id") Long ownerId) throws Exception {
+    @GetMapping("/{owner_id}")
+    public ResponseFormat<OwnerResDTO.READ> getOwnerById(@PathVariable(name = "owner_id") Long ownerId) {
         try {
-            return ResponseEntity.ok(ownerService.getOwnerById(ownerId));
-        } catch (Exception e) {
-            throw new Exception("Error : " + e);
+            return successData(
+                    ErrorCode.SUCCESS_EXECUTE,
+                    ownerService.getOwnerById(ownerId));
+        } catch (NotFoundException e) {
+            return ResponseFormat.fail(ErrorCode.FAIL);
         }
     }
 
     @PutMapping
-    public ResponseEntity<String> updateOwner(@Valid @RequestBody OwnerReqDTO.UPDATE update) {
+    public ResponseFormat<String> updateOwner(@Validated @RequestBody OwnerReqDTO.UPDATE update) {
         try {
             ownerService.updateOwner(update);
-            return ResponseEntity.ok("Successfully Update Owner");
-        } catch (Exception e) {
-            return ResponseEntity.ok("Error : " + e);
+            return successMessage(
+                    ErrorCode.SUCCESS_EXECUTE,
+                    update.getFirstName() + "님 소유자 정보가 성공적으로 수정되었습니다");
+        } catch (NotFoundException e) {
+            return ResponseFormat.fail(ErrorCode.FAIL);
+        } catch (DuplicatedException e) {
+            return ResponseFormat.fail(ErrorCode.FAIL);
         }
     }
 
-    @DeleteMapping
-    public ResponseEntity<String> deleteOwnerById(@PathVariable(name = "owner_id") Long ownerId) {
+    @DeleteMapping("/{owner_id}")
+    public ResponseFormat<String> deleteOwnerById(@PathVariable(name = "owner_id") Long ownerId) {
         try {
             ownerService.deleteOwnerById(ownerId);
-            return ResponseEntity.ok("Successfully Delete Owner");
-        } catch (Exception e) {
-            return ResponseEntity.ok("Error : " + e);
+            return successMessage(
+                    ErrorCode.SUCCESS_EXECUTE,
+                    "소유자 정보가 성공적으로 삭제되었습니다");
+        } catch (NotFoundException e) {
+            return ResponseFormat.fail(ErrorCode.FAIL);
         }
     }
 }

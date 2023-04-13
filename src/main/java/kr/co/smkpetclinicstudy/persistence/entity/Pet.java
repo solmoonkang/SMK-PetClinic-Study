@@ -48,25 +48,6 @@ public class Pet extends BaseEntity {
     }
 
 
-    public static Pet dtoToEntity(PetReqDTO.CREATE create,
-                                  Owner owner) {
-        return Pet.builder()
-                .name(create.getName())
-                .birthDate(create.getBirthDate())
-                .petType(PetType.of(create.getPetType()))
-                .owner(owner)
-                .build();
-    }
-
-    public static PetResDTO.READ entityToDto(Pet pet) {
-        return PetResDTO.READ.builder()
-                .name(pet.getName())
-                .birthDate(pet.getBirthDate())
-                .petType(pet.petType)
-                .ownerName(pet.getOwner().getFirstName() + pet.getOwner().getLastName())
-                .build();
-    }
-
     public void updatePet(PetReqDTO.UPDATE update) {
         this.name = update.getName();
         this.birthDate = update.getBirthDate();

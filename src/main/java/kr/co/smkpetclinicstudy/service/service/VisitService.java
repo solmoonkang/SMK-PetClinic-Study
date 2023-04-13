@@ -1,11 +1,14 @@
 package kr.co.smkpetclinicstudy.service.service;
 
+import kr.co.smkpetclinicstudy.infra.global.error.enums.ErrorCode;
+import kr.co.smkpetclinicstudy.infra.global.exception.NotFoundException;
 import kr.co.smkpetclinicstudy.persistence.entity.Pet;
 import kr.co.smkpetclinicstudy.persistence.entity.Visit;
 import kr.co.smkpetclinicstudy.persistence.repository.PetRepository;
 import kr.co.smkpetclinicstudy.persistence.repository.VisitRepository;
 import kr.co.smkpetclinicstudy.service.model.dtos.request.VisitReqDTO;
 import kr.co.smkpetclinicstudy.service.model.dtos.response.VisitResDTO;
+import kr.co.smkpetclinicstudy.service.model.mappers.VisitMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,29 +25,31 @@ public class VisitService {
 
     private final PetRepository petRepository;
 
+    private final VisitMapper visitMapper;
+
     @Transactional
     public void createVisit(VisitReqDTO.CREATE create) {
         final Pet pet = petRepository.findById(create.getPetId())
-                .orElseThrow(() -> new RuntimeException("Not Found Pet"));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND_PET));
 
-        final Visit visit = Visit.dtoToEntity(create, pet);
+        final Visit visit = visitMapper.visitCreateDtoToEntity(create, pet);
 
         visitRepository.save(visit);
     }
 
     public List<VisitResDTO.READ> getVisitByPetId(Long petId) {
         final Pet pet = petRepository.findById(petId)
-                .orElseThrow(() -> new RuntimeException("Not Found Pet"));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND_PET));
 
         return visitRepository.findByPet(pet).stream()
-                .map(Visit::entityToDto)
+                .map(visitMapper::visitEntityToReadDto)
                 .collect(Collectors.toList());
     }
 
     @Transactional
     public void updateVisit(VisitReqDTO.UPDATE update) {
         Visit visit = visitRepository.findById(update.getVisitId())
-                .orElseThrow(() -> new RuntimeException("Not Found Visit"));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND_VISIT));
 
         visit.updatePetDescription(update);
     }
@@ -52,7 +57,7 @@ public class VisitService {
     @Transactional
     public void deleteVisitById(Long visitId) {
         Visit visit = visitRepository.findById(visitId)
-                .orElseThrow(() -> new RuntimeException("Not Found Visit"));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND_VISIT));
 
         visitRepository.delete(visit);
     }

@@ -42,23 +42,6 @@ public class Vet extends BaseEntity {
         this.vetSpecialties = vetSpecialties;
     }
 
-    public static Vet dtoToEntity(VetReqDTO.CREATE create,
-                                  List<VetSpecialty> vetSpecialties) {
-        return Vet.builder()
-                .firstName(create.getFirstName())
-                .lastName(create.getLastName())
-                .vetSpecialties(vetSpecialties)
-                .build();
-    }
-
-    public static VetResDTO.READ entityToDto(Vet vet,
-                                             List<String> vetSpecialtiesName) {
-        return VetResDTO.READ.builder()
-                .firstName(vet.getFirstName())
-                .lastName(vet.getLastName())
-                .vetSpecialtiesName(vetSpecialtiesName)
-                .build();
-    }
 
     public void updateVetSpecialties(List<VetSpecialty> vetSpecialties) {
         this.vetSpecialties = vetSpecialties;

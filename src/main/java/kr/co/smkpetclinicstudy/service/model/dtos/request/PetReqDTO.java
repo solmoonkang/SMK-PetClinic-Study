@@ -25,7 +25,7 @@ public class PetReqDTO {
         @NotBlank(message = "Please enter your pet type")
         private String petType;
 
-        @NotBlank(message = "Please enter your owner")
+        @NotBlank(message = "Please enter your owner id")
         private Long ownerId;
     }
 
@@ -35,7 +35,7 @@ public class PetReqDTO {
     @NoArgsConstructor
     public static class UPDATE {
 
-        @NotNull(message = "Please enter your pet")
+        @NotNull(message = "Please enter your pet id")
         private Long petId;
 
         private String name;
@@ -43,6 +43,5 @@ public class PetReqDTO {
         private LocalDate birthDate;
 
         private String petType;
-
     }
 }
