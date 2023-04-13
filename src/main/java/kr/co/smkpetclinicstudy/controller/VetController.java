@@ -17,7 +17,7 @@ public class VetController {
 
     private final VetService vetService;
 
-    @PostMapping()
+    @PostMapping
     public ResponseFormat<String> createVet(@RequestBody @Validated VetReqDTO.CREATE create) {
         try {
             vetService.createVet(create);
@@ -29,7 +29,7 @@ public class VetController {
         }
     }
 
-    @GetMapping("{/vet_id}")
+    @GetMapping("/{vet_id}")
     public ResponseFormat<VetResDTO.READ> getVetById(@PathVariable(name = "vet_id") Long vetId) {
         try {
             return ResponseFormat.successData(
@@ -52,7 +52,7 @@ public class VetController {
         }
     }
 
-    @DeleteMapping("{/vet_id}")
+    @DeleteMapping("/{vet_id}")
     public ResponseFormat<String> deleteVetById(@PathVariable(name = "vet_id") Long vetId) {
         try {
             vetService.deleteVetById(vetId);

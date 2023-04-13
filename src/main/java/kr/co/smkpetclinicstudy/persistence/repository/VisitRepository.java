@@ -11,4 +11,6 @@ import java.util.List;
 public interface VisitRepository extends JpaRepository<Visit, Long> {
 
     List<Visit> findByPet(Pet pet);
+
+    List<Visit> findAllByPetId(Long petId);
 }

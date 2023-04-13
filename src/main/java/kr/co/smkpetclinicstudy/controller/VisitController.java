@@ -47,11 +47,24 @@ public class VisitController {
     }
 
     @GetMapping("/{visit_id}")
-    public ResponseFormat<VisitResDTO.READ> getVisitByVisitId(@PathVariable Long visitId) {
+    public ResponseFormat<VisitResDTO.READ> getVisitByVisitId(@PathVariable(name = "visit_id") Long visitId) {
         try {
             return ResponseFormat.successData(
                     ErrorCode.SUCCESS_EXECUTE,
                     visitService.getVisitByVisitId(visitId));
+        } catch (NotFoundException e) {
+            return ResponseFormat.fail(ErrorCode.FAIL);
+        } catch (RuntimeException e) {
+            return ResponseFormat.fail(ErrorCode.FAIL);
+        }
+    }
+
+    @GetMapping("/{owner_id}")
+    public ResponseFormat<List<VisitResDTO.READ>> getAllVisitByOwnerId(@PathVariable(name = "owner_id") Long ownerId) {
+        try {
+            return ResponseFormat.successData(
+                    ErrorCode.SUCCESS_EXECUTE,
+                    visitService.getAllVisitByOwnerId(ownerId));
         } catch (NotFoundException e) {
             return ResponseFormat.fail(ErrorCode.FAIL);
         } catch (RuntimeException e) {

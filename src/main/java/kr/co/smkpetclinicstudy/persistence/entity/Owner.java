@@ -6,6 +6,8 @@ import kr.co.smkpetclinicstudy.service.model.dtos.request.OwnerReqDTO;
 import kr.co.smkpetclinicstudy.service.model.dtos.response.OwnerResDTO;
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity

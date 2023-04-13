@@ -2,17 +2,21 @@ package kr.co.smkpetclinicstudy.service.service;
 
 import kr.co.smkpetclinicstudy.infra.global.error.enums.ErrorCode;
 import kr.co.smkpetclinicstudy.infra.global.exception.NotFoundException;
+import kr.co.smkpetclinicstudy.persistence.entity.Owner;
 import kr.co.smkpetclinicstudy.persistence.entity.Pet;
 import kr.co.smkpetclinicstudy.persistence.entity.Visit;
+import kr.co.smkpetclinicstudy.persistence.repository.OwnerRepository;
 import kr.co.smkpetclinicstudy.persistence.repository.PetRepository;
 import kr.co.smkpetclinicstudy.persistence.repository.VisitRepository;
 import kr.co.smkpetclinicstudy.service.model.dtos.request.VisitReqDTO;
 import kr.co.smkpetclinicstudy.service.model.dtos.response.VisitResDTO;
+import kr.co.smkpetclinicstudy.service.model.mappers.PetMapper;
 import kr.co.smkpetclinicstudy.service.model.mappers.VisitMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,7 +29,11 @@ public class VisitService {
 
     private final PetRepository petRepository;
 
+    private final OwnerRepository ownerRepository;
+
     private final VisitMapper visitMapper;
+
+    private final PetMapper petMapper;
 
     /** Create Visit Service
      * @Param VisitReqDTO.CREATE : create visit info
@@ -57,7 +65,7 @@ public class VisitService {
 
     /** Get Visit By VisitId Service
      * @Param visitId : get visit info
-     * @Return VisitResDTO.READ List
+     * @Return VisitResDTO.READ
      */
     public VisitResDTO.READ getVisitByVisitId(Long visitId) {
 
@@ -65,6 +73,22 @@ public class VisitService {
                 .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND_VISIT));
 
         return visitMapper.visitEntityToReadDto(visit);
+    }
+
+    /** Get Visit By OwnerId Service
+     * @Param ownerId : get all visit info
+     * @Return VisitResDTO.READ List
+     */
+    public List<VisitResDTO.READ> getAllVisitByOwnerId(Long ownerId) {
+
+        final List<VisitResDTO.READ> visits = new ArrayList<>();
+        final List<Pet> pets = petRepository.findAllByOwnerId(ownerId);
+        for (Pet pet : pets) {
+            visits.addAll(visitRepository.findAllByPetId(pet.getId()).stream()
+                    .map(visitMapper::visitEntityToReadDto)
+                    .collect(Collectors.toList()));
+        }
+        return visits;
     }
 
     /** Update Visit Service

@@ -10,5 +10,7 @@ import org.mapstruct.Mapping;
 public interface VetSpecialtyMapper {
 
     // Specialty, Vet Parameter -> VetSpecialty Entity
+    @Mapping(source = "specialty", target = "specialty")
+    @Mapping(source = "vet", target = "vet")
     VetSpecialty paramToVetSpecialtyEntity(Specialty specialty, Vet vet);
 }

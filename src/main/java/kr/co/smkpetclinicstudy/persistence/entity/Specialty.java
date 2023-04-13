@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
         column = @Column(name = "specialty_id", length = 4))
 public class Specialty extends BaseEntity {
 
-    @Column(name = "name", length = 80)
+    @Column(name = "specialty_name", length = 80)
     private String specialtyName;
 
 

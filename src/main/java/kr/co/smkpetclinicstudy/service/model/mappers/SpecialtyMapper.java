@@ -9,5 +9,6 @@ import org.mapstruct.Named;
 public interface SpecialtyMapper {
 
     // String name -> Specialty
-    Specialty nameToSpecialtyEntity(String name);
+    @Mapping(source = "specialtyName", target = "specialtyName")
+    Specialty nameToSpecialtyEntity(String specialtyName);
 }

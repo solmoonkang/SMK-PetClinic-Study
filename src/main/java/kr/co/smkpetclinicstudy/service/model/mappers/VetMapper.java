@@ -14,8 +14,14 @@ public interface VetMapper {
     // VetDTO와 VetEntity 간의 데이터 전환을 담당
 
     // VetReqDTO.CREATE, List<VetSpecialty> -> Vet Entity
+    @Mapping(source = "create.firstName", target = "firstName")
+    @Mapping(source = "create.lastName", target = "lastName")
+    @Mapping(source = "vetSpecialties", target = "vetSpecialties")
     Vet vetCreateDtoToEntity(VetReqDTO.CREATE create, List<VetSpecialty> vetSpecialties);
 
     // Vet, List<String> -> VetResDTO.READ
+    @Mapping(source = "vet.firstName", target = "firstName")
+    @Mapping(source = "vet.lastName", target = "lastName")
+    @Mapping(source = "specialtiesName", target = "vetSpecialtiesName")
     VetResDTO.READ vetEntityToReadDto(Vet vet, List<String> specialtiesName);
 }

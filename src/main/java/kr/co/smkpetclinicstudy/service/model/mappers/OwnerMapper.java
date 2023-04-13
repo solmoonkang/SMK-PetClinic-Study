@@ -34,8 +34,17 @@ public interface OwnerMapper {
      */
 
     // OwnerReqDTO.CREATE -> Owner Entity
+    @Mapping(source = "create.firstName", target = "firstName")
+    @Mapping(source = "create.lastName", target = "lastName")
+    @Mapping(source = "create.address", target = "address")
+    @Mapping(source = "create.city", target = "city")
+    @Mapping(source = "create.telephone", target = "telephone")
     Owner ownerCreateDtoToEntity(OwnerReqDTO.CREATE create);
 
     // Owner Entity -> OwnerResDTO.READ
+    @Mapping(source = "id", target = "ownerId")
+    @Mapping(source = "firstName", target = "firstName")
+    @Mapping(source = "lastName", target = "lastName")
+    @Mapping(source = "city", target = "city")
     OwnerResDTO.READ ownerEntityToReadDto(Owner owner);
 }
