@@ -72,12 +72,12 @@ public class VetService {
     private List<Specialty> getOrCreateSpecialtiesByName(List<String> names) {
         List<Specialty> specialties = specialtyRepository.findAllByName(names);
 
-        final Set<String> existName = specialties.stream()
-                .map(Specialty::getName)
+        final Set<String> existNames = specialties.stream()
+                .map(Specialty::getSpecialtyName)
                 .collect(Collectors.toSet());
 
         final List<Specialty> createSpecialties = names.stream()
-                .filter(name -> !existName.contains(name))
+                .filter(name -> !existNames.contains(name))
                 .map(specialtyMapper::nameToSpecialtyEntity)
                 .collect(Collectors.toList());
 
@@ -89,7 +89,7 @@ public class VetService {
     private List<String> getSpecialtiesNameByVet(Vet vet) {
         return vet.getVetSpecialties().stream()
                 .map(VetSpecialty::getSpecialty)
-                .map(Specialty::getName)
+                .map(Specialty::getSpecialtyName)
                 .collect(Collectors.toList());
     }
 

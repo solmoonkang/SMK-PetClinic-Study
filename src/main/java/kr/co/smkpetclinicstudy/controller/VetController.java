@@ -24,7 +24,7 @@ public class VetController {
             return ResponseFormat.successMessage(
                     ErrorCode.SUCCESS_CREATED,
                     create.getFirstName() + "님 수의사 정보가 성공적으로 생성되었습니다");
-        } catch (NotFoundException e) {
+        } catch (RuntimeException e) {
             return ResponseFormat.fail(ErrorCode.FAIL);
         }
     }
@@ -36,7 +36,7 @@ public class VetController {
                     ErrorCode.SUCCESS_EXECUTE,
                     vetService.getVetById(vetId));
         } catch (NotFoundException e) {
-            return ResponseFormat.fail(ErrorCode.FAIL);
+            return ResponseFormat.fail(ErrorCode.NOT_FOUND_VET);
         }
     }
 
@@ -48,7 +48,7 @@ public class VetController {
                     ErrorCode.SUCCESS_EXECUTE,
                     update.getFirstName() + "님 수의사 정보가 성공적으로 수정되었습니다");
         } catch (NotFoundException e) {
-            return ResponseFormat.fail(ErrorCode.FAIL);
+            return ResponseFormat.fail(ErrorCode.NOT_FOUND_VET);
         }
     }
 
@@ -60,7 +60,7 @@ public class VetController {
                     ErrorCode.SUCCESS_EXECUTE,
                     "수의사 정보가 성공적으로 삭제되었습니다");
         } catch (NotFoundException e) {
-            return ResponseFormat.fail(ErrorCode.FAIL);
+            return ResponseFormat.fail(ErrorCode.NOT_FOUND_VET);
         }
     }
 }

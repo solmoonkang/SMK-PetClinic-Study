@@ -29,9 +29,9 @@ public class OwnerController {
                     ErrorCode.SUCCESS_CREATED,
                     create.getFirstName() + "님 소유자 정보가 성공적으로 생성되었습니다");
         } catch (NotFoundException e) {
-            return ResponseFormat.fail(ErrorCode.FAIL);
+            return ResponseFormat.fail(ErrorCode.NOT_FOUND_OWNER);
         } catch (DuplicatedException e) {
-            return ResponseFormat.fail(ErrorCode.FAIL);
+            return ResponseFormat.fail(ErrorCode.DUPLICATED_OWNER_PHONE);
         }
     }
 
@@ -42,7 +42,7 @@ public class OwnerController {
                     ErrorCode.SUCCESS_EXECUTE,
                     ownerService.getOwnerById(ownerId));
         } catch (NotFoundException e) {
-            return ResponseFormat.fail(ErrorCode.FAIL);
+            return ResponseFormat.fail(ErrorCode.NOT_FOUND_OWNER);
         }
     }
 
@@ -54,9 +54,9 @@ public class OwnerController {
                     ErrorCode.SUCCESS_EXECUTE,
                     update.getFirstName() + "님 소유자 정보가 성공적으로 수정되었습니다");
         } catch (NotFoundException e) {
-            return ResponseFormat.fail(ErrorCode.FAIL);
+            return ResponseFormat.fail(ErrorCode.NOT_FOUND_OWNER);
         } catch (DuplicatedException e) {
-            return ResponseFormat.fail(ErrorCode.FAIL);
+            return ResponseFormat.fail(ErrorCode.DUPLICATED_OWNER_PHONE);
         }
     }
 
@@ -68,7 +68,7 @@ public class OwnerController {
                     ErrorCode.SUCCESS_EXECUTE,
                     "소유자 정보가 성공적으로 삭제되었습니다");
         } catch (NotFoundException e) {
-            return ResponseFormat.fail(ErrorCode.FAIL);
+            return ResponseFormat.fail(ErrorCode.NOT_FOUND_OWNER);
         }
     }
 }

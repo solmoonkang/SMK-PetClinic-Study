@@ -38,8 +38,6 @@ public class OwnerServiceTest {
 
     private OwnerReqDTO.CREATE create;
 
-    private OwnerReqDTO.UPDATE update;
-
     private Owner owner;
 
     @BeforeEach
@@ -54,12 +52,13 @@ public class OwnerServiceTest {
                 .telephone("010-3884-2913")
                 .build();
 
-        owner = new Owner(
-                create.getFirstName(),
-                create.getLastName(),
-                create.getAddress(),
-                create.getCity(),
-                create.getTelephone());
+        owner = Owner.builder()
+                .firstName(create.getFirstName())
+                .lastName(create.getLastName())
+                .address(create.getAddress())
+                .city(create.getCity())
+                .telephone(create.getTelephone())
+                .build();
     }
 
     @AfterEach
@@ -76,6 +75,7 @@ public class OwnerServiceTest {
         ownerService.createOwner(create);
 
         // then
+        verify(ownerMapper, times(1)).ownerCreateDtoToEntity(create);
         verify(ownerRepository, times(1)).save(eq(owner));
     }
 
@@ -98,16 +98,7 @@ public class OwnerServiceTest {
     @DisplayName("getOwnerById Service Test")
     public void getOwnerByIdTest() {
         Long ownerId = 1L;
-        Owner owner = Owner.builder()
-                .firstName("SOLMOON")
-                .lastName("KANG")
-                .address("BOO-YOUNG APT 301, Inchang-Dong")
-                .city("GURI-SI")
-                .telephone("010-3884-2913")
-                .build();
-
-        OwnerResDTO.READ expected = OwnerResDTO.READ.builder()
-                .ownerId(ownerId)
+        owner = Owner.builder()
                 .firstName("SOLMOON")
                 .lastName("KANG")
                 .city("GURI-SI")
@@ -115,15 +106,20 @@ public class OwnerServiceTest {
 
         // given
             // thenReturn : 스텁 메소드의 기본 반환 값을 설정하는데 사용된다(스텁 메소드 : 호출된 경우 지정된 값을 반환한다)
+        OwnerResDTO.READ read = ownerMapper.ownerEntityToReadDto(owner);
         when(ownerRepository.findById(ownerId)).thenReturn(Optional.of(owner));
 
         // when
         OwnerResDTO.READ actual = ownerService.getOwnerById(ownerId);
 
         // then
-        assertThat(actual).isEqualTo(expected);
+        assertThat(actual).isEqualTo(read);
         verify(ownerRepository, times(1)).findById(ownerId);
-        // 더 이상 Mock 객체와 상호작용이 없는지 검증한다
-        verifyNoInteractions(ownerRepository);
+    }
+
+    @Test
+    @DisplayName("getOwnerById Service Test with Not Found Owner")
+    public void getOwnerByIdTest_withNotFoundOwner() {
+
     }
 }

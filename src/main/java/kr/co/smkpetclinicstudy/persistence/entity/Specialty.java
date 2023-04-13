@@ -17,11 +17,11 @@ import lombok.NoArgsConstructor;
 public class Specialty extends BaseEntity {
 
     @Column(name = "name", length = 80)
-    private String name;
+    private String specialtyName;
 
 
     @Builder
-    public Specialty(String name) {
-        this.name = name;
+    public Specialty(String specialtyName) {
+        this.specialtyName = specialtyName;
     }
 }
