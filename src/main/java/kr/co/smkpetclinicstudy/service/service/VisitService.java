@@ -27,8 +27,12 @@ public class VisitService {
 
     private final VisitMapper visitMapper;
 
+    /** Create Visit Service
+     * @Param VisitReqDTO.CREATE : create visit info
+     */
     @Transactional
     public void createVisit(VisitReqDTO.CREATE create) {
+
         final Pet pet = petRepository.findById(create.getPetId())
                 .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND_PET));
 
@@ -37,7 +41,12 @@ public class VisitService {
         visitRepository.save(visit);
     }
 
+    /** Get Visit By PetId Service
+     * @Param petId : get visit info
+     * @Return VisitResDTO.READ List
+     */
     public List<VisitResDTO.READ> getVisitByPetId(Long petId) {
+
         final Pet pet = petRepository.findById(petId)
                 .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND_PET));
 
@@ -46,17 +55,37 @@ public class VisitService {
                 .collect(Collectors.toList());
     }
 
+    /** Get Visit By VisitId Service
+     * @Param visitId : get visit info
+     * @Return VisitResDTO.READ List
+     */
+    public VisitResDTO.READ getVisitByVisitId(Long visitId) {
+
+        final Visit visit = visitRepository.findById(visitId)
+                .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND_VISIT));
+
+        return visitMapper.visitEntityToReadDto(visit);
+    }
+
+    /** Update Visit Service
+     * @Param VisitReqDTO.UPDATE : update visit info
+     */
     @Transactional
     public void updateVisit(VisitReqDTO.UPDATE update) {
-        Visit visit = visitRepository.findById(update.getVisitId())
+
+        final Visit visit = visitRepository.findById(update.getVisitId())
                 .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND_VISIT));
 
         visit.updatePetDescription(update);
     }
 
+    /** Delete Visit Service
+     * @Param visitId : delete visit info
+     */
     @Transactional
     public void deleteVisitById(Long visitId) {
-        Visit visit = visitRepository.findById(visitId)
+
+        final Visit visit = visitRepository.findById(visitId)
                 .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND_VISIT));
 
         visitRepository.delete(visit);

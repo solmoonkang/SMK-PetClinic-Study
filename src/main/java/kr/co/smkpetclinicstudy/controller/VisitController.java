@@ -28,6 +28,8 @@ public class VisitController {
                     "방문자 정보가 성공적으로 생성되었습니다");
         } catch (NotFoundException e) {
             return ResponseFormat.fail(ErrorCode.FAIL);
+        } catch (RuntimeException e) {
+            return ResponseFormat.fail(ErrorCode.FAIL);
         }
     }
 
@@ -38,6 +40,21 @@ public class VisitController {
                     ErrorCode.SUCCESS_EXECUTE,
                     visitService.getVisitByPetId(petId));
         } catch (NotFoundException e) {
+            return ResponseFormat.fail(ErrorCode.FAIL);
+        } catch (RuntimeException e) {
+            return ResponseFormat.fail(ErrorCode.FAIL);
+        }
+    }
+
+    @GetMapping("/{visit_id}")
+    public ResponseFormat<VisitResDTO.READ> getVisitByVisitId(@PathVariable Long visitId) {
+        try {
+            return ResponseFormat.successData(
+                    ErrorCode.SUCCESS_EXECUTE,
+                    visitService.getVisitByVisitId(visitId));
+        } catch (NotFoundException e) {
+            return ResponseFormat.fail(ErrorCode.FAIL);
+        } catch (RuntimeException e) {
             return ResponseFormat.fail(ErrorCode.FAIL);
         }
     }
@@ -51,6 +68,8 @@ public class VisitController {
                     "방문자 정보가 성공적으로 수정되었습니다");
         } catch (NotFoundException e) {
             return ResponseFormat.fail(ErrorCode.FAIL);
+        } catch (RuntimeException e) {
+            return ResponseFormat.fail(ErrorCode.FAIL);
         }
     }
 
@@ -62,6 +81,8 @@ public class VisitController {
                     ErrorCode.SUCCESS_EXECUTE,
                     "방문자 정보가 성공적으로 삭제되었습니다");
         } catch (NotFoundException e) {
+            return ResponseFormat.fail(ErrorCode.FAIL);
+        } catch (RuntimeException e) {
             return ResponseFormat.fail(ErrorCode.FAIL);
         }
     }
