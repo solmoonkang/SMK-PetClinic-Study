@@ -4,6 +4,7 @@ import kr.co.smkpetclinicstudy.persistence.entity.Specialty;
 import kr.co.smkpetclinicstudy.persistence.entity.Vet;
 import kr.co.smkpetclinicstudy.persistence.entity.VetSpecialty;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface VetSpecialtyMapper {

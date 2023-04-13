@@ -5,6 +5,7 @@ import kr.co.smkpetclinicstudy.persistence.entity.Pet;
 import kr.co.smkpetclinicstudy.service.model.dtos.request.PetReqDTO;
 import kr.co.smkpetclinicstudy.service.model.dtos.response.PetResDTO;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface PetMapper {

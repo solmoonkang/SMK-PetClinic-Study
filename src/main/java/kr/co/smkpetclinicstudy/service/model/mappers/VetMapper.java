@@ -5,6 +5,7 @@ import kr.co.smkpetclinicstudy.persistence.entity.VetSpecialty;
 import kr.co.smkpetclinicstudy.service.model.dtos.request.VetReqDTO;
 import kr.co.smkpetclinicstudy.service.model.dtos.response.VetResDTO;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import java.util.List;
 

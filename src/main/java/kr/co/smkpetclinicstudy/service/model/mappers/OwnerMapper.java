@@ -4,6 +4,7 @@ import kr.co.smkpetclinicstudy.persistence.entity.Owner;
 import kr.co.smkpetclinicstudy.service.model.dtos.request.OwnerReqDTO;
 import kr.co.smkpetclinicstudy.service.model.dtos.response.OwnerResDTO;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")  // Spring의 컴포넌트 모델을 사용할 수 있다(Bean을 주입하고 구현체 클래스를 만들지 않고도 사용 가능하다)
 public interface OwnerMapper {

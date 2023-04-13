@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import kr.co.smkpetclinicstudy.persistence.BaseEntity;
 import kr.co.smkpetclinicstudy.service.model.enums.PetType;
 import kr.co.smkpetclinicstudy.service.model.dtos.request.PetReqDTO;
-import kr.co.smkpetclinicstudy.service.model.dtos.response.PetResDTO;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -37,7 +36,7 @@ public class Pet extends BaseEntity {
 
 
     @Builder
-    public Pet(String name,
+    private Pet(String name,
                LocalDate birthDate,
                PetType petType,
                Owner owner) {

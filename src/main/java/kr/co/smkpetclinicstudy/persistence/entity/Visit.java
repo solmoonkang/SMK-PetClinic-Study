@@ -31,7 +31,7 @@ public class Visit extends BaseEntity {
 
 
     @Builder
-    public Visit(LocalDate visitDate,
+    private Visit(LocalDate visitDate,
                  String description,
                  Pet pet) {
         this.visitDate = visitDate;
