@@ -36,11 +36,11 @@ public class PetController {
         }
     }
 
-    /** Get Pet By id Controller
+    /** Get Pet Detail By id Controller
      *
      */
     @GetMapping("/{pet_id}")
-    public ResponseFormat<PetResDTO.READ> getDetailPetById(@PathVariable(name = "pet_id") Long petId) {
+    public ResponseFormat<PetResDTO.READ_DETAIL> getDetailPetById(@PathVariable(name = "pet_id") Long petId) {
         try {
             return ResponseFormat.successData(
                     ErrorCode.SUCCESS_EXECUTE,

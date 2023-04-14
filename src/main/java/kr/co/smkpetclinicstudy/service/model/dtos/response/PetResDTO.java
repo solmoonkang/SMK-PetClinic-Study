@@ -28,8 +28,6 @@ public class PetResDTO {
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
     public static class READ_DETAIL {
 
-        private Long petId;
-
         private String name;
 
         private LocalDate birthDate;

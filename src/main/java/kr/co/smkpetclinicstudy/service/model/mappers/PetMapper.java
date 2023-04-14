@@ -23,4 +23,14 @@ public interface PetMapper {
     @Mapping(source = "pet.birthDate", target = "birthDate")
     @Mapping(source = "pet.petType", target = "petType")
     PetResDTO.READ petEntityToReadDto(Pet pet);
+
+    // Pet Entity -> PetResDTO.READ_DETAIL
+    @Mapping(source = "pet.name", target = "name")
+    @Mapping(source = "pet.birthDate", target = "birthDate")
+    @Mapping(source = "pet.petType", target = "petType")
+    @Mapping(source = "pet.owner.firstName", target = "ownerFirstName")
+    @Mapping(source = "pet.owner.lastName", target = "ownerLastName")
+    @Mapping(source = "pet.owner.address", target = "ownerAddress")
+    @Mapping(source = "pet.owner.telephone", target = "ownerTelephone")
+    PetResDTO.READ_DETAIL petEntityToReadDetailDto(Pet pet);
 }

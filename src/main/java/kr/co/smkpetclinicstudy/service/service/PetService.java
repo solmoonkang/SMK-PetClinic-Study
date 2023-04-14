@@ -41,15 +41,15 @@ public class PetService {
         petRepository.save(pet);
     }
 
-    /** Get Pet By petId Service
+    /** Get Pet Detail By petId Service
      *
      */
-    public PetResDTO.READ getDetailPetById(Long petId) {
+    public PetResDTO.READ_DETAIL getDetailPetById(Long petId) {
 
         final Pet pet = petRepository.findById(petId)
                 .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND_PET));
 
-        return petMapper.petEntityToReadDto(pet);
+        return petMapper.petEntityToReadDetailDto(pet);
     }
 
     /** Get Owner's Pets By ownerId Service
