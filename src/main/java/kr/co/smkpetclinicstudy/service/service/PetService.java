@@ -1,7 +1,6 @@
 package kr.co.smkpetclinicstudy.service.service;
 
 import kr.co.smkpetclinicstudy.infra.global.error.enums.ErrorCode;
-import kr.co.smkpetclinicstudy.infra.global.exception.BusinessException;
 import kr.co.smkpetclinicstudy.infra.global.exception.NotFoundException;
 import kr.co.smkpetclinicstudy.persistence.entity.Owner;
 import kr.co.smkpetclinicstudy.persistence.entity.Pet;
@@ -28,8 +27,12 @@ public class PetService {
 
     private final OwnerRepository ownerRepository;
 
+    /** Create Pet Service
+     *
+     */
     @Transactional
     public void createPet(PetReqDTO.CREATE create) {
+
         final Owner owner = ownerRepository.findById(create.getOwnerId())
                 .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND_OWNER));
 
@@ -38,26 +41,50 @@ public class PetService {
         petRepository.save(pet);
     }
 
-    public List<PetResDTO.READ> getPetsByOwnerId(Long ownerId) {
-        Owner owner = ownerRepository.findById(ownerId)
+    /** Get Pet By petId Service
+     *
+     */
+    public PetResDTO.READ getDetailPetById(Long petId) {
+
+        final Pet pet = petRepository.findById(petId)
+                .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND_PET));
+
+        return petMapper.petEntityToReadDto(pet);
+    }
+
+    /** Get Owner's Pets By ownerId Service
+     *
+     */
+    public List<PetResDTO.READ> getOwnerPetsByOwnerId(Long ownerId) {
+
+        final Owner owner = ownerRepository.findById(ownerId)
                 .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND_OWNER));
 
-        return petRepository.findByOwner(owner).stream()
+        return petRepository.findByOwner(owner)
+                .stream()
                 .map(petMapper::petEntityToReadDto)
                 .collect(Collectors.toList());
     }
 
+    /** Update Pet Service
+     *
+     */
     @Transactional
     public void updatePet(PetReqDTO.UPDATE update) {
-        Pet pet = petRepository.findById(update.getPetId())
+
+        final Pet pet = petRepository.findById(update.getPetId())
                 .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND_PET));
 
         pet.updatePet(update);
     }
 
+    /** Delete Pet Service
+     *
+     */
     @Transactional
     public void deletePetById(Long petId) {
-        Pet pet = petRepository.findById(petId)
+
+        final Pet pet = petRepository.findById(petId)
                 .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND_PET));
 
         petRepository.delete(pet);

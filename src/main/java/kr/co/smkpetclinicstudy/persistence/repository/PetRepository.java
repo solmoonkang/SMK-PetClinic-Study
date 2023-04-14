@@ -2,6 +2,7 @@ package kr.co.smkpetclinicstudy.persistence.repository;
 
 import kr.co.smkpetclinicstudy.persistence.entity.Owner;
 import kr.co.smkpetclinicstudy.persistence.entity.Pet;
+import kr.co.smkpetclinicstudy.service.model.dtos.response.PetResDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
