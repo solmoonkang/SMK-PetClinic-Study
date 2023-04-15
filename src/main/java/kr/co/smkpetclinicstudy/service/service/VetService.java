@@ -7,6 +7,7 @@ import kr.co.smkpetclinicstudy.persistence.entity.Vet;
 import kr.co.smkpetclinicstudy.persistence.entity.VetSpecialty;
 import kr.co.smkpetclinicstudy.persistence.repository.SpecialtyRepository;
 import kr.co.smkpetclinicstudy.persistence.repository.VetRepository;
+import kr.co.smkpetclinicstudy.persistence.repository.VetSpecialtyRepository;
 import kr.co.smkpetclinicstudy.service.model.dtos.request.VetReqDTO;
 import kr.co.smkpetclinicstudy.service.model.dtos.response.VetResDTO;
 import kr.co.smkpetclinicstudy.service.model.mappers.SpecialtyMapper;
@@ -30,14 +31,20 @@ public class VetService {
 
     private final SpecialtyRepository specialtyRepository;
 
+    private final VetSpecialtyRepository vetSpecialtyRepository;
+
     private final VetMapper vetMapper;
 
     private final SpecialtyMapper specialtyMapper;
 
     private final VetSpecialtyMapper vetSpecialtyMapper;
 
+    /** Create Vet Service
+     *
+     */
     @Transactional
     public void createVet(VetReqDTO.CREATE create) {
+
         Vet vet = vetMapper.vetCreateDtoToEntity(create, Collections.emptyList());
 
         final List<VetSpecialty> vetSpecialties =
@@ -48,7 +55,11 @@ public class VetService {
         vetRepository.save(vet);
     }
 
+    /** Get Vet By vetId Service
+     *
+     */
     public VetResDTO.READ getVetById(Long vetId) {
+
         final Vet vet = vetRepository.findById(vetId)
                 .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND_VET));
 
@@ -57,6 +68,25 @@ public class VetService {
         return vetMapper.vetEntityToReadDto(vet, specialtiesName);
     }
 
+    /** Get All Specialties List Service
+     *
+     */
+    public Set<String> getVetSpecialtiesName() {
+
+        final List<VetSpecialty> vetSpecialties = vetSpecialtyRepository.findAll();
+
+        return vetSpecialties
+                .stream()
+//                .map(vetSpecialty -> vetSpecialty.getSpecialty().getSpecialtyName())
+                .map(VetSpecialty::getSpecialty)
+                .map(Specialty::getSpecialtyName)
+                .collect(Collectors.toSet());
+    }
+
+
+    /** Update Vet Service
+     *
+     */
     @Transactional
     public void updateVet(VetReqDTO.UPDATE update) {
 
@@ -68,6 +98,9 @@ public class VetService {
         vet.updateVetSpecialties(vetSpecialties);
     }
 
+    /** Delete Vet Service
+     *
+     */
     @Transactional
     public void deleteVetById(Long vetId) {
 
@@ -100,6 +133,7 @@ public class VetService {
     }
 
     private List<String> getSpecialtiesNameByVet(Vet vet) {
+
         return vet.getVetSpecialties().stream()
                 .map(VetSpecialty::getSpecialty)
                 .map(Specialty::getSpecialtyName)
@@ -108,6 +142,7 @@ public class VetService {
 
     private List<VetSpecialty> getOrCreateVetSpecialties(List<String> specialtiesName,
                                                          Vet vet) {
+
         final List<Specialty> specialties = getOrCreateSpecialtiesByName(specialtiesName);
 
         return specialties
