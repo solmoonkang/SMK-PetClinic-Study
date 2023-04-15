@@ -19,6 +19,9 @@ public class VisitController {
 
     private final VisitService visitService;
 
+    /** Create Visit Controller
+     *
+     */
     @PostMapping
     public ResponseFormat<String> createVisit(@RequestBody @Validated VisitReqDTO.CREATE create) {
         try {
@@ -33,6 +36,9 @@ public class VisitController {
         }
     }
 
+    /** Get Visit By PetId Controller
+     *
+     */
     @GetMapping("/{pet_id}")
     public ResponseFormat<List<VisitResDTO.READ>> getVisitByPetId(@PathVariable(name = "pet_id") Long petId) {
         try {
@@ -46,6 +52,9 @@ public class VisitController {
         }
     }
 
+    /** Get Visit By VisitId Controller
+     *
+     */
     @GetMapping("/{visit_id}")
     public ResponseFormat<VisitResDTO.READ> getVisitByVisitId(@PathVariable(name = "visit_id") Long visitId) {
         try {
@@ -59,6 +68,9 @@ public class VisitController {
         }
     }
 
+    /** Get Visit By OwnerId Controller
+     *
+     */
     @GetMapping("/{owner_id}")
     public ResponseFormat<List<VisitResDTO.READ>> getAllVisitByOwnerId(@PathVariable(name = "owner_id") Long ownerId) {
         try {
@@ -72,6 +84,9 @@ public class VisitController {
         }
     }
 
+    /** Update Visit Controller
+     *
+     */
     @PutMapping
     public ResponseFormat<String> updateVisit(@RequestBody @Validated VisitReqDTO.UPDATE update) {
         try {
@@ -86,6 +101,9 @@ public class VisitController {
         }
     }
 
+    /** Delete Visit Controller
+     *
+     */
     @DeleteMapping("/{visit_id}")
     public ResponseFormat<String> deleteVisitById(@PathVariable(name = "visit_id") Long visitId) {
         try {
