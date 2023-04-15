@@ -5,12 +5,14 @@ import kr.co.smkpetclinicstudy.infra.global.error.response.ResponseFormat;
 import kr.co.smkpetclinicstudy.infra.global.exception.NotFoundException;
 import kr.co.smkpetclinicstudy.service.model.dtos.request.PetReqDTO;
 import kr.co.smkpetclinicstudy.service.model.dtos.response.PetResDTO;
+import kr.co.smkpetclinicstudy.service.model.enums.PetType;
 import kr.co.smkpetclinicstudy.service.service.PetService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/v1/pets")
@@ -31,6 +33,20 @@ public class PetController {
                     "펫 정보가 성공적으로 생성되었습니다");
         } catch (NotFoundException e) {
             return ResponseFormat.fail(ErrorCode.NOT_FOUND_OWNER);
+        } catch (RuntimeException e) {
+            return ResponseFormat.fail(ErrorCode.FAIL);
+        }
+    }
+
+    /** Get All PetTypes Service
+     *
+     */
+    @GetMapping("/pet_types")
+    public ResponseFormat<Set<PetType>> getAllPetTyes() {
+        try {
+            return ResponseFormat.successData(
+                    ErrorCode.SUCCESS_EXECUTE,
+                    petService.getAllPetTypes());
         } catch (RuntimeException e) {
             return ResponseFormat.fail(ErrorCode.FAIL);
         }

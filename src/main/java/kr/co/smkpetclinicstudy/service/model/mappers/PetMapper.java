@@ -2,10 +2,14 @@ package kr.co.smkpetclinicstudy.service.model.mappers;
 
 import kr.co.smkpetclinicstudy.persistence.entity.Owner;
 import kr.co.smkpetclinicstudy.persistence.entity.Pet;
+import kr.co.smkpetclinicstudy.persistence.entity.Vet;
 import kr.co.smkpetclinicstudy.service.model.dtos.request.PetReqDTO;
 import kr.co.smkpetclinicstudy.service.model.dtos.response.PetResDTO;
+import kr.co.smkpetclinicstudy.service.model.enums.PetType;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+
+import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface PetMapper {
@@ -16,13 +20,16 @@ public interface PetMapper {
     @Mapping(source = "create.birthDate", target = "birthDate")
     @Mapping(source = "create.petType", target = "petType")
     @Mapping(source = "owner", target = "owner")
-    Pet petCreateDtoToEntity(PetReqDTO.CREATE create, Owner owner);
+    @Mapping(source = "vet", target = "vet")
+    Pet toPetEntity(PetReqDTO.CREATE create, Owner owner, Vet vet);
 
     // Pet Entity -> PetResDTO.READ
     @Mapping(source = "pet.name", target = "name")
     @Mapping(source = "pet.birthDate", target = "birthDate")
     @Mapping(source = "pet.petType", target = "petType")
-    PetResDTO.READ petEntityToReadDto(Pet pet);
+    @Mapping(source = "pet.owner.firstName", target = "ownerFirstName")
+    @Mapping(source = "pet.owner.lastName", target = "ownerLastName")
+    PetResDTO.READ toPetReadDto(Pet pet);
 
     // Pet Entity -> PetResDTO.READ_DETAIL
     @Mapping(source = "pet.name", target = "name")
@@ -32,5 +39,7 @@ public interface PetMapper {
     @Mapping(source = "pet.owner.lastName", target = "ownerLastName")
     @Mapping(source = "pet.owner.address", target = "ownerAddress")
     @Mapping(source = "pet.owner.telephone", target = "ownerTelephone")
-    PetResDTO.READ_DETAIL petEntityToReadDetailDto(Pet pet);
+    PetResDTO.READ_DETAIL toPetReadDetailDto(Pet pet);
+
+//    List<String> getAllPetTypes();
 }
