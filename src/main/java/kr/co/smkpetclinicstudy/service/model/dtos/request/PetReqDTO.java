@@ -24,6 +24,9 @@ public class PetReqDTO {
 
         @NotBlank(message = "Please enter your owner id")
         private Long ownerId;
+
+        @NotBlank(message = "Please enter your vet id")
+        private Long vetId;
     }
 
     @Getter

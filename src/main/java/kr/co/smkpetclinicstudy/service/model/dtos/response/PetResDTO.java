@@ -19,7 +19,9 @@ public class PetResDTO {
 
         private PetType petType;
 
-        private String ownerName;
+        private String ownerFirstName;
+
+        private String ownerLastName;
     }
 
     @Getter

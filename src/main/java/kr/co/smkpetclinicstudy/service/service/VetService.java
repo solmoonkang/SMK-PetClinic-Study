@@ -1,21 +1,27 @@
 package kr.co.smkpetclinicstudy.service.service;
 
 import kr.co.smkpetclinicstudy.infra.global.error.enums.ErrorCode;
+import kr.co.smkpetclinicstudy.infra.global.error.response.ResponseFormat;
 import kr.co.smkpetclinicstudy.infra.global.exception.NotFoundException;
+import kr.co.smkpetclinicstudy.persistence.entity.Pet;
 import kr.co.smkpetclinicstudy.persistence.entity.Specialty;
 import kr.co.smkpetclinicstudy.persistence.entity.Vet;
 import kr.co.smkpetclinicstudy.persistence.entity.VetSpecialty;
+import kr.co.smkpetclinicstudy.persistence.repository.PetRepository;
 import kr.co.smkpetclinicstudy.persistence.repository.SpecialtyRepository;
 import kr.co.smkpetclinicstudy.persistence.repository.VetRepository;
 import kr.co.smkpetclinicstudy.persistence.repository.VetSpecialtyRepository;
 import kr.co.smkpetclinicstudy.service.model.dtos.request.VetReqDTO;
+import kr.co.smkpetclinicstudy.service.model.dtos.response.PetResDTO;
 import kr.co.smkpetclinicstudy.service.model.dtos.response.VetResDTO;
+import kr.co.smkpetclinicstudy.service.model.mappers.PetMapper;
 import kr.co.smkpetclinicstudy.service.model.mappers.SpecialtyMapper;
 import kr.co.smkpetclinicstudy.service.model.mappers.VetMapper;
 import kr.co.smkpetclinicstudy.service.model.mappers.VetSpecialtyMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.Collections;
 import java.util.List;
@@ -33,7 +39,11 @@ public class VetService {
 
     private final VetSpecialtyRepository vetSpecialtyRepository;
 
+    private final PetRepository petRepository;
+
     private final VetMapper vetMapper;
+
+    private final PetMapper petMapper;
 
     private final SpecialtyMapper specialtyMapper;
 
@@ -68,6 +78,20 @@ public class VetService {
         return vetMapper.vetEntityToReadDto(vet, specialtiesName);
     }
 
+    /** Get Vet's Pet By vetId Service
+     *
+     */
+    public List<PetResDTO.READ> getVetPetsByVetId(Long vetId) {
+
+        final Vet vet = vetRepository.findById(vetId)
+                .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND_VET));
+
+        return petRepository.findByVet(vet)
+                .stream()
+                .map(petMapper::toPetReadDto)
+                .collect(Collectors.toList());
+    }
+
     /** Get All Specialties List Service
      *
      */
@@ -82,7 +106,6 @@ public class VetService {
                 .map(Specialty::getSpecialtyName)
                 .collect(Collectors.toSet());
     }
-
 
     /** Update Vet Service
      *

@@ -20,5 +20,6 @@ public interface VisitMapper {
     // Visit Entity -> VisitResDTO.READ
     @Mapping(source = "visit.visitDate", target = "visitDate")
     @Mapping(source = "visit.description", target = "description")
+    @Mapping(source = "visit.pet.name", target = "petName")
     VisitResDTO.READ visitEntityToReadDto(Visit visit);
 }

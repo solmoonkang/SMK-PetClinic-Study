@@ -53,10 +53,21 @@ public class VetController {
         }
     }
 
-    /** Get Vet's Pets By vetId Controller
+    /** Get Vet's Pet By vetId Controller
      *
      */
-
+    @GetMapping("/{vet_id}/pets")
+    public ResponseFormat<List<PetResDTO.READ>> getVetPetsByVetId(@PathVariable(name = "vet_id") Long vetId) {
+        try {
+            return ResponseFormat.successData(
+                    ErrorCode.SUCCESS_EXECUTE,
+                    vetService.getVetPetsByVetId(vetId));
+        } catch (NotFoundException e) {
+            return ResponseFormat.fail(ErrorCode.NOT_FOUND_VET);
+        } catch (RuntimeException e) {
+            return ResponseFormat.fail(ErrorCode.FAIL);
+        }
+    }
 
     /** Get All Specialties List Controller
      *

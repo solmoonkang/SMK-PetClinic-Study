@@ -34,16 +34,21 @@ public class Pet extends BaseEntity {
     @JoinColumn(name = "owner_id")
     private Owner owner;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "vet_id")
+    private Vet vet;
 
     @Builder
     private Pet(String name,
                LocalDate birthDate,
                PetType petType,
-               Owner owner) {
+               Owner owner,
+                Vet vet) {
         this.name = name;
         this.birthDate = birthDate;
         this.petType = petType;
         this.owner = owner;
+        this.vet = vet;
     }
 
 

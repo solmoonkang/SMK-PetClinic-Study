@@ -21,46 +21,68 @@ public class OwnerService {
 
     private final OwnerMapper ownerMapper;
 
+    /** Create Owner Service
+     *
+     */
     @Transactional
     public void createOwner(OwnerReqDTO.CREATE create) {
-        duplicateOwnerTelephone(create.getTelephone());
 
-        final Owner owner = ownerMapper.ownerCreateDtoToEntity(create);
+        final Owner owner = ownerMapper.toOwnerEntity(create);
+
+        existOwnerTelephone(create.getTelephone());
 
         ownerRepository.save(owner);
     }
 
+    /** Get Owner By OwnerId Service
+     *
+     */
     public OwnerResDTO.READ getOwnerById(Long ownerId) {
-       Owner owner = ownerRepository.findById(ownerId)
+
+       final Owner owner = ownerRepository.findById(ownerId)
                .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND_OWNER));
 
-       return ownerMapper.ownerEntityToReadDto(owner);
+       return ownerMapper.toOwnerReadDto(owner);
     }
 
+    /** Update Owner Service
+     *
+     */
     @Transactional
     public void updateOwner(OwnerReqDTO.UPDATE update) {
-        Owner owner = ownerRepository.findById(update.getOwnerId())
+
+        final Owner owner = ownerRepository.findById(update.getOwnerId())
                 .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND_OWNER));
 
-        duplicateOwnerTelephone(update.getTelephone());
+        duplicateOwnerTelephone(owner.getTelephone(), update.getTelephone());
 
         owner.updateOwner(update);
     }
 
+    /** Delete Owner Service
+     *
+     */
     @Transactional
     public void deleteOwnerById(Long ownerId) {
-        Owner owner = ownerRepository.findById(ownerId)
+
+        final Owner owner = ownerRepository.findById(ownerId)
                 .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND_OWNER));
 
         ownerRepository.delete(owner);
     }
 
 
+    private void existOwnerTelephone(String telephone) {
 
-    // 전화번호 입력 시 중복 검사
-    private void duplicateOwnerTelephone(String telephone) {
         if (ownerRepository.existsByTelephone(telephone)) {
             throw new DuplicatedException(ErrorCode.DUPLICATED_OWNER_PHONE);
+        }
+    }
+
+    private void duplicateOwnerTelephone(String telephone, String checkTelephone) {
+
+        if (!telephone.equals(checkTelephone)) {
+            existOwnerTelephone(checkTelephone);
         }
     }
 }
