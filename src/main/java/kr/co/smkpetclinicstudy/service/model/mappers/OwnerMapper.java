@@ -19,20 +19,6 @@ public interface OwnerMapper {
      *  이렇게 생성된 OwnerMapper Object를 통해 Mapper 메소드를 호출할 수 있다
      */
 
-    /** INSTANCE -> static final
-     *  Mappers.getMapper()를 호출할 때마다 새로운 인스턴스를 생성하지 않고 기존의 생성된 인스턴스를 재사용하는 것이 좋은 방법이다
-     *      이렇게 할 경우 매번 새로운 객체를 생성하지 않아도 되기 때문에 성능상 이점이 있다
-     *      따라서 Mappers.getMapper()로 인스턴스를 가져오고 나면, 해당 인스턴스를 상수로 선언하여 사용할 수 있다
-     *
-     *  INSTANCE는 OwnerMapper의 인스턴스를 단일화해서 사용하기 위한 목적으로 선언된 것이다
-     *      따라서 INSTANCE를 사용하면 OwnerMapper Interface의 메소드를 호출할 때마다 매번 새로운 인스턴스를 생성하지 않고, 미리 생성된
-     *      단일 인스턴스를 사용할 수 있어서 성능상 이점이 있다
-     *      또한 INSTANCE를 사용하면 OwnerMapperImpl을 직접 생성하지 않고도 OwnerMapper의 메소드를 사용할 수 있다
-     *
-     *  OwnerMapper 내에서 ownerMapper 객체를 static final로 선언하면 이 객체는 상수로 사용된다
-     *      이렇게 상수로선언하면 객체가 여러 번 생성되지 않으므로 성능상의 이점이 있다
-     */
-
     // OwnerReqDTO.CREATE -> Owner Entity
     @Mapping(source = "create.firstName", target = "firstName")
     @Mapping(source = "create.lastName", target = "lastName")

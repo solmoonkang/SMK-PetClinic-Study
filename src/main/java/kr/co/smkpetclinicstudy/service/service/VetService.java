@@ -1,9 +1,7 @@
 package kr.co.smkpetclinicstudy.service.service;
 
 import kr.co.smkpetclinicstudy.infra.global.error.enums.ErrorCode;
-import kr.co.smkpetclinicstudy.infra.global.error.response.ResponseFormat;
 import kr.co.smkpetclinicstudy.infra.global.exception.NotFoundException;
-import kr.co.smkpetclinicstudy.persistence.entity.Pet;
 import kr.co.smkpetclinicstudy.persistence.entity.Specialty;
 import kr.co.smkpetclinicstudy.persistence.entity.Vet;
 import kr.co.smkpetclinicstudy.persistence.entity.VetSpecialty;
@@ -21,7 +19,6 @@ import kr.co.smkpetclinicstudy.service.model.mappers.VetSpecialtyMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.Collections;
 import java.util.List;
@@ -135,16 +132,16 @@ public class VetService {
 
 
 
-    private List<Specialty> getOrCreateSpecialtiesByName(List<String> specialtiesName) {
+    private List<Specialty> getOrCreateSpecialtiesByName(List<String> specialtiesNames) {
 
-        List<Specialty> specialties = specialtyRepository.findAllBySpecialtyNameIn(specialtiesName);
+        List<Specialty> specialties = specialtyRepository.findAllBySpecialtyNameIn(specialtiesNames);
 
         final Set<String> existNames = specialties
                 .stream()
                 .map(Specialty::getSpecialtyName)
                 .collect(Collectors.toSet());
 
-        final List<Specialty> createSpecialties = specialtiesName
+        final List<Specialty> createSpecialties = specialtiesNames
                 .stream()
                 .filter(specialtyName -> !existNames.contains(specialtyName))
                 .map(specialtyMapper::nameToSpecialtyEntity)
