@@ -25,7 +25,7 @@ public class OwnerController {
      *
      */
     @PostMapping
-    public ResponseFormat<String> createOwner(@Validated @RequestBody OwnerReqDTO.CREATE create) {
+    public ResponseFormat<Void> createOwner(@Validated @RequestBody OwnerReqDTO.CREATE create) {
         try {
             ownerService.createOwner(create);
             return ResponseFormat.successMessage(
@@ -60,7 +60,7 @@ public class OwnerController {
      *
      */
     @PutMapping
-    public ResponseFormat<String> updateOwner(@Validated @RequestBody OwnerReqDTO.UPDATE update) {
+    public ResponseFormat<Void> updateOwner(@Validated @RequestBody OwnerReqDTO.UPDATE update) {
         try {
             ownerService.updateOwner(update);
             return successMessage(
@@ -79,7 +79,7 @@ public class OwnerController {
      *
      */
     @DeleteMapping("/{owner_id}")
-    public ResponseFormat<String> deleteOwnerById(@PathVariable(name = "owner_id") Long ownerId) {
+    public ResponseFormat<Void> deleteOwnerById(@PathVariable(name = "owner_id") Long ownerId) {
         try {
             ownerService.deleteOwnerById(ownerId);
             return successMessage(

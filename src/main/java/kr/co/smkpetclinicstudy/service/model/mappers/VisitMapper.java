@@ -15,11 +15,11 @@ public interface VisitMapper {
     @Mapping(source = "create.visitDate", target = "visitDate")
     @Mapping(source = "create.description", target = "description")
     @Mapping(source = "pet", target = "pet")
-    Visit visitCreateDtoToEntity(VisitReqDTO.CREATE create, Pet pet);
+    Visit toVisitEntity(VisitReqDTO.CREATE create, Pet pet);
 
     // Visit Entity -> VisitResDTO.READ
     @Mapping(source = "visit.visitDate", target = "visitDate")
     @Mapping(source = "visit.description", target = "description")
     @Mapping(source = "visit.pet.name", target = "petName")
-    VisitResDTO.READ visitEntityToReadDto(Visit visit);
+    VisitResDTO.READ toVisitReadDto(Visit visit);
 }

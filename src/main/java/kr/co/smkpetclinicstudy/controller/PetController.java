@@ -25,7 +25,7 @@ public class PetController {
      *
      */
     @PostMapping
-    public ResponseFormat<String> createPet(@RequestBody @Validated PetReqDTO.CREATE create) {
+    public ResponseFormat<Void> createPet(@RequestBody @Validated PetReqDTO.CREATE create) {
         try {
             petService.createPet(create);
             return ResponseFormat.successMessage(
@@ -55,7 +55,7 @@ public class PetController {
     /** Get Pet Detail By id Controller
      *
      */
-    @GetMapping("/{pet_id}")
+    @GetMapping("/detail/{pet_id}")
     public ResponseFormat<PetResDTO.READ_DETAIL> getDetailPetById(@PathVariable(name = "pet_id") Long petId) {
         try {
             return ResponseFormat.successData(
@@ -71,7 +71,7 @@ public class PetController {
     /** Get Owner's Pets By ownerId Controller
      *
      */
-    @GetMapping("/{owner_id}")
+    @GetMapping("/owners/{owner_id}")
     public ResponseFormat<List<PetResDTO.READ>> getOwnerPetsByOwnerId(@PathVariable(name = "owner_id") Long ownerId) {
         try {
             return ResponseFormat.successData(
@@ -88,7 +88,7 @@ public class PetController {
      *
      */
     @PutMapping
-    public ResponseFormat<String> updatePet(@RequestBody @Validated PetReqDTO.UPDATE update) {
+    public ResponseFormat<Void> updatePet(@RequestBody @Validated PetReqDTO.UPDATE update) {
         try {
             petService.updatePet(update);
             return ResponseFormat.successMessage(
@@ -105,7 +105,7 @@ public class PetController {
      *
      */
     @DeleteMapping("/{pet_id}")
-    public ResponseFormat<String> deletePet(@PathVariable(name = "pet_id") Long petId) {
+    public ResponseFormat<Void> deletePet(@PathVariable(name = "pet_id") Long petId) {
         try {
             petService.deletePetById(petId);
             return ResponseFormat.successMessage(

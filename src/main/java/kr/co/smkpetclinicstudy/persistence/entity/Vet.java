@@ -42,6 +42,7 @@ public class Vet extends BaseEntity {
 
 
     public void updateVetSpecialties(List<VetSpecialty> vetSpecialties) {
+
         this.vetSpecialties = vetSpecialties;
     }
 }

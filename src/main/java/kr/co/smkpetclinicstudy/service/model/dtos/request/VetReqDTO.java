@@ -20,7 +20,6 @@ public class VetReqDTO {
         @NotBlank(message = "Please enter your last name")
         private String lastName;
 
-        @NotBlank(message = "Please enter your specialty")
         private List<String> vetSpecialtiesName;
     }
 

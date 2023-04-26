@@ -5,10 +5,12 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface SpecialtyMapper {
 
     // String name -> Specialty
     @Mapping(source = "specialtyName", target = "specialtyName")
-    Specialty nameToSpecialtyEntity(String specialtyName);
+    Specialty toSpecialtyEntity(String specialtyName);
 }

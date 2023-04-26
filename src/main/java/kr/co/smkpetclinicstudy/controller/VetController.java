@@ -2,6 +2,7 @@ package kr.co.smkpetclinicstudy.controller;
 
 import kr.co.smkpetclinicstudy.infra.global.error.enums.ErrorCode;
 import kr.co.smkpetclinicstudy.infra.global.error.response.ResponseFormat;
+import kr.co.smkpetclinicstudy.infra.global.exception.InvalidInputException;
 import kr.co.smkpetclinicstudy.infra.global.exception.NotFoundException;
 import kr.co.smkpetclinicstudy.persistence.entity.Specialty;
 import kr.co.smkpetclinicstudy.service.model.dtos.request.VetReqDTO;
@@ -26,12 +27,14 @@ public class VetController {
      *
      */
     @PostMapping
-    public ResponseFormat<String> createVet(@RequestBody @Validated VetReqDTO.CREATE create) {
+    public ResponseFormat<Void> createVet(@RequestBody @Validated VetReqDTO.CREATE create) {
         try {
             vetService.createVet(create);
             return ResponseFormat.successMessage(
                     ErrorCode.SUCCESS_CREATED,
                     create.getFirstName() + "님 수의사 정보가 성공적으로 생성되었습니다");
+        } catch (InvalidInputException e) {
+            return ResponseFormat.fail(ErrorCode.FAIL_INVALID_VALUE);
         } catch (RuntimeException e) {
             return ResponseFormat.fail(ErrorCode.FAIL);
         }
@@ -56,7 +59,7 @@ public class VetController {
     /** Get Vet's Pet By vetId Controller
      *
      */
-    @GetMapping("/{vet_id}/pets")
+    @GetMapping("/pets/{vet_id}")
     public ResponseFormat<List<PetResDTO.READ>> getVetPetsByVetId(@PathVariable(name = "vet_id") Long vetId) {
         try {
             return ResponseFormat.successData(
@@ -87,7 +90,7 @@ public class VetController {
      *
      */
     @PutMapping
-    public ResponseFormat<String> updateVet(@RequestBody @Validated VetReqDTO.UPDATE update) {
+    public ResponseFormat<Void> updateVet(@RequestBody @Validated VetReqDTO.UPDATE update) {
         try {
             vetService.updateVet(update);
             return ResponseFormat.successMessage(
@@ -104,7 +107,7 @@ public class VetController {
      *
      */
     @DeleteMapping("/{vet_id}")
-    public ResponseFormat<String> deleteVetById(@PathVariable(name = "vet_id") Long vetId) {
+    public ResponseFormat<Void> deleteVetById(@PathVariable(name = "vet_id") Long vetId) {
         try {
             vetService.deleteVetById(vetId);
             return ResponseFormat.successMessage(

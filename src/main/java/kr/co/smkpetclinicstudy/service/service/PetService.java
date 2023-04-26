@@ -31,7 +31,6 @@ public class PetService {
     private final PetMapper petMapper;
 
     private final OwnerRepository ownerRepository;
-    private final VetRepository vetRepository;
 
     /** Create Pet Service
      *
@@ -42,10 +41,7 @@ public class PetService {
         final Owner owner = ownerRepository.findById(create.getOwnerId())
                 .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND_OWNER));
 
-        final Vet vet = vetRepository.findById(create.getVetId())
-                .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND_VET));
-
-        final Pet pet = petMapper.toPetEntity(create, owner, vet);
+        final Pet pet = petMapper.toPetEntity(create, owner);
 
         petRepository.save(pet);
     }

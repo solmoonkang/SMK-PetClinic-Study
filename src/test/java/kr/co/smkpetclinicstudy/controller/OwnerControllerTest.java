@@ -60,7 +60,7 @@ public class OwnerControllerTest {
         Mockito.doNothing().when(ownerService).createOwner(create);
 
         // when
-        ResponseFormat<String> responseFormat = ownerController.createOwner(create);
+        ResponseFormat<Void> responseFormat = ownerController.createOwner(create);
 
         // then
         assertThat(responseFormat.getStatus())
@@ -78,7 +78,7 @@ public class OwnerControllerTest {
         Mockito.doThrow(DuplicatedException.class).when(ownerService).createOwner(create);
 
         // when
-        ResponseFormat<String> responseFormat = ownerController.createOwner(create);
+        ResponseFormat<Void> responseFormat = ownerController.createOwner(create);
 
         // then
         assertThat(responseFormat.getStatus())
@@ -96,7 +96,7 @@ public class OwnerControllerTest {
         Mockito.doThrow(NotFoundException.class).when(ownerService).createOwner(create);
 
         // when
-        ResponseFormat<String> responseFormat = ownerController.createOwner(create);
+        ResponseFormat<Void> responseFormat = ownerController.createOwner(create);
 
         // then
         assertThat(responseFormat.getStatus())
@@ -189,7 +189,7 @@ public class OwnerControllerTest {
         Mockito.doNothing().when(ownerService).updateOwner(update);
 
         // when
-        ResponseFormat<String> responseFormat = ownerController.updateOwner(update);
+        ResponseFormat<Void> responseFormat = ownerController.updateOwner(update);
 
         // then
         assertThat(responseFormat.getStatus())
@@ -208,7 +208,7 @@ public class OwnerControllerTest {
         Mockito.doThrow(DuplicatedException.class).when(ownerService).updateOwner(update);
 
         // when
-        ResponseFormat<String> responseFormat = ownerController.updateOwner(update);
+        ResponseFormat<Void> responseFormat = ownerController.updateOwner(update);
 
         // then
         assertThat(responseFormat.getStatus())
@@ -226,7 +226,7 @@ public class OwnerControllerTest {
         Mockito.doThrow(NotFoundException.class).when(ownerService).updateOwner(update);
 
         // when
-        ResponseFormat<String> responseFormat = ownerController.updateOwner(update);
+        ResponseFormat<Void> responseFormat = ownerController.updateOwner(update);
 
         // then
         assertThat(responseFormat.getStatus())
@@ -247,7 +247,7 @@ public class OwnerControllerTest {
         Mockito.doNothing().when(ownerService).deleteOwnerById(ownerId);
 
         // when
-        ResponseFormat<String> responseFormat = ownerController.deleteOwnerById(ownerId);
+        ResponseFormat<Void> responseFormat = ownerController.deleteOwnerById(ownerId);
 
         // then
         assertThat(responseFormat.getStatus())
@@ -267,7 +267,7 @@ public class OwnerControllerTest {
         Mockito.doThrow(NotFoundException.class).when(ownerService).deleteOwnerById(ownerId);
 
         // when
-        ResponseFormat<String> responseFormat = ownerController.deleteOwnerById(ownerId);
+        ResponseFormat<Void> responseFormat = ownerController.deleteOwnerById(ownerId);
 
         // then
         assertThat(responseFormat.getStatus())

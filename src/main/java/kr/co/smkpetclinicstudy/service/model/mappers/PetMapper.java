@@ -20,8 +20,7 @@ public interface PetMapper {
     @Mapping(source = "create.birthDate", target = "birthDate")
     @Mapping(source = "create.petType", target = "petType")
     @Mapping(source = "owner", target = "owner")
-    @Mapping(source = "vet", target = "vet")
-    Pet toPetEntity(PetReqDTO.CREATE create, Owner owner, Vet vet);
+    Pet toPetEntity(PetReqDTO.CREATE create, Owner owner);
 
     // Pet Entity -> PetResDTO.READ
     @Mapping(source = "pet.name", target = "name")

@@ -7,6 +7,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
@@ -18,6 +21,12 @@ public class Specialty extends BaseEntity {
 
     @Column(name = "specialty_name", length = 80)
     private String specialtyName;
+
+    @OneToMany(
+            mappedBy = "specialty",
+            fetch = FetchType.LAZY,
+            cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
+    private List<VetSpecialty> vetSpecialties = new ArrayList<>();
 
 
     @Builder

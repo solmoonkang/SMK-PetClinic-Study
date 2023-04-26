@@ -26,6 +26,10 @@ public class Visit extends BaseEntity {
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "owner_id")
+    private Owner owner;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pet_id")
     private Pet pet;
 
@@ -33,9 +37,11 @@ public class Visit extends BaseEntity {
     @Builder
     private Visit(LocalDate visitDate,
                  String description,
+                 Owner owner,
                  Pet pet) {
         this.visitDate = visitDate;
         this.description = description;
+        this.owner = owner;
         this.pet = pet;
     }
 
