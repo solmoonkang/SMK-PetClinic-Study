@@ -1,18 +1,15 @@
 package kr.co.smkpetclinicstudy.service.model.dtos.response;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
 public class VetResDTO {
 
     @Getter
-    @AllArgsConstructor
     @Builder
-    @NoArgsConstructor
+    @AllArgsConstructor(access = AccessLevel.PRIVATE)
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
     public static class READ {
 
         private String firstName;

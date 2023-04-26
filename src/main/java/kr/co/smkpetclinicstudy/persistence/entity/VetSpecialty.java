@@ -20,12 +20,12 @@ public class VetSpecialty extends BaseEntity {
     @JoinColumn(name = "vet_id")
     private Vet vet;
 
-    @JoinColumn(name = "specialty_id")
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "specialty_id")
     private Specialty specialty;
 
     @Builder
-    public VetSpecialty(Vet vet,
+    private VetSpecialty(Vet vet,
                         Specialty specialty) {
         this.vet = vet;
         this.specialty = specialty;

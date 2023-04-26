@@ -11,7 +11,6 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
@@ -69,13 +68,13 @@ public class OwnerServiceTest {
     @DisplayName("createOwner Service Test")
     public void createOwnerTest() {
         // given
-        given(ownerMapper.ownerCreateDtoToEntity(eq(create))).willReturn(owner);
+        given(ownerMapper.toOwnerEntity(eq(create))).willReturn(owner);
 
         // when
         ownerService.createOwner(create);
 
         // then
-        verify(ownerMapper, times(1)).ownerCreateDtoToEntity(create);
+        verify(ownerMapper, times(1)).toOwnerEntity(create);
         verify(ownerRepository, times(1)).save(eq(owner));
     }
 
@@ -106,7 +105,7 @@ public class OwnerServiceTest {
 
         // given
             // thenReturn : 스텁 메소드의 기본 반환 값을 설정하는데 사용된다(스텁 메소드 : 호출된 경우 지정된 값을 반환한다)
-        OwnerResDTO.READ read = ownerMapper.ownerEntityToReadDto(owner);
+        OwnerResDTO.READ read = ownerMapper.toOwnerReadDto(owner);
         when(ownerRepository.findById(ownerId)).thenReturn(Optional.of(owner));
 
         // when

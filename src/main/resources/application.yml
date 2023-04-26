@@ -21,3 +21,10 @@ jpa:
   properties:
     hibernate:
       format_sql: true
+
+# Logging
+logging:
+  level:
+    root: "warn"
+    org.springframework.web: "debug"
+    org.hibernate: "error"

@@ -1,16 +1,13 @@
 package kr.co.smkpetclinicstudy.service.model.dtos.response;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 public class OwnerResDTO {
 
     @Getter
-    @AllArgsConstructor
     @Builder
-    @NoArgsConstructor
+    @AllArgsConstructor(access = AccessLevel.PRIVATE)
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
     public static class READ {
 
         private Long ownerId;

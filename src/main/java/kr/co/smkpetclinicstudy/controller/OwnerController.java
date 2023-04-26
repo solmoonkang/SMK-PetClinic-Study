@@ -21,8 +21,11 @@ public class OwnerController {
 
     private final OwnerService ownerService;
 
+    /** Create Owner Controller
+     *
+     */
     @PostMapping
-    public ResponseFormat<String> createOwner(@Validated @RequestBody OwnerReqDTO.CREATE create) {
+    public ResponseFormat<Void> createOwner(@Validated @RequestBody OwnerReqDTO.CREATE create) {
         try {
             ownerService.createOwner(create);
             return ResponseFormat.successMessage(
@@ -32,9 +35,14 @@ public class OwnerController {
             return ResponseFormat.fail(ErrorCode.NOT_FOUND_OWNER);
         } catch (DuplicatedException e) {
             return ResponseFormat.fail(ErrorCode.DUPLICATED_OWNER_PHONE);
+        } catch (RuntimeException e) {
+            return ResponseFormat.fail(ErrorCode.FAIL);
         }
     }
 
+    /** Get Owner By id Controller
+     *
+     */
     @GetMapping("/{owner_id}")
     public ResponseFormat<OwnerResDTO.READ> getOwnerById(@PathVariable(name = "owner_id") Long ownerId) {
         try {
@@ -43,11 +51,16 @@ public class OwnerController {
                     ownerService.getOwnerById(ownerId));
         } catch (NotFoundException e) {
             return ResponseFormat.fail(ErrorCode.NOT_FOUND_OWNER);
+        } catch (RuntimeException e) {
+            return ResponseFormat.fail(ErrorCode.FAIL);
         }
     }
 
+    /** Update Owner Controller
+     *
+     */
     @PutMapping
-    public ResponseFormat<String> updateOwner(@Validated @RequestBody OwnerReqDTO.UPDATE update) {
+    public ResponseFormat<Void> updateOwner(@Validated @RequestBody OwnerReqDTO.UPDATE update) {
         try {
             ownerService.updateOwner(update);
             return successMessage(
@@ -57,11 +70,16 @@ public class OwnerController {
             return ResponseFormat.fail(ErrorCode.NOT_FOUND_OWNER);
         } catch (DuplicatedException e) {
             return ResponseFormat.fail(ErrorCode.DUPLICATED_OWNER_PHONE);
+        } catch (RuntimeException e) {
+            return ResponseFormat.fail(ErrorCode.FAIL);
         }
     }
 
+    /** Delete Owner Controller
+     *
+     */
     @DeleteMapping("/{owner_id}")
-    public ResponseFormat<String> deleteOwnerById(@PathVariable(name = "owner_id") Long ownerId) {
+    public ResponseFormat<Void> deleteOwnerById(@PathVariable(name = "owner_id") Long ownerId) {
         try {
             ownerService.deleteOwnerById(ownerId);
             return successMessage(
@@ -69,6 +87,8 @@ public class OwnerController {
                     "소유자 정보가 성공적으로 삭제되었습니다");
         } catch (NotFoundException e) {
             return ResponseFormat.fail(ErrorCode.NOT_FOUND_OWNER);
+        } catch (RuntimeException e) {
+            return ResponseFormat.fail(ErrorCode.FAIL);
         }
     }
 }

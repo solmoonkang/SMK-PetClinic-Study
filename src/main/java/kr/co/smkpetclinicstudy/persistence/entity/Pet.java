@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import kr.co.smkpetclinicstudy.persistence.BaseEntity;
 import kr.co.smkpetclinicstudy.service.model.enums.PetType;
 import kr.co.smkpetclinicstudy.service.model.dtos.request.PetReqDTO;
-import kr.co.smkpetclinicstudy.service.model.dtos.response.PetResDTO;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -35,16 +34,21 @@ public class Pet extends BaseEntity {
     @JoinColumn(name = "owner_id")
     private Owner owner;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "vet_id")
+    private Vet vet;
 
     @Builder
-    public Pet(String name,
+    private Pet(String name,
                LocalDate birthDate,
                PetType petType,
-               Owner owner) {
+               Owner owner,
+                Vet vet) {
         this.name = name;
         this.birthDate = birthDate;
         this.petType = petType;
         this.owner = owner;
+        this.vet = vet;
     }
 
 

@@ -4,10 +4,13 @@ import kr.co.smkpetclinicstudy.persistence.entity.Specialty;
 import kr.co.smkpetclinicstudy.persistence.entity.Vet;
 import kr.co.smkpetclinicstudy.persistence.entity.VetSpecialty;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface VetSpecialtyMapper {
 
     // Specialty, Vet Parameter -> VetSpecialty Entity
-    VetSpecialty paramToVetSpecialtyEntity(Specialty specialty, Vet vet);
+    @Mapping(source = "specialty", target = "specialty")
+    @Mapping(source = "vet", target = "vet")
+    VetSpecialty toVetSpecialtyEntity(Specialty specialty, Vet vet);
 }

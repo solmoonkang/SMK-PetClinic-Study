@@ -1,5 +1,7 @@
 package kr.co.smkpetclinicstudy.service.model.enums;
 
+import kr.co.smkpetclinicstudy.infra.global.error.enums.ErrorCode;
+import kr.co.smkpetclinicstudy.infra.global.exception.NotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -19,11 +21,12 @@ public enum PetType {
 
     OTHER("기타");
 
+
     String petType;
 
     public static PetType of(String petType){
         return Arrays.stream(PetType.values())
                 .filter(type -> type.toString().equalsIgnoreCase(petType))
-                .findAny().orElseThrow(() -> new RuntimeException("Not Fount Pet Type"));
+                .findAny().orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND_PET));
     }
 }
