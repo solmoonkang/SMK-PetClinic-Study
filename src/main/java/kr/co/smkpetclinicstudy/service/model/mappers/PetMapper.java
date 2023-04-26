@@ -5,11 +5,8 @@ import kr.co.smkpetclinicstudy.persistence.entity.Pet;
 import kr.co.smkpetclinicstudy.persistence.entity.Vet;
 import kr.co.smkpetclinicstudy.service.model.dtos.request.PetReqDTO;
 import kr.co.smkpetclinicstudy.service.model.dtos.response.PetResDTO;
-import kr.co.smkpetclinicstudy.service.model.enums.PetType;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-
-import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface PetMapper {
@@ -20,7 +17,8 @@ public interface PetMapper {
     @Mapping(source = "create.birthDate", target = "birthDate")
     @Mapping(source = "create.petType", target = "petType")
     @Mapping(source = "owner", target = "owner")
-    Pet toPetEntity(PetReqDTO.CREATE create, Owner owner);
+    @Mapping(source = "vet", target = "vet")
+    Pet toPetEntity(PetReqDTO.CREATE create, Owner owner, Vet vet);
 
     // Pet Entity -> PetResDTO.READ
     @Mapping(source = "pet.name", target = "name")

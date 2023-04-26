@@ -32,6 +32,8 @@ public class PetService {
 
     private final OwnerRepository ownerRepository;
 
+    private final VetRepository vetRepository;
+
     /** Create Pet Service
      *
      */
@@ -41,7 +43,10 @@ public class PetService {
         final Owner owner = ownerRepository.findById(create.getOwnerId())
                 .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND_OWNER));
 
-        final Pet pet = petMapper.toPetEntity(create, owner);
+        final Vet vet = vetRepository.findById(create.getVetId())
+                .orElseThrow(() -> new NotFoundException(ErrorCode.NOT_FOUND_VET));
+
+        final Pet pet = petMapper.toPetEntity(create, owner, vet);
 
         petRepository.save(pet);
     }
@@ -50,15 +55,6 @@ public class PetService {
      *
      */
     public Set<PetType> getAllPetTypes() {
-
-//        List<String> petTypes = petMapper.getAllPetTypes();
-//
-//        Set<PetType> petTypeSet = petTypes
-//                .stream()
-//                .map(PetType::of)
-//                .collect(Collectors.toSet());
-//
-//        return petTypeSet;
 
         return Arrays.stream(PetType.values())
                 .collect(Collectors.toSet());
