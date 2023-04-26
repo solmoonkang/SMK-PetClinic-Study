@@ -2,6 +2,7 @@ package kr.co.smkpetclinicstudy.persistence.entity;
 
 import jakarta.persistence.*;
 import kr.co.smkpetclinicstudy.persistence.BaseEntity;
+import kr.co.smkpetclinicstudy.service.model.dtos.request.VetReqDTO;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -40,8 +41,15 @@ public class Vet extends BaseEntity {
         this.vetSpecialties = vetSpecialties;
     }
 
+    public void updateVetSpecialties(VetReqDTO.UPDATE update,
+                                     List<VetSpecialty> vetSpecialties) {
 
-    public void updateVetSpecialties(List<VetSpecialty> vetSpecialties) {
+        this.firstName = update.getFirstName();
+        this.lastName = update.getLastName();
+        this.vetSpecialties = vetSpecialties;
+    }
+
+    public void updateVetSpecialtiesName(List<VetSpecialty> vetSpecialties) {
 
         this.vetSpecialties = vetSpecialties;
     }

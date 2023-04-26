@@ -55,7 +55,7 @@ public class VetService {
 
         List<VetSpecialty> vetSpecialties = getOrCreateVetSpecialties(create.getVetSpecialtiesName(), vet);
 
-        vet.updateVetSpecialties(vetSpecialties);
+        vet.updateVetSpecialtiesName(vetSpecialties);
 
         vetSpecialtyRepository.saveAll(vetSpecialties);
 
@@ -98,7 +98,6 @@ public class VetService {
 
         return vetSpecialties
                 .stream()
-//                .map(vetSpecialty -> vetSpecialty.getSpecialty().getSpecialtyName())
                 .map(VetSpecialty::getSpecialty)
                 .map(Specialty::getSpecialtyName)
                 .collect(Collectors.toSet());
@@ -115,7 +114,7 @@ public class VetService {
 
         final List<VetSpecialty> vetSpecialties = getOrCreateVetSpecialties(update.getVetSpecialtiesName(), vet);
 
-        vet.updateVetSpecialties(vetSpecialties);
+        vet.updateVetSpecialties(update, vetSpecialties);
     }
 
     /** Delete Vet Service
