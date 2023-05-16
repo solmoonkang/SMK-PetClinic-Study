@@ -28,16 +28,12 @@ public class VetController {
      */
     @PostMapping
     public ResponseFormat<Void> createVet(@RequestBody @Validated VetReqDTO.CREATE create) {
-        try {
-            vetService.createVet(create);
-            return ResponseFormat.successMessage(
-                    ErrorCode.SUCCESS_CREATED,
-                    create.getFirstName() + "님 수의사 정보가 성공적으로 생성되었습니다");
-        } catch (InvalidInputException e) {
-            return ResponseFormat.fail(ErrorCode.FAIL_INVALID_VALUE);
-        } catch (RuntimeException e) {
-            return ResponseFormat.fail(ErrorCode.FAIL);
-        }
+
+        vetService.createVet(create);
+
+        return ResponseFormat.successMessage(
+                ErrorCode.SUCCESS_CREATED,
+                create.getFirstName() + "님 수의사 정보가 성공적으로 생성되었습니다");
     }
 
     /** Get Vet By vetId Controller
@@ -45,15 +41,10 @@ public class VetController {
      */
     @GetMapping("/{vet_id}")
     public ResponseFormat<VetResDTO.READ> getVetById(@PathVariable(name = "vet_id") Long vetId) {
-        try {
-            return ResponseFormat.successData(
-                    ErrorCode.SUCCESS_EXECUTE,
-                    vetService.getVetById(vetId));
-        } catch (NotFoundException e) {
-            return ResponseFormat.fail(ErrorCode.NOT_FOUND_VET);
-        } catch (RuntimeException e) {
-            return ResponseFormat.fail(ErrorCode.FAIL);
-        }
+
+        return ResponseFormat.successData(
+                ErrorCode.SUCCESS_EXECUTE,
+                vetService.getVetById(vetId));
     }
 
     /** Get Vet's Pet By vetId Controller
@@ -61,15 +52,10 @@ public class VetController {
      */
     @GetMapping("/pets/{vet_id}")
     public ResponseFormat<List<PetResDTO.READ>> getVetPetsByVetId(@PathVariable(name = "vet_id") Long vetId) {
-        try {
-            return ResponseFormat.successData(
-                    ErrorCode.SUCCESS_EXECUTE,
-                    vetService.getVetPetsByVetId(vetId));
-        } catch (NotFoundException e) {
-            return ResponseFormat.fail(ErrorCode.NOT_FOUND_VET);
-        } catch (RuntimeException e) {
-            return ResponseFormat.fail(ErrorCode.FAIL);
-        }
+
+        return ResponseFormat.successData(
+                ErrorCode.SUCCESS_EXECUTE,
+                vetService.getVetPetsByVetId(vetId));
     }
 
     /** Get All Specialties List Controller
@@ -77,13 +63,10 @@ public class VetController {
      */
     @GetMapping("/specialties")
     public ResponseFormat<Set<String>> getVetSpecialtiesName() {
-        try {
-            return ResponseFormat.successData(
-                    ErrorCode.SUCCESS_EXECUTE,
-                    vetService.getVetSpecialtiesName());
-        } catch (RuntimeException e) {
-            return ResponseFormat.fail(ErrorCode.FAIL);
-        }
+
+        return ResponseFormat.successData(
+                ErrorCode.SUCCESS_EXECUTE,
+                vetService.getVetSpecialtiesName());
     }
 
     /** Update Vet Controller
@@ -91,16 +74,12 @@ public class VetController {
      */
     @PutMapping
     public ResponseFormat<Void> updateVet(@RequestBody @Validated VetReqDTO.UPDATE update) {
-        try {
-            vetService.updateVet(update);
-            return ResponseFormat.successMessage(
-                    ErrorCode.SUCCESS_EXECUTE,
-                    update.getFirstName() + "님 수의사 정보가 성공적으로 수정되었습니다");
-        } catch (NotFoundException e) {
-            return ResponseFormat.fail(ErrorCode.NOT_FOUND_VET);
-        } catch (RuntimeException e) {
-            return ResponseFormat.fail(ErrorCode.FAIL);
-        }
+
+        vetService.updateVet(update);
+
+        return ResponseFormat.successMessage(
+                ErrorCode.SUCCESS_EXECUTE,
+                update.getFirstName() + "님 수의사 정보가 성공적으로 수정되었습니다");
     }
 
     /** Delete Vet Controller
@@ -108,15 +87,11 @@ public class VetController {
      */
     @DeleteMapping("/{vet_id}")
     public ResponseFormat<Void> deleteVetById(@PathVariable(name = "vet_id") Long vetId) {
-        try {
-            vetService.deleteVetById(vetId);
-            return ResponseFormat.successMessage(
-                    ErrorCode.SUCCESS_EXECUTE,
-                    "수의사 정보가 성공적으로 삭제되었습니다");
-        } catch (NotFoundException e) {
-            return ResponseFormat.fail(ErrorCode.NOT_FOUND_VET);
-        } catch (RuntimeException e) {
-            return ResponseFormat.fail(ErrorCode.FAIL);
-        }
+
+        vetService.deleteVetById(vetId);
+
+        return ResponseFormat.successMessage(
+                ErrorCode.SUCCESS_EXECUTE,
+                "수의사 정보가 성공적으로 삭제되었습니다");
     }
 }

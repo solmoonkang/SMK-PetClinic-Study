@@ -6,7 +6,7 @@ import lombok.Getter;
 @Getter
 public class InvalidInputException extends BusinessException {
 
-    public InvalidInputException(ErrorCode errorCode) {
-        super(errorCode);
+    public InvalidInputException() {
+        super(ErrorCode.FAIL_INVALID_VALUE);
     }
 }
