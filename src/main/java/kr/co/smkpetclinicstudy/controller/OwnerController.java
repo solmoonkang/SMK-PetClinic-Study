@@ -11,6 +11,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import static kr.co.smkpetclinicstudy.infra.global.error.response.ResponseFormat.successData;
 import static kr.co.smkpetclinicstudy.infra.global.error.response.ResponseFormat.successMessage;
 
@@ -21,8 +24,8 @@ public class OwnerController {
 
     private final OwnerService ownerService;
 
-    /** Create Owner Controller
-     *
+    /**
+     * Create Owner Controller
      */
     @PostMapping
     public ResponseFormat<Void> createOwner(@Validated @RequestBody OwnerReqDTO.CREATE create) {
@@ -34,8 +37,8 @@ public class OwnerController {
                 create.getFirstName() + "님 소유자 정보가 성공적으로 생성되었습니다");
     }
 
-    /** Get Owner By id Controller
-     *
+    /**
+     * Get Owner By id Controller
      */
     @GetMapping("/{owner_id}")
     public ResponseFormat<OwnerResDTO.READ> getOwnerById(@PathVariable(name = "owner_id") Long ownerId) {
@@ -45,8 +48,20 @@ public class OwnerController {
                 ownerService.getOwnerById(ownerId));
     }
 
-    /** Update Owner Controller
-     *
+    /**
+     * Get Owners By Date Controller
+     */
+    @GetMapping("/date")
+    public ResponseFormat<List<OwnerResDTO.READ>> getOwnersByDate(@RequestParam(name = "start_date") LocalDate startDate,
+                                                                  @RequestParam(name = "end_date") LocalDate endDate) {
+
+        return ResponseFormat.successData(
+                ErrorCode.SUCCESS_EXECUTE,
+                ownerService.getOwnersByDate(startDate, endDate));
+    }
+
+    /**
+     * Update Owner Controller
      */
     @PutMapping
     public ResponseFormat<Void> updateOwner(@Validated @RequestBody OwnerReqDTO.UPDATE update) {
@@ -58,8 +73,8 @@ public class OwnerController {
                 update.getFirstName() + "님 소유자 정보가 성공적으로 수정되었습니다");
     }
 
-    /** Delete Owner Controller
-     *
+    /**
+     * Delete Owner Controller
      */
     @DeleteMapping("/{owner_id}")
     public ResponseFormat<Void> deleteOwnerById(@PathVariable(name = "owner_id") Long ownerId) {
