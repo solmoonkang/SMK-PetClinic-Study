@@ -4,7 +4,6 @@ import kr.co.smkpetclinicstudy.infra.global.error.enums.ErrorCode;
 import kr.co.smkpetclinicstudy.infra.global.exception.NotFoundException;
 import kr.co.smkpetclinicstudy.persistence.entity.Pet;
 import kr.co.smkpetclinicstudy.persistence.entity.Visit;
-import kr.co.smkpetclinicstudy.persistence.repository.OwnerRepository;
 import kr.co.smkpetclinicstudy.persistence.repository.PetRepository;
 import kr.co.smkpetclinicstudy.persistence.repository.VisitRepository;
 import kr.co.smkpetclinicstudy.service.model.dtos.request.VisitReqDTO;
@@ -27,7 +26,6 @@ public class VisitService {
     private final PetRepository petRepository;
 
     private final VisitMapper visitMapper;
-    private final OwnerRepository ownerRepository;
 
     /** Create Visit Service
      *

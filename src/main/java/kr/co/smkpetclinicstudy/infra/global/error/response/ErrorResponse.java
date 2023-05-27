@@ -2,6 +2,8 @@ package kr.co.smkpetclinicstudy.infra.global.error.response;
 
 import kr.co.smkpetclinicstudy.infra.global.error.enums.ErrorCode;
 import lombok.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 @Getter
 @AllArgsConstructor
@@ -11,17 +13,18 @@ public class ErrorResponse {
 
     private int status;
 
-    private String code;
+    private HttpStatus httpStatus;
 
     private String message;
 
 
-    public static ErrorResponse of(ErrorCode errorCode) {
+    public static ResponseEntity<ErrorResponse> toResponseEntity(ErrorCode errorCode) {
 
-        return ErrorResponse.builder()
+        return ResponseEntity
                 .status(errorCode.getStatus())
-                .code(errorCode.getCode())
-                .message(errorCode.getMessage())
-                .build();
+                .body(ErrorResponse.builder()
+                        .httpStatus(errorCode.getHttpStatus())
+                        .message(errorCode.getMessage())
+                        .build());
     }
 }

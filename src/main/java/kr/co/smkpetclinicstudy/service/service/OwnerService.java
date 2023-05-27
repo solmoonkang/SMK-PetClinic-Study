@@ -12,6 +12,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Transactional(readOnly = true)
 @Service
 @RequiredArgsConstructor
@@ -21,8 +25,8 @@ public class OwnerService {
 
     private final OwnerMapper ownerMapper;
 
-    /** Create Owner Service
-     *
+    /**
+     * Create Owner Service
      */
     @Transactional
     public void createOwner(OwnerReqDTO.CREATE create) {
@@ -34,8 +38,8 @@ public class OwnerService {
         ownerRepository.save(owner);
     }
 
-    /** Get Owner By OwnerId Service
-     *
+    /**
+     * Get Owner By OwnerId Service
      */
     public OwnerResDTO.READ getOwnerById(Long ownerId) {
 
@@ -45,8 +49,20 @@ public class OwnerService {
        return ownerMapper.toOwnerReadDto(owner);
     }
 
-    /** Update Owner Service
-     *
+    /**
+     * Get Owners By Date Service
+     */
+    public List<OwnerResDTO.READ> getOwnersByDate(LocalDate startDate, LocalDate endDate) {
+
+        List<Owner> owners = ownerRepository.findByCreatedAtBetween(startDate, endDate);
+
+        return owners.stream()
+                .map(ownerMapper::toOwnerReadDto)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Update Owner Service
      */
     @Transactional
     public void updateOwner(OwnerReqDTO.UPDATE update) {
@@ -59,8 +75,8 @@ public class OwnerService {
         owner.updateOwner(update);
     }
 
-    /** Delete Owner Service
-     *
+    /**
+     * Delete Owner Service
      */
     @Transactional
     public void deleteOwnerById(Long ownerId) {

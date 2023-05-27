@@ -6,6 +6,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
+import java.util.List;
+
 @Repository
 public interface OwnerRepository extends JpaRepository<Owner, Long> {
 
@@ -15,4 +18,6 @@ public interface OwnerRepository extends JpaRepository<Owner, Long> {
             "from Owner o " +
             "where o.telephone = :telephone")
     boolean existsByTelephone(@Param("telephone") String telephone);
+
+    List<Owner> findByCreatedAtBetween(LocalDate startDate, LocalDate endDate);
 }
