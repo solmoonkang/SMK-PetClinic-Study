@@ -13,10 +13,14 @@ import java.time.LocalDate;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-@Table(name = "tbl_visits")
+@Table(
+        name = "tbl_visits",
+        indexes = @Index(name = "i_visits", columnList = "visit_id")
+)
 @AttributeOverride(
         name = "id",
-        column = @Column(name = "visit_id", length = 4))
+        column = @Column(name = "visit_id", length = 4)
+)
 public class Visit extends BaseEntity {
 
     @Column(name = "visit_date")

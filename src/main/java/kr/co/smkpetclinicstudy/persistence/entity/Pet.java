@@ -14,10 +14,14 @@ import java.time.LocalDate;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-@Table(name = "tbl_pets")
+@Table(
+        name = "tbl_pets",
+        indexes = @Index(name = "i_pets", columnList = "pet_id")
+)
 @AttributeOverride(
         name = "id",
-        column = @Column(name = "pet_id", length = 4))
+        column = @Column(name = "pet_id", length = 4)
+)
 public class Pet extends BaseEntity {
 
     @Column(name = "name", length = 30)

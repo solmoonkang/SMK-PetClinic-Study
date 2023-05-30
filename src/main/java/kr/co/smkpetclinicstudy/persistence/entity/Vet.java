@@ -14,10 +14,14 @@ import java.util.List;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-@Table(name = "tbl_vets")
+@Table(
+        name = "tbl_vets",
+        indexes = @Index(name = "i_vets", columnList = "vet_id")
+)
 @AttributeOverride(
         name = "id",
-        column = @Column(name = "vet_id", length = 4))
+        column = @Column(name = "vet_id", length = 4)
+)
 public class Vet extends BaseEntity {
 
     @Column(name = "first_name", length = 30)
