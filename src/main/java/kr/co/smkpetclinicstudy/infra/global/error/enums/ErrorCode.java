@@ -14,6 +14,11 @@ public enum ErrorCode {
     FAIL_INVALID_VALUE(400, HttpStatus.BAD_REQUEST, "실행에 실패했고, 이유는 필수 항목을 입력하지 않았습니다"),
     FAIL_BAD_REQUEST(400, HttpStatus.BAD_REQUEST, "실행에 실패했고, 이유는 형식에 맞지 않는 값을 입력하였습니다"),
 
+    // Member
+    NOT_FOUND_MEMBER(404, HttpStatus.NOT_FOUND, "해당 사용자 정보를 찾지 못하였습니다"),
+
+    DUPLICATED_MEMBER_ID(400, HttpStatus.BAD_REQUEST, "사용자 ID가 중복되었습니다"),
+
     // Owner
     DUPLICATED_OWNER_ID(400, HttpStatus.BAD_REQUEST, "소유자 ID가 중복되었습니다"),
     DUPLICATED_OWNER_PHONE(400, HttpStatus.BAD_REQUEST, "소유자 핸드폰 번호가 중복되었습니다"),
