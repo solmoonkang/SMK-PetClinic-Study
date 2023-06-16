@@ -20,10 +20,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(MockitoExtension.class)
-public class OwnerControllerTest {
+public class OwnerSampleControllerTest {
 
-    // Business Logic 이 담긴 Service 객체를 호출하므로, Controller 에서는 Service 객체에 대한 의존성을 주입받아야 한다
-    // 이 때 @InjectMocks 를 사용하면 Mockito 가 Controller 객체 내부의 Service 객체에 대한 의존성을 자동으로 주입해준다
+    // Business Logic 이 담긴 SampleService 객체를 호출하므로, SampleController 에서는 SampleService 객체에 대한 의존성을 주입받아야 한다
+    // 이 때 @InjectMocks 를 사용하면 Mockito 가 SampleController 객체 내부의 SampleService 객체에 대한 의존성을 자동으로 주입해준다
     @InjectMocks
     private OwnerController ownerController;
 
@@ -54,7 +54,7 @@ public class OwnerControllerTest {
     }
 
     @Test
-    @DisplayName("createOwner Controller Test")
+    @DisplayName("createOwner SampleController Test")
     void createOwnerTest() {
         // given
         Mockito.doNothing().when(ownerService).createOwner(create);
@@ -72,7 +72,7 @@ public class OwnerControllerTest {
     }
 
     @Test
-    @DisplayName("createOwner Controller Test with Duplicate Owner Telephone")
+    @DisplayName("createOwner SampleController Test with Duplicate Owner Telephone")
     void createOwnerTest_withDuplicateOwnerTelephone() throws DuplicatedException {
         // given
         Mockito.doThrow(DuplicatedException.class).when(ownerService).createOwner(create);
@@ -90,7 +90,7 @@ public class OwnerControllerTest {
     }
 
     @Test
-    @DisplayName("createOwner Service Test with Not Found Owner")
+    @DisplayName("createOwner SampleService Test with Not Found Owner")
     void createOwnerTest_withNotFoundOwner() throws NotFoundException {
         // given
         Mockito.doThrow(NotFoundException.class).when(ownerService).createOwner(create);
@@ -125,7 +125,7 @@ public class OwnerControllerTest {
     }
 
     @Test
-    @DisplayName("getOwnerById Controller Test")
+    @DisplayName("getOwnerById SampleController Test")
     void getOwnerByIdTest() {
         // given
         Mockito.when(ownerService.getOwnerById(read.getOwnerId())).thenReturn(read);
@@ -146,7 +146,7 @@ public class OwnerControllerTest {
     }
 
     @Test
-    @DisplayName("getOwnerById Controller Test with Not Found Owner")
+    @DisplayName("getOwnerById SampleController Test with Not Found Owner")
     void getOwnerByIdTest_withNotFoundOwner() throws NotFoundException {
         //given
         Mockito.doThrow(NotFoundException.class).when(ownerService).getOwnerById(read.getOwnerId());
@@ -183,7 +183,7 @@ public class OwnerControllerTest {
     }
 
     @Test
-    @DisplayName("updateOwner Controller Test")
+    @DisplayName("updateOwner SampleController Test")
     void updateOwner() {
         // given
         Mockito.doNothing().when(ownerService).updateOwner(update);
@@ -202,7 +202,7 @@ public class OwnerControllerTest {
 
 
     @Test
-    @DisplayName("updateOwner Controller Test with Duplicate Owner Telephone")
+    @DisplayName("updateOwner SampleController Test with Duplicate Owner Telephone")
     void updateOwnerTest_withDuplicateOwnerTelephone() throws DuplicatedException {
         // given
         Mockito.doThrow(DuplicatedException.class).when(ownerService).updateOwner(update);
@@ -220,7 +220,7 @@ public class OwnerControllerTest {
     }
 
     @Test
-    @DisplayName("updateOwner Controller Test with Not Found Owner")
+    @DisplayName("updateOwner SampleController Test with Not Found Owner")
     void updateOwnerTest_withNotFoundOwner() throws NotFoundException {
         // given
         Mockito.doThrow(NotFoundException.class).when(ownerService).updateOwner(update);
@@ -239,7 +239,7 @@ public class OwnerControllerTest {
 
 
     @Test
-    @DisplayName("deleteOwnerById Controller Test")
+    @DisplayName("deleteOwnerById SampleController Test")
     void deleteOwnerById() {
         // given
         Long ownerId = 1L;
@@ -259,7 +259,7 @@ public class OwnerControllerTest {
     }
 
     @Test
-    @DisplayName("deleteOwnerById Controller Test with Not Found Owner")
+    @DisplayName("deleteOwnerById SampleController Test with Not Found Owner")
     void deleteOwnerById_withNotFoundOwner() throws NotFoundException {
         // given
         Long ownerId = 999L;

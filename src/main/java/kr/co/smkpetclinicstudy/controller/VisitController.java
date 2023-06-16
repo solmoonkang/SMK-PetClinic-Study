@@ -19,7 +19,7 @@ public class VisitController {
 
     private final VisitService visitService;
 
-    /** Create Visit Controller
+    /** Create Visit SampleController
      *
      */
     @PostMapping
@@ -32,7 +32,7 @@ public class VisitController {
                 "방문자 정보가 성공적으로 생성되었습니다");
     }
 
-    /** Get Visit By PetId Controller
+    /** Get Visit By PetId SampleController
      *
      */
     @GetMapping("/{pet_id}/pets")
@@ -43,7 +43,7 @@ public class VisitController {
                 visitService.getVisitByPetId(petId));
     }
 
-    /** Get Visit By VisitId Controller
+    /** Get Visit By VisitId SampleController
      *
      */
     @GetMapping("/{visit_id}")
@@ -54,7 +54,7 @@ public class VisitController {
                 visitService.getVisitByVisitId(visitId));
     }
 
-    /** Get Visit By OwnerId Controller
+    /** Get Visit By OwnerId SampleController
      *
      */
     @GetMapping("/owners/{owner_id}")
@@ -65,7 +65,7 @@ public class VisitController {
                 visitService.getAllVisitByOwnerId(ownerId));
     }
 
-    /** Update Visit Controller
+    /** Update Visit SampleController
      *
      */
     @PutMapping
@@ -78,7 +78,7 @@ public class VisitController {
                 "방문자 정보가 성공적으로 수정되었습니다");
     }
 
-    /** Delete Visit Controller
+    /** Delete Visit SampleController
      *
      */
     @DeleteMapping("/{visit_id}")

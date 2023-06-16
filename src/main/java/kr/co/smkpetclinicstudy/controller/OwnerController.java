@@ -25,7 +25,7 @@ public class OwnerController {
     private final OwnerService ownerService;
 
     /**
-     * Create Owner Controller
+     * Create Owner SampleController
      */
     @PostMapping
     public ResponseFormat<Void> createOwner(@Validated @RequestBody OwnerReqDTO.CREATE create) {
@@ -38,7 +38,7 @@ public class OwnerController {
     }
 
     /**
-     * Get Owner By id Controller
+     * Get Owner By id SampleController
      */
     @GetMapping("/{owner_id}")
     public ResponseFormat<OwnerResDTO.READ> getOwnerById(@PathVariable(name = "owner_id") Long ownerId) {
@@ -49,7 +49,7 @@ public class OwnerController {
     }
 
     /**
-     * Get Owners By Date Controller
+     * Get Owners By Date SampleController
      */
     @GetMapping("/date")
     public ResponseFormat<List<OwnerResDTO.READ>> getOwnersByDate(@RequestParam(name = "start_date") LocalDate startDate,
@@ -61,7 +61,7 @@ public class OwnerController {
     }
 
     /**
-     * Update Owner Controller
+     * Update Owner SampleController
      */
     @PutMapping
     public ResponseFormat<Void> updateOwner(@Validated @RequestBody OwnerReqDTO.UPDATE update) {
@@ -74,7 +74,7 @@ public class OwnerController {
     }
 
     /**
-     * Delete Owner Controller
+     * Delete Owner SampleController
      */
     @DeleteMapping("/{owner_id}")
     public ResponseFormat<Void> deleteOwnerById(@PathVariable(name = "owner_id") Long ownerId) {

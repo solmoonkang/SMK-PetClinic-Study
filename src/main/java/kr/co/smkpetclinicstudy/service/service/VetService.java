@@ -45,7 +45,7 @@ public class VetService {
 
     private final VetSpecialtyMapper vetSpecialtyMapper;
 
-    /** Create Vet Service
+    /** Create Vet SampleService
      *
      */
     @Transactional
@@ -62,7 +62,7 @@ public class VetService {
         vetRepository.save(vet);
     }
 
-    /** Get Vet By vetId Service
+    /** Get Vet By vetId SampleService
      *
      */
     public VetResDTO.READ getVetById(Long vetId) {
@@ -75,7 +75,7 @@ public class VetService {
         return vetMapper.toVetReadDto(vet, specialtiesName);
     }
 
-    /** Get Vet's Pet By vetId Service
+    /** Get Vet's Pet By vetId SampleService
      *
      */
     public List<PetResDTO.READ> getVetPetsByVetId(Long vetId) {
@@ -89,7 +89,7 @@ public class VetService {
                 .collect(Collectors.toList());
     }
 
-    /** Get All Specialties List Service
+    /** Get All Specialties List SampleService
      *
      */
     public Set<String> getVetSpecialtiesName() {
@@ -103,7 +103,7 @@ public class VetService {
                 .collect(Collectors.toSet());
     }
 
-    /** Update Vet Service
+    /** Update Vet SampleService
      *
      */
     @Transactional
@@ -117,7 +117,7 @@ public class VetService {
         vet.updateVetSpecialties(update, vetSpecialties);
     }
 
-    /** Delete Vet Service
+    /** Delete Vet SampleService
      *
      */
     @Transactional

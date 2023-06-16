@@ -26,7 +26,7 @@ public class OwnerService {
     private final OwnerMapper ownerMapper;
 
     /**
-     * Create Owner Service
+     * Create Owner SampleService
      */
     @Transactional
     public void createOwner(OwnerReqDTO.CREATE create) {
@@ -39,7 +39,7 @@ public class OwnerService {
     }
 
     /**
-     * Get Owner By OwnerId Service
+     * Get Owner By OwnerId SampleService
      */
     public OwnerResDTO.READ getOwnerById(Long ownerId) {
 
@@ -50,7 +50,7 @@ public class OwnerService {
     }
 
     /**
-     * Get Owners By Date Service
+     * Get Owners By Date SampleService
      */
     public List<OwnerResDTO.READ> getOwnersByDate(LocalDate startDate, LocalDate endDate) {
 
@@ -62,7 +62,7 @@ public class OwnerService {
     }
 
     /**
-     * Update Owner Service
+     * Update Owner SampleService
      */
     @Transactional
     public void updateOwner(OwnerReqDTO.UPDATE update) {
@@ -76,7 +76,7 @@ public class OwnerService {
     }
 
     /**
-     * Delete Owner Service
+     * Delete Owner SampleService
      */
     @Transactional
     public void deleteOwnerById(Long ownerId) {

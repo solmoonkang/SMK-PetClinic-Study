@@ -21,10 +21,10 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class OwnerServiceTest {
+public class OwnerSampleServiceTest {
 
-    // Spring 컨테이너가 Service 객체를 생성하고 의존성 주입을 자동으로 처리한다
-    // 따라서 Service 객체를 직접 생성할 필요 없이, Test Class에 @Autowired 을 사용하여 Service 객체를 주입받을 수 있다
+    // Spring 컨테이너가 SampleService 객체를 생성하고 의존성 주입을 자동으로 처리한다
+    // 따라서 SampleService 객체를 직접 생성할 필요 없이, Test Class에 @Autowired 을 사용하여 SampleService 객체를 주입받을 수 있다
     // 이 방식은 TestCode 작성 시 유연성을 높여주며, 코드 중복을 줄일 수 있어 코드의 가독성을 높여준다
     @InjectMocks
     private OwnerService ownerService;
@@ -65,7 +65,7 @@ public class OwnerServiceTest {
     }
 
     @Test
-    @DisplayName("createOwner Service Test")
+    @DisplayName("createOwner SampleService Test")
     public void createOwnerTest() {
         // given
         given(ownerMapper.toOwnerEntity(eq(create))).willReturn(owner);
@@ -79,7 +79,7 @@ public class OwnerServiceTest {
     }
 
     @Test
-    @DisplayName("createOwner Service Test with Duplicate Owner Telephone")
+    @DisplayName("createOwner SampleService Test with Duplicate Owner Telephone")
     public void createOwnerTest_withDuplicateOwnerTelephone() {
         // given : Owner 의 전화번호를 이미 존재하는 상황을 가정한다
         // willReturn : void 메소드에서 호출 후 예외를 던질 때 사용된다
@@ -94,7 +94,7 @@ public class OwnerServiceTest {
 
 
     @Test
-    @DisplayName("getOwnerById Service Test")
+    @DisplayName("getOwnerById SampleService Test")
     public void getOwnerByIdTest() {
         Long ownerId = 1L;
         owner = Owner.builder()
@@ -117,7 +117,7 @@ public class OwnerServiceTest {
     }
 
     @Test
-    @DisplayName("getOwnerById Service Test with Not Found Owner")
+    @DisplayName("getOwnerById SampleService Test with Not Found Owner")
     public void getOwnerByIdTest_withNotFoundOwner() {
 
     }
