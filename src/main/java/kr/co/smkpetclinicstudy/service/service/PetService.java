@@ -34,7 +34,7 @@ public class PetService {
 
     private final VetRepository vetRepository;
 
-    /** Create Pet SampleService
+    /** Create Pet Service
      *
      */
     @Transactional
@@ -51,7 +51,7 @@ public class PetService {
         petRepository.save(pet);
     }
 
-    /** Get All PetTypes SampleService
+    /** Get All PetTypes Service
      *
      */
     public Set<PetType> getAllPetTypes() {
@@ -60,7 +60,7 @@ public class PetService {
                 .collect(Collectors.toSet());
     }
 
-    /** Get Pet Detail By petId SampleService
+    /** Get Pet Detail By petId Service
      *
      */
     public PetResDTO.READ_DETAIL getDetailPetById(Long petId) {
@@ -71,7 +71,7 @@ public class PetService {
         return petMapper.toPetReadDetailDto(pet);
     }
 
-    /** Get Owner's Pets By ownerId SampleService
+    /** Get Owner's Pets By ownerId Service
      *
      */
     public List<PetResDTO.READ> getOwnerPetsByOwnerId(Long ownerId) {
@@ -85,7 +85,7 @@ public class PetService {
                 .collect(Collectors.toList());
     }
 
-    /** Update Pet SampleService
+    /** Update Pet Service
      *
      */
     @Transactional
@@ -97,7 +97,7 @@ public class PetService {
         pet.updatePet(update);
     }
 
-    /** Delete Pet SampleService
+    /** Delete Pet Service
      *
      */
     @Transactional

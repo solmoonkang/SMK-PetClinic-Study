@@ -21,7 +21,7 @@ public class PetController {
 
     private final PetService petService;
 
-    /** Create Pet SampleController
+    /** Create Pet Controller
      *
      */
     @PostMapping
@@ -34,7 +34,7 @@ public class PetController {
                 "펫 정보가 성공적으로 생성되었습니다");
     }
 
-    /** Get All PetTypes SampleService
+    /** Get All PetTypes Controller
      *
      */
     @GetMapping("/pet_types")
@@ -45,7 +45,7 @@ public class PetController {
                 petService.getAllPetTypes());
     }
 
-    /** Get Pet Detail By id SampleController
+    /** Get Pet Detail By id Controller
      *
      */
     @GetMapping("/detail/{pet_id}")
@@ -56,7 +56,7 @@ public class PetController {
                 petService.getDetailPetById(petId));
     }
 
-    /** Get Owner's Pets By ownerId SampleController
+    /** Get Owner's Pets By ownerId Controller
      *
      */
     @GetMapping("/owners/{owner_id}")
@@ -67,7 +67,7 @@ public class PetController {
                 petService.getOwnerPetsByOwnerId(ownerId));
     }
 
-    /** Update Pet SampleController
+    /** Update Pet Controller
      *
      */
     @PutMapping
@@ -80,7 +80,7 @@ public class PetController {
                 "펫 정보가 성공적으로 수정되었습니다");
     }
 
-    /** Delete Pet SampleController
+    /** Delete Pet Controller
      *
      */
     @DeleteMapping("/{pet_id}")

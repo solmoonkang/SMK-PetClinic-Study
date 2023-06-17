@@ -27,7 +27,7 @@ public class VisitService {
 
     private final VisitMapper visitMapper;
 
-    /** Create Visit SampleService
+    /** Create Visit Service
      *
      */
     @Transactional
@@ -41,7 +41,7 @@ public class VisitService {
         visitRepository.save(visit);
     }
 
-    /** Get Visit By PetId SampleService
+    /** Get Visit By PetId Service
      *
      */
     public List<VisitResDTO.READ> getVisitByPetId(Long petId) {
@@ -54,7 +54,7 @@ public class VisitService {
                 .collect(Collectors.toList());
     }
 
-    /** Get Visit By VisitId SampleService
+    /** Get Visit By VisitId Service
      *
      */
     public VisitResDTO.READ getVisitByVisitId(Long visitId) {
@@ -65,7 +65,7 @@ public class VisitService {
         return visitMapper.toVisitReadDto(visit);
     }
 
-    /** Get Visit By OwnerId SampleService
+    /** Get Visit By OwnerId Service
      *  수정 필요, PostMan X
      */
     public List<VisitResDTO.READ> getAllVisitByOwnerId(Long ownerId) {
@@ -79,7 +79,7 @@ public class VisitService {
                 .collect(Collectors.toList());
     }
 
-    /** Update Visit SampleService
+    /** Update Visit Service
      *
      */
     @Transactional
@@ -91,7 +91,7 @@ public class VisitService {
         visit.updatePetDescription(update);
     }
 
-    /** Delete Visit SampleService
+    /** Delete Visit Service
      *
      */
     @Transactional

@@ -11,9 +11,9 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum RoleType {
 
-    ROLE_USER("사용자"),
+    USER_ROLE("사용자"),
 
-    ROLE_ADMIN("관리자");
+    ADMIN_ROLE("관리자");
 
 
     String roleType;

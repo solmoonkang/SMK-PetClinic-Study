@@ -40,13 +40,13 @@ public class MemberController {
     }
 
     @PostMapping("/signUp")
-    public ResponseFormat<Void> signUp(@RequestBody @Validated MemberReqDTO.CREATE create) {
+    public ResponseFormat<String> signUp(@RequestBody @Validated MemberReqDTO.CREATE create) {
 
         memberService.signUp(create);
 
         return ResponseFormat.successMessage(
                 ErrorCode.SUCCESS_CREATED,
-                "님 성공적으로 회원가입 되었습니다"
+                create.getName() + "님 성공적으로 회원가입 되었습니다"
         );
     }
 }

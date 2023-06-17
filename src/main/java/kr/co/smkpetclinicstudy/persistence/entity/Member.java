@@ -28,13 +28,11 @@ public class Member extends BaseEntity {
     private String identity;
 
     @Column(name = "member_password",
-            nullable = false,
-            length = 30)
+            nullable = false)
     private String password;
 
     @Column(name = "member_name",
-            nullable = false,
-            length = 30)
+            nullable = false)
     private String name;
 
     @Column(name = "role_type")

@@ -23,7 +23,7 @@ public class VetController {
 
     private final VetService vetService;
 
-    /** Create Vet SampleController
+    /** Create Vet Controller
      *
      */
     @PostMapping
@@ -36,7 +36,7 @@ public class VetController {
                 create.getFirstName() + "님 수의사 정보가 성공적으로 생성되었습니다");
     }
 
-    /** Get Vet By vetId SampleController
+    /** Get Vet By vetId Controller
      *
      */
     @GetMapping("/{vet_id}")
@@ -47,7 +47,7 @@ public class VetController {
                 vetService.getVetById(vetId));
     }
 
-    /** Get Vet's Pet By vetId SampleController
+    /** Get Vet's Pet By vetId Controller
      *
      */
     @GetMapping("/pets/{vet_id}")
@@ -58,7 +58,7 @@ public class VetController {
                 vetService.getVetPetsByVetId(vetId));
     }
 
-    /** Get All Specialties List SampleController
+    /** Get All Specialties List Controller
      *
      */
     @GetMapping("/specialties")
@@ -69,7 +69,7 @@ public class VetController {
                 vetService.getVetSpecialtiesName());
     }
 
-    /** Update Vet SampleController
+    /** Update Vet Controller
      *
      */
     @PutMapping
@@ -82,7 +82,7 @@ public class VetController {
                 update.getFirstName() + "님 수의사 정보가 성공적으로 수정되었습니다");
     }
 
-    /** Delete Vet SampleController
+    /** Delete Vet Controller
      *
      */
     @DeleteMapping("/{vet_id}")
