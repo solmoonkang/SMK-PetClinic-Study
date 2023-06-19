@@ -34,7 +34,7 @@ public class PetController {
                 "펫 정보가 성공적으로 생성되었습니다");
     }
 
-    /** Get All PetTypes Service
+    /** Get All PetTypes Controller
      *
      */
     @GetMapping("/pet_types")

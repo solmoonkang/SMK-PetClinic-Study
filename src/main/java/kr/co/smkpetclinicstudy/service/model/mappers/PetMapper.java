@@ -37,6 +37,4 @@ public interface PetMapper {
     @Mapping(source = "pet.owner.address", target = "ownerAddress")
     @Mapping(source = "pet.owner.telephone", target = "ownerTelephone")
     PetResDTO.READ_DETAIL toPetReadDetailDto(Pet pet);
-
-//    List<String> getAllPetTypes();
 }

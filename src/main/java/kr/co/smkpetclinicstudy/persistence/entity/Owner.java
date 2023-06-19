@@ -11,10 +11,14 @@ import java.util.List;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-@Table(name = "tbl_owners")
+@Table(
+        name = "tbl_owners",
+        indexes = @Index(name = "i_owners", columnList = "owner_id")
+)
 @AttributeOverride(     // 하나의 Entity에서 같은 값 타입을 사용하면 Column 명이 중복되므로 Column 명 속성을 재정의
         name = "id",
-        column = @Column(name = "owner_id", length = 4))
+        column = @Column(name = "owner_id", length = 4)
+)
 public class Owner extends BaseEntity {
 
     @Column(name = "first_name", length = 30)
